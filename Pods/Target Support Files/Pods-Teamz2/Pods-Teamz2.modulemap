@@ -1,0 +1,6 @@
+framework module Pods_Teamz2 {
+  umbrella header "Pods-Teamz2-umbrella.h"
+
+  export *
+  module * { export * }
+}
