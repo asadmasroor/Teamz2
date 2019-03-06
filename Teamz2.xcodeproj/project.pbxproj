@@ -22,6 +22,10 @@
 		846B664A222D71F30090CAF2 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B6649222D71F30090CAF2 /* Fixture.swift */; };
 		846B664C222DCE620090CAF2 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B664B222DCE620090CAF2 /* Challenge.swift */; };
 		846B664E222DE6AB0090CAF2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B664D222DE6AB0090CAF2 /* Result.swift */; };
+		846B6650222EAE150090CAF2 /* FixtureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B664F222EAE150090CAF2 /* FixtureViewController.swift */; };
+		846B6654222EB4B40090CAF2 /* FixtureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B6653222EB4B40090CAF2 /* FixtureTableViewCell.swift */; };
+		846B6657222ED9760090CAF2 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B6656222ED9760090CAF2 /* ChallengeViewController.swift */; };
+		846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,10 @@
 		846B6649222D71F30090CAF2 /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
 		846B664B222DCE620090CAF2 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		846B664D222DE6AB0090CAF2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		846B664F222EAE150090CAF2 /* FixtureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureViewController.swift; sourceTree = "<group>"; };
+		846B6653222EB4B40090CAF2 /* FixtureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FixtureTableViewCell.swift; path = /Users/asadmasroor/Desktop/Xcode/Teamz2/Teamz2/FixtureTableViewCell.swift; sourceTree = "<absolute>"; };
+		846B6656222ED9760090CAF2 /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		859B597C94C731053F72D4DC /* Pods-Teamz2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teamz2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teamz2/Pods-Teamz2.debug.xcconfig"; sourceTree = "<group>"; };
 		9B33278F5C58856CA7638CEC /* Pods_Teamz2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A339BE4BA7B1940D83B404 /* Pods-Teamz2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teamz2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teamz2Tests/Pods-Teamz2Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,12 +145,11 @@
 		843412D1222CBDEA0098CFEA /* Teamz2 */ = {
 			isa = PBXGroup;
 			children = (
-				846B6642222D701E0090CAF2 /* Model */,
-				843412D2222CBDEA0098CFEA /* AppDelegate.swift */,
-				843412D6222CBDEA0098CFEA /* Main.storyboard */,
-				843412D9222CBDEC0098CFEA /* Assets.xcassets */,
-				843412DB222CBDEC0098CFEA /* LaunchScreen.storyboard */,
 				843412DE222CBDEC0098CFEA /* Info.plist */,
+				846B6658222ED98D0090CAF2 /* View */,
+				846B6655222ED9490090CAF2 /* Controller */,
+				846B6642222D701E0090CAF2 /* Model */,
+				846B6659222ED9AF0090CAF2 /* Supporting Files */,
 			);
 			path = Teamz2;
 			sourceTree = "<group>";
@@ -176,6 +183,35 @@
 				846B664D222DE6AB0090CAF2 /* Result.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		846B6655222ED9490090CAF2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				846B664F222EAE150090CAF2 /* FixtureViewController.swift */,
+				846B6656222ED9760090CAF2 /* ChallengeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		846B6658222ED98D0090CAF2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				843412DB222CBDEC0098CFEA /* LaunchScreen.storyboard */,
+				843412D6222CBDEA0098CFEA /* Main.storyboard */,
+				846B6653222EB4B40090CAF2 /* FixtureTableViewCell.swift */,
+				846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846B6659222ED9AF0090CAF2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				843412D2222CBDEA0098CFEA /* AppDelegate.swift */,
+				843412D9222CBDEC0098CFEA /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E048B0BF6A0023258A64A7DC /* Frameworks */ = {
@@ -420,9 +456,13 @@
 				843412D3222CBDEA0098CFEA /* AppDelegate.swift in Sources */,
 				846B6644222D70550090CAF2 /* User.swift in Sources */,
 				846B6646222D70790090CAF2 /* Club.swift in Sources */,
+				846B6650222EAE150090CAF2 /* FixtureViewController.swift in Sources */,
 				846B6648222D70AE0090CAF2 /* Squad.swift in Sources */,
+				846B6657222ED9760090CAF2 /* ChallengeViewController.swift in Sources */,
 				846B664E222DE6AB0090CAF2 /* Result.swift in Sources */,
+				846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */,
 				846B664A222D71F30090CAF2 /* Fixture.swift in Sources */,
+				846B6654222EB4B40090CAF2 /* FixtureTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.safem.Teamz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safem.Teamz2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -624,7 +664,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.safem.Teamz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safem.Teamz2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

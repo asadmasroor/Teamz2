@@ -12,7 +12,7 @@ import RealmSwift
 class Fixture: Object {
     
     @objc dynamic var title : String = ""
-    @objc dynamic var homeTeam: Squad?
+//  @objc dynamic var homeTeam: Squad?
 //  @objc dynamic var awayTeam =  Squad()
     @objc dynamic var address : String = ""
     var parentSquad = LinkingObjects(fromType: Squad.self, property: "fixtures")
