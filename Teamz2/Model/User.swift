@@ -16,8 +16,7 @@ class User: Object {
     @objc dynamic var username : String = ""
     @objc dynamic var password : String = ""
     @objc dynamic var name : String = ""
-    
-//    var clubs = List<Club>()
+    var clubs = List<Club>()
     
    
 

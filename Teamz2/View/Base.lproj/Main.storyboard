@@ -256,15 +256,80 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1FK-4A-7I9">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.50649863029999997" blue="0.012248963829999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PoD-WH-c0y" kind="relationship" relationship="rootViewController" id="nOH-XC-FDo"/>
+                        <segue destination="mUg-DE-HOH" kind="relationship" relationship="rootViewController" id="COg-Yw-g2e"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkK-n6-52I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="49" y="685"/>
+            <point key="canvasLocation" x="-1495" y="668"/>
+        </scene>
+        <!--My Clubs-->
+        <scene sceneID="7Fm-Sg-lP9">
+            <objects>
+                <tableViewController id="mUg-DE-HOH" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j9Y-qs-3OJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pnn-BU-oZp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pnn-BU-oZp" id="Azb-Fe-k6T">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mUg-DE-HOH" id="g3L-C3-2ls"/>
+                            <outlet property="delegate" destination="mUg-DE-HOH" id="VSx-Z1-oJA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Clubs" id="AnR-XN-jGj"/>
+                    <connections>
+                        <segue destination="6fw-kY-P4J" kind="show" id="1Jw-9X-6k2"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ToB-dt-6sv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-732" y="682"/>
+        </scene>
+        <!--SSCC Squads-->
+        <scene sceneID="XMz-Qj-1VC">
+            <objects>
+                <tableViewController id="6fw-kY-P4J" customClass="SquadViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dg1-C1-9i2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="squadCell" id="rao-ca-zfq">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rao-ca-zfq" id="Fnj-ZY-A5j">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6fw-kY-P4J" id="KVJ-si-JZ7"/>
+                            <outlet property="delegate" destination="6fw-kY-P4J" id="IL5-zl-JpQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="SSCC Squads" id="Xbt-UA-dry"/>
+                    <connections>
+                        <segue destination="PoD-WH-c0y" kind="show" identifier="fixtureSegue" id="qCv-jS-nqf"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sIW-Vp-DPJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="86" y="678"/>
         </scene>
     </scenes>
 </document>
