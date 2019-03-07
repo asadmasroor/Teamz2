@@ -14,10 +14,12 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     
-   
+    
+    
+    // Global variable to store the indexpath of the table
     var uIndexPath = 0
     
-    
+    // Store fixtures of the current club's squad
     var fixtures = List<Fixture>()
 
     override func viewDidLoad() {
@@ -34,12 +36,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         return fixtures.count
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ChallengeViewController
-        
-        destinationVC.selectedFixture = fixtures[uIndexPath]
-        
-    }
+    
     
    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -60,17 +57,47 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         return cell
     }
     
- 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        if (segue.identifier == "challengeSegue") {
+            let destinationVC = segue.destination as! ChallengeViewController
+            
+            destinationVC.selectedFixture = fixtures[uIndexPath]
+            
+        }
+        
+        if (segue.identifier == "selectionSegue") {
+            let destinationVC = segue.destination as! SelectionViewController
+            
+            destinationVC.selectedFixture = fixtures[uIndexPath]
+            
+        }
+        
+        
+        
+    }
     
+ 
     func challengeButtonPressed(cell: FixtureTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
-       uIndexPath = indexPath!.row
+        uIndexPath = indexPath!.row
         
         print(indexPath!.row)
         performSegue(withIdentifier: "challengeSegue", sender: self)
     }
- 
+    
+    
+    
+    func selectionButtonPressed(cell: FixtureTableViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        
+        uIndexPath = indexPath!.row
+        
+        print(indexPath!.row)
+        performSegue(withIdentifier: "selectionSegue", sender: self)
+    }
 
     
     func initialiseData() {
@@ -171,8 +198,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         result5.timeTaken = 3
         
         let result6 = Result()
-        result5.user = User3
-        result5.timeTaken = 10
+        result6.user = User3
+        result6.timeTaken = 10
         
         
         

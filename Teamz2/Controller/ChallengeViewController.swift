@@ -11,7 +11,7 @@ import RealmSwift
 
 class ChallengeViewController: UITableViewController {
     
-    
+    var dIndexPath = 0
     var challanges = List<Challenge>()
     var selectedFixture : Fixture? {
         didSet{
@@ -41,6 +41,8 @@ class ChallengeViewController: UITableViewController {
         let challenge = challanges[indexPath.row]
         
         cell.setChallenege(challenge: challenge)
+        
+        cell.delegate = self
 
         return cell
     }
@@ -101,4 +103,26 @@ class ChallengeViewController: UITableViewController {
     }
     */
 
+}
+
+extension ChallengeViewController: cellDelegateResult {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+            let destinationVC = segue.destination as! ResultViewController
+            
+            destinationVC.selectedChallenge = challanges[dIndexPath]
+            
+        
+    }
+    
+    func resultButtonPressed(cell: ChallengeTableViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        dIndexPath = indexPath!.row
+        print("dindexpath: \(dIndexPath)")
+        performSegue(withIdentifier: "resultSegue", sender: self)
+    }
+    
+    
+    
 }

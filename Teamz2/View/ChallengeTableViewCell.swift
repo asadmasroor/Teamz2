@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol cellDelegateResult: AnyObject {
+    func resultButtonPressed(cell: ChallengeTableViewCell)
+    
+}
+
 
 
 class ChallengeTableViewCell: UITableViewCell {
@@ -17,6 +22,11 @@ class ChallengeTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionTextField: UITextView!
     @IBOutlet weak var milesLabel: UILabel!
     
+    weak var delegate: cellDelegateResult?
+    
+    @IBAction func resultButtonPressed(_ sender: Any) {
+        delegate?.resultButtonPressed(cell: self)
+    }
     
     
     override func awakeFromNib() {

@@ -9,6 +9,7 @@ import UIKit
 
 protocol cellDelegateChallenge: AnyObject {
     func challengeButtonPressed(cell: FixtureTableViewCell)
+    func selectionButtonPressed(cell: FixtureTableViewCell)
 }
 
 class FixtureTableViewCell: UITableViewCell {
@@ -24,6 +25,9 @@ class FixtureTableViewCell: UITableViewCell {
          delegate?.challengeButtonPressed(cell: self)
     }
     
+    @IBAction func selectionButtonPressed(_ sender: Any) {
+         delegate?.selectionButtonPressed(cell: self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
