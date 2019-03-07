@@ -35,10 +35,9 @@ class SquadViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "squadCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "squadCell", for: indexPath) as! SquadTableViewCell
         
-        cell.textLabel?.text = self.squads[indexPath.row].name
-        cell.textLabel?.textColor = UIColor.white
+        cell.squadLabel.text = squads[indexPath.row].name
 
         return cell
     }
@@ -58,4 +57,33 @@ class SquadViewController: UITableViewController {
     }
  
     
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        let newSquadAlert = UIAlertController(title: "Make New Squad", message: "", preferredStyle: .alert)
+        
+        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+            let newSquad = Squad()
+            newSquad.name = (textField.text)!
+            self.selectedClub?.squads.append(newSquad)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+            newSquadAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        newSquadAlert.addTextField { (UITextField) in
+            UITextField.placeholder = "Enter name for squad"
+            textField = UITextField
+        }
+        
+        newSquadAlert.addAction(action)
+        newSquadAlert.addAction(cancelAction)
+        
+        present(newSquadAlert, animated: true, completion: nil)
+        
+    }
 }

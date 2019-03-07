@@ -1,5 +1,5 @@
 //
-//  ClubTableViewCell.swift
+//  SquadTableViewCell.swift
 //  Teamz2
 //
 //  Created by Asad Masroor on 07/03/2019.
@@ -8,11 +8,7 @@
 
 import UIKit
 
-class ClubTableViewCell: UITableViewCell {
+class SquadTableViewCell: UITableViewCell {
     
-    
-    @IBOutlet weak var clubLabel: UILabel!
-    
-    
-
+    @IBOutlet weak var squadLabel: UILabel!
 }

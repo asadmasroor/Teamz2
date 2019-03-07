@@ -39,13 +39,13 @@ class ResultViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
         
         let name = (selectedChallenge?.results[indexPath.row].user?.name)!
         let minutes = (results[indexPath.row].timeTaken)
         
         
-        cell.textLabel?.text = "\(name): \(minutes) minutes"
+        cell.resultLabel.text = "\(name): \(minutes) minutes"
         
         return cell
     }

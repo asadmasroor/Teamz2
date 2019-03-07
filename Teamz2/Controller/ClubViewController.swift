@@ -23,8 +23,7 @@ class ClubViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
+        
     }
 
     // MARK: - Table view data source
@@ -33,15 +32,16 @@ class ClubViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return  clubs.count
+        
+        return clubs.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "clubCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "clubCell", for: indexPath) as! ClubTableViewCell
         
-        cell.textLabel?.text = clubs[indexPath.row].name
-        cell.textLabel?.textColor = UIColor.white
+        cell.clubLabel.text = clubs[indexPath.row].name
+        
 
         return cell
     }

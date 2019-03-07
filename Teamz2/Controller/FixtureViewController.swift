@@ -104,8 +104,46 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         print(indexPath!.row)
         performSegue(withIdentifier: "selectionSegue", sender: self)
     }
+    
+    
 
     
     
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        var addressField = UITextField()
+        let newClubAlert = UIAlertController(title: "Add New Fixture", message: "", preferredStyle: .alert)
+        
+        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+            let newFixture = Fixture()
+            newFixture.title = (textField.text)!
+            newFixture.address = (addressField.text)!
+            
+            self.fixtures.append(newFixture)
+            
+            self.tableView.reloadData()
+            
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+            newClubAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        newClubAlert.addTextField { (UITextField) in
+            UITextField.placeholder = "Enter title for fixture"
+            textField = UITextField
+        }
+        
+        newClubAlert.addTextField { (UIAddressTextField) in
+            UIAddressTextField.placeholder = "Enter address for fixture"
+            addressField = UIAddressTextField
+        }
+        
+        newClubAlert.addAction(action)
+        newClubAlert.addAction(cancelAction)
+        
+        present(newClubAlert, animated: true, completion: nil)
+    }
 }
 

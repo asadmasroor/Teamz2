@@ -41,6 +41,35 @@ class MainMenuViewController: UIViewController {
     }
     
     
+    @IBAction func newClubButtonPressed(_ sender: Any) {
+        
+        var textField = UITextField()
+        let newClubAlert = UIAlertController(title: "Make New Club", message: "", preferredStyle: .alert)
+        
+        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+             let newClub = Club()
+             newClub.name = (textField.text)!
+             self.UserLoggedIn.clubs.append(newClub)
+            
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+            newClubAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        newClubAlert.addTextField { (UITextField) in
+            UITextField.placeholder = "Enter name for club"
+            textField = UITextField
+        }
+        
+        newClubAlert.addAction(action)
+        newClubAlert.addAction(cancelAction)
+        
+        present(newClubAlert, animated: true, completion: nil)
+    }
+    
+    
     
     
     func initialiseData() {
@@ -79,6 +108,14 @@ class MainMenuViewController: UIViewController {
         firstXI.name = "First XI"
         SSCC.squads.append(firstXI)
         
+        let secondXI = Squad()
+        secondXI.name = "Second XI"
+        SSCC.squads.append(secondXI)
+        
+        let thirdXI = Squad()
+        thirdXI.name = "Third XI"
+        SSCC.squads.append(thirdXI)
+        
         
         let fixture1 = Fixture()
         fixture1.title = "SSCC 1st XI vs NFC 1st XI"
@@ -108,6 +145,31 @@ class MainMenuViewController: UIViewController {
         firstXI.fixtures.append(fixture1)
         firstXI.fixtures.append(fixture2)
         firstXI.fixtures.append(fixture3)
+        
+        let fixture4 = Fixture()
+        fixture4.title = "SSCC 2nd XI vs LFC 1st XI"
+        fixture4.address = "Ostler's Lane"
+        fixture4.availablePlayers.append(User1)
+        fixture4.availablePlayers.append(User2)
+        fixture4.availablePlayers.append(User3)
+        
+        let fixture5 = Fixture()
+        fixture5.title = "SSCC 2nd XI vs PSG 1st XI"
+        fixture5.address = "Ostler's Lane"
+        fixture5.availablePlayers.append(User1)
+        fixture5.availablePlayers.append(User2)
+        fixture5.availablePlayers.append(User3)
+        
+        let fixture6 = Fixture()
+        fixture6.title = "MUFC 2nd XI vs SSCC 2nd XI"
+        fixture6.address = "Old Trafford"
+        fixture6.availablePlayers.append(User1)
+        fixture6.availablePlayers.append(User2)
+        fixture6.availablePlayers.append(User3)
+        
+        secondXI.fixtures.append(fixture4)
+        secondXI.fixtures.append(fixture5)
+        secondXI.fixtures.append(fixture6)
         
         
         let challenge1 =  Challenge()
@@ -157,6 +219,15 @@ class MainMenuViewController: UIViewController {
         
         fixture1.challenges.append(challenge1)
         fixture2.challenges.append(challenge2)
+        fixture3.challenges.append(challenge1)
+        fixture3.challenges.append(challenge2)
+        fixture4.challenges.append(challenge1)
+        fixture4.challenges.append(challenge2)
+        fixture5.challenges.append(challenge1)
+        fixture5.challenges.append(challenge2)
+        fixture6.challenges.append(challenge1)
+        fixture6 .challenges.append(challenge2)
+        
         
         User1.clubs.append(SSCC)
         

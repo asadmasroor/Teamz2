@@ -1,5 +1,5 @@
 //
-//  ClubTableViewCell.swift
+//  SelectionTableViewCell.swift
 //  Teamz2
 //
 //  Created by Asad Masroor on 07/03/2019.
@@ -8,11 +8,8 @@
 
 import UIKit
 
-class ClubTableViewCell: UITableViewCell {
-    
-    
-    @IBOutlet weak var clubLabel: UILabel!
-    
-    
+class SelectionTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var playerNameLabel: UILabel!
+    
 }
