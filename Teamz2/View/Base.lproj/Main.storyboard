@@ -232,7 +232,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Challenges" id="lp0-Cf-RkJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sKC-wc-eLZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sKC-wc-eLZ">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="lEP-Z8-l34" id="GhE-AI-63p"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

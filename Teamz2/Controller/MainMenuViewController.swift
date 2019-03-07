@@ -51,6 +51,7 @@ class MainMenuViewController: UIViewController {
              newClub.name = (textField.text)!
              self.UserLoggedIn.clubs.append(newClub)
             
+            self.performSegue(withIdentifier: "clubSegue", sender: self)
             
         }
         
