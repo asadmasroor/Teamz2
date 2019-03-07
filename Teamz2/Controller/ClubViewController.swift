@@ -1,5 +1,5 @@
 //
-//  SquadViewController.swift
+//  ClubViewController.swift
 //  Teamz2
 //
 //  Created by Asad Masroor on 07/03/2019.
@@ -8,54 +8,56 @@
 
 import UIKit
 import RealmSwift
-
-class SquadViewController: UITableViewController {
+class ClubViewController: UITableViewController {
     
-    var squads = List<Squad>()
-    var findexPath = 0
+    var clubs = List<Club>()
     
-    var selectedClub : Club? {
+    var selectedUser : User? {
         didSet {
-            squads = (selectedClub?.squads)!
+            clubs = (selectedUser?.clubs)!
         }
     }
+   
+    
+    var indexPath1 = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-           
+
+    
     }
 
     // MARK: - Table view data source
 
-  
+   
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-         return squads.count
+        return  clubs.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "squadCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "clubCell", for: indexPath)
         
-        cell.textLabel?.text = self.squads[indexPath.row].name
+        cell.textLabel?.text = clubs[indexPath.row].name
         cell.textLabel?.textColor = UIColor.white
 
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! FixtureViewController
+        let destinationVC = segue.destination as! SquadViewController
         
-        destinationVC.selectedSquad = squads[findexPath]
-        
+        destinationVC.selectedClub = clubs[indexPath1]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        findexPath = indexPath.row
+        indexPath1 = indexPath.row
         
-        performSegue(withIdentifier: "fixtureSegue", sender: self)
-        
+        performSegue(withIdentifier: "squadSegue", sender: self)
     }
- 
     
+
+
 }
