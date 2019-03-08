@@ -1,5 +1,5 @@
 //
-//  JoinedSquadViewController.swift
+//  JoinedFixturesViewController.swift
 //  Teamz2
 //
 //  Created by Asad Masroor on 08/03/2019.
@@ -8,13 +8,14 @@
 
 import UIKit
 import RealmSwift
-class JoinedSquadViewController: UITableViewController {
+
+class JoinedFixturesViewController: UITableViewController {
     
-    var squads = List<Squad>()
+    var fixtures = List<Fixture>()
     
-    var selectedClub : Club? {
+    var selectedSquad : Squad? {
         didSet {
-            squads = (selectedClub?.squads)!
+            fixtures = (selectedSquad?.fixtures)!
         }
     }
 
@@ -30,21 +31,24 @@ class JoinedSquadViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-
+   
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return squads.count
+        return fixtures.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "squadCell", for: indexPath) as! JoinedSquadTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fixtureCell", for: indexPath) as! JoinedFixtureViewCell
+        
+        cell.setFixture(fixture: fixtures[indexPath.row])
 
-        cell.squadLabel.text = squads[indexPath.row].name
+        
 
         return cell
     }
  
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

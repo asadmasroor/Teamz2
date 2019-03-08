@@ -39,16 +39,6 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2b-qv-2I5">
-                                            <rect key="frame" x="68" y="86" width="95" height="35"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <state key="normal" title="Challenges">
-                                                <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="challengeButtonPressed:" destination="pMb-hk-tWg" eventType="touchUpInside" id="6ju-F9-OgX"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXF-qt-87X">
                                             <rect key="frame" x="221" y="87" width="79" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -57,6 +47,16 @@
                                             </state>
                                             <connections>
                                                 <action selector="selectionButtonPressed:" destination="pMb-hk-tWg" eventType="touchUpInside" id="Mfu-Zp-gSn"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2b-qv-2I5">
+                                            <rect key="frame" x="68" y="86" width="95" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <state key="normal" title="Challenges">
+                                                <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="challengeButtonPressed:" destination="pMb-hk-tWg" eventType="touchUpInside" id="6ju-F9-OgX"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -324,41 +324,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6TE-8E-9l3">
-                                <rect key="frame" x="16" y="143" width="207" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                                <state key="normal" title="Joined Clubs">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="joinedClubsButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="utz-WX-wnw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8g-gV-L2S">
-                                <rect key="frame" x="16" y="259" width="173" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                                <state key="normal" title="My Clubs">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="myClubButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="lVR-ra-lgo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWs-Bl-wXW">
-                                <rect key="frame" x="16" y="317" width="320" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                                <state key="normal" title="Make New Club">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="newClubButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="8NF-ib-NFa"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiA-PS-U2A">
-                                <rect key="frame" x="16" y="201" width="173" height="50"/>
+                                <rect key="frame" x="16" y="261" width="173" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
                                 <state key="normal" title="Join New Club">
@@ -368,12 +335,53 @@
                                     <action selector="joinNewClubButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="jSu-sa-c7h"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8g-gV-L2S">
+                                <rect key="frame" x="16" y="310" width="173" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                <state key="normal" title="My Clubs">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="myClubButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="lVR-ra-lgo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6TE-8E-9l3">
+                                <rect key="frame" x="16" y="213" width="207" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                <state key="normal" title="Joined Clubs">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="joinedClubsButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="utz-WX-wnw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txH-bg-bYq">
+                                <rect key="frame" x="16" y="172" width="333" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWs-Bl-wXW">
+                                <rect key="frame" x="16" y="356" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                <state key="normal" title="Make New Club">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="newClubButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="8NF-ib-NFa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2742924802676191" green="0.51672611681671876" blue="0.88106863486334452" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="jNd-yJ-H49"/>
                     </view>
                     <navigationItem key="navigationItem" title="Main Menu" id="JQ4-aM-fFq"/>
                     <connections>
+                        <outlet property="welcomeLabel" destination="txH-bg-bYq" id="7y9-By-gqp"/>
                         <segue destination="mUg-DE-HOH" kind="show" identifier="clubSegue" id="XN5-7p-PGG"/>
                         <segue destination="2xf-6n-6T8" kind="show" identifier="searchSegue" id="F7G-CB-rcx"/>
                         <segue destination="hdE-8r-msd" kind="show" identifier="joinedClubSegue" id="TL2-T9-ybq"/>
@@ -619,7 +627,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Squads" id="jDP-db-yE5"/>
                     <connections>
-                        <segue destination="2wq-Lt-Mov" kind="show" id="3aa-TA-chQ"/>
+                        <segue destination="2wq-Lt-Mov" kind="show" identifier="joinedFixtureSegue" id="3aa-TA-chQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OCI-wt-Vdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -629,34 +637,68 @@
         <!--Fixtures-->
         <scene sceneID="PTF-bJ-5RI">
             <objects>
-                <tableViewController id="2wq-Lt-Mov" sceneMemberID="viewController">
+                <tableViewController id="2wq-Lt-Mov" customClass="JoinedFixturesViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wx3-M7-ayX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="66" id="E0L-pL-9Ee">
-                                <rect key="frame" x="0.0" y="28" width="375" height="66"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fixtureCell" rowHeight="147" id="E0L-pL-9Ee" customClass="JoinedFixtureViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="147"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E0L-pL-9Ee" id="3WU-4m-ruS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="146.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jg-n8-sfo">
-                                            <rect key="frame" x="25" y="17" width="334" height="31"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KfQ-MS-evW">
+                                            <rect key="frame" x="16" y="21" width="345" height="26"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsb-6D-yxB">
+                                            <rect key="frame" x="16" y="54.999999999999993" width="345" height="23.666666666666664"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c0-W2-sAD">
+                                            <rect key="frame" x="76" y="86" width="95" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <state key="normal" title="Challenges">
+                                                <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTa-Dh-C0A">
+                                            <rect key="frame" x="212" y="87" width="79" height="33"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <state key="normal" title="Selection">
+                                                <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="3Jg-n8-sfo" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leadingMargin" constant="9" id="8yA-lA-L87"/>
-                                        <constraint firstItem="3Jg-n8-sfo" firstAttribute="trailing" secondItem="3WU-4m-ruS" secondAttribute="trailingMargin" id="mma-CC-CdO"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="3Jg-n8-sfo" secondAttribute="bottom" constant="7" id="yXO-Yr-nCR"/>
-                                        <constraint firstItem="3Jg-n8-sfo" firstAttribute="top" secondItem="3WU-4m-ruS" secondAttribute="topMargin" constant="6" id="z6q-57-OpP"/>
+                                        <constraint firstItem="Zsb-6D-yxB" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leading" constant="16" id="5rN-YG-RF5"/>
+                                        <constraint firstItem="BTa-Dh-C0A" firstAttribute="leading" secondItem="6c0-W2-sAD" secondAttribute="trailing" constant="41" id="9NC-ki-U7g"/>
+                                        <constraint firstItem="KfQ-MS-evW" firstAttribute="top" secondItem="3WU-4m-ruS" secondAttribute="top" constant="21" id="9mF-lO-2Dz"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="6c0-W2-sAD" secondAttribute="bottom" constant="15" id="Auh-va-o5g"/>
+                                        <constraint firstItem="BTa-Dh-C0A" firstAttribute="top" secondItem="Zsb-6D-yxB" secondAttribute="bottom" constant="8.3300000000000001" id="EwN-IH-w3e"/>
+                                        <constraint firstAttribute="trailing" secondItem="KfQ-MS-evW" secondAttribute="trailing" constant="14" id="IpK-ZD-0bG"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="BTa-Dh-C0A" secondAttribute="bottom" constant="16" id="KFG-Vj-JkD"/>
+                                        <constraint firstItem="BTa-Dh-C0A" firstAttribute="leading" secondItem="6c0-W2-sAD" secondAttribute="trailing" constant="41" id="RLl-LX-3YY"/>
+                                        <constraint firstItem="Zsb-6D-yxB" firstAttribute="top" secondItem="KfQ-MS-evW" secondAttribute="bottom" constant="8" id="YFo-tr-7Kn"/>
+                                        <constraint firstItem="6c0-W2-sAD" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leadingMargin" constant="60" id="Zph-2O-bMh"/>
+                                        <constraint firstItem="KfQ-MS-evW" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leading" constant="16" id="gYf-7H-3Y0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="BTa-Dh-C0A" secondAttribute="trailing" constant="68" id="lwD-eq-Svs"/>
+                                        <constraint firstItem="6c0-W2-sAD" firstAttribute="top" secondItem="Zsb-6D-yxB" secondAttribute="bottom" constant="7.3300000000000001" id="mKy-cC-qjj"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zsb-6D-yxB" secondAttribute="trailing" constant="14" id="yuL-Bs-rVk"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <outlet property="addressLabel" destination="Zsb-6D-yxB" id="dL0-Op-VEr"/>
+                                    <outlet property="titleLabel" destination="KfQ-MS-evW" id="PSj-Id-ARS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -668,7 +710,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xuc-wJ-Jo2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="-10"/>
+            <point key="canvasLocation" x="933.60000000000002" y="-10.344827586206897"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

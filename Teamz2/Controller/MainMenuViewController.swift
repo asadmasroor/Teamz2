@@ -10,10 +10,13 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
     
+    @IBOutlet weak var welcomeLabel: UILabel!
     var UserLoggedIn = User()
     override func viewDidLoad() {
         super.viewDidLoad()
         initialiseData()
+        
+        welcomeLabel.text = "Welcome \(UserLoggedIn.name)"
 
         // Do any additional setup after loading the view.
     }
@@ -95,7 +98,7 @@ class MainMenuViewController: UIViewController {
     
     func initialiseData() {
         let User1 = User()
-        User1.name = "Asad Masroor"
+        User1.name = "Asad"
         User1.password = "password"
         User1.username = "asadmasroor"
         

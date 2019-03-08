@@ -21,4 +21,11 @@ class JoinedFixtureViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    func setFixture(fixture: Fixture){
+        self.addressLabel.text = fixture.address
+        self.titleLabel.text = fixture.title
+    }
 }
