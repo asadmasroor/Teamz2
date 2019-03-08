@@ -16,5 +16,6 @@ class Club: Object {
 //    var admin : User?
     var squads = List<Squad>()
     var parentUser = LinkingObjects(fromType: User.self, property: "clubs")
+    var parentmMember = LinkingObjects(fromType: User.self, property: "joinedClubs")
 
 }

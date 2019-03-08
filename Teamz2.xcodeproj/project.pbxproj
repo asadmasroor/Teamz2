@@ -36,6 +36,12 @@
 		84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE331D2231D78300C91071 /* SelectionTableViewCell.swift */; };
 		84DE33202231D82E00C91071 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE331F2231D82E00C91071 /* LoginViewController.swift */; };
 		84DE33222231D93B00C91071 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33212231D93B00C91071 /* ResultsTableViewCell.swift */; };
+		84DE332422327E8B00C91071 /* JoinedClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332322327E8B00C91071 /* JoinedClubTableViewCell.swift */; };
+		84DE332622327ED300C91071 /* JoinedClubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332522327ED300C91071 /* JoinedClubViewController.swift */; };
+		84DE332822328BBB00C91071 /* JoinedSquadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332722328BBB00C91071 /* JoinedSquadTableViewCell.swift */; };
+		84DE332A22328BDD00C91071 /* JoinedSquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332922328BDD00C91071 /* JoinedSquadViewController.swift */; };
+		84DE332C22328F3D00C91071 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332B22328F3D00C91071 /* SearchViewController.swift */; };
+		84DE3330223293A400C91071 /* JoinedFixtureViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE332F223293A400C91071 /* JoinedFixtureViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,12 @@
 		84DE331D2231D78300C91071 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		84DE331F2231D82E00C91071 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		84DE33212231D93B00C91071 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
+		84DE332322327E8B00C91071 /* JoinedClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedClubTableViewCell.swift; sourceTree = "<group>"; };
+		84DE332522327ED300C91071 /* JoinedClubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedClubViewController.swift; sourceTree = "<group>"; };
+		84DE332722328BBB00C91071 /* JoinedSquadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedSquadTableViewCell.swift; sourceTree = "<group>"; };
+		84DE332922328BDD00C91071 /* JoinedSquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedSquadViewController.swift; sourceTree = "<group>"; };
+		84DE332B22328F3D00C91071 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		84DE332F223293A400C91071 /* JoinedFixtureViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedFixtureViewCell.swift; sourceTree = "<group>"; };
 		859B597C94C731053F72D4DC /* Pods-Teamz2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teamz2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teamz2/Pods-Teamz2.debug.xcconfig"; sourceTree = "<group>"; };
 		9B33278F5C58856CA7638CEC /* Pods_Teamz2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A339BE4BA7B1940D83B404 /* Pods-Teamz2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teamz2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teamz2Tests/Pods-Teamz2Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
+				84DE332522327ED300C91071 /* JoinedClubViewController.swift */,
+				84DE332922328BDD00C91071 /* JoinedSquadViewController.swift */,
 				84DE331322318FBF00C91071 /* ClubViewController.swift */,
 				84DE33112231851A00C91071 /* SquadViewController.swift */,
 				846B664F222EAE150090CAF2 /* FixtureViewController.swift */,
@@ -216,6 +230,7 @@
 				846B6656222ED9760090CAF2 /* ChallengeViewController.swift */,
 				846B666022304D0C0090CAF2 /* ResultViewController.swift */,
 				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
+				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -223,14 +238,10 @@
 		846B6658222ED98D0090CAF2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84DE332E2232936F00C91071 /* JoinedClubs */,
+				84DE332D2232933200C91071 /* MyClubs */,
 				843412DB222CBDEC0098CFEA /* LaunchScreen.storyboard */,
 				843412D6222CBDEA0098CFEA /* Main.storyboard */,
-				84DE33172231D18100C91071 /* ClubTableViewCell.swift */,
-				846B6653222EB4B40090CAF2 /* FixtureTableViewCell.swift */,
-				846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */,
-				84DE33192231D56D00C91071 /* SquadTableViewCell.swift */,
-				84DE331D2231D78300C91071 /* SelectionTableViewCell.swift */,
-				84DE33212231D93B00C91071 /* ResultsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +253,29 @@
 				843412D9222CBDEC0098CFEA /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84DE332D2232933200C91071 /* MyClubs */ = {
+			isa = PBXGroup;
+			children = (
+				84DE331D2231D78300C91071 /* SelectionTableViewCell.swift */,
+				846B6653222EB4B40090CAF2 /* FixtureTableViewCell.swift */,
+				84DE33172231D18100C91071 /* ClubTableViewCell.swift */,
+				846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */,
+				84DE33192231D56D00C91071 /* SquadTableViewCell.swift */,
+				84DE33212231D93B00C91071 /* ResultsTableViewCell.swift */,
+			);
+			path = MyClubs;
+			sourceTree = "<group>";
+		};
+		84DE332E2232936F00C91071 /* JoinedClubs */ = {
+			isa = PBXGroup;
+			children = (
+				84DE332722328BBB00C91071 /* JoinedSquadTableViewCell.swift */,
+				84DE332322327E8B00C91071 /* JoinedClubTableViewCell.swift */,
+				84DE332F223293A400C91071 /* JoinedFixtureViewCell.swift */,
+			);
+			path = JoinedClubs;
 			sourceTree = "<group>";
 		};
 		E048B0BF6A0023258A64A7DC /* Frameworks */ = {
@@ -484,16 +518,22 @@
 			files = (
 				84DE33162231C55500C91071 /* MainMenuViewController.swift in Sources */,
 				846B666122304D0C0090CAF2 /* ResultViewController.swift in Sources */,
+				84DE332622327ED300C91071 /* JoinedClubViewController.swift in Sources */,
+				84DE332822328BBB00C91071 /* JoinedSquadTableViewCell.swift in Sources */,
 				84DE33222231D93B00C91071 /* ResultsTableViewCell.swift in Sources */,
 				84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */,
 				846B664C222DCE620090CAF2 /* Challenge.swift in Sources */,
 				846B665F223033010090CAF2 /* SelectionViewController.swift in Sources */,
+				84DE332C22328F3D00C91071 /* SearchViewController.swift in Sources */,
+				84DE3330223293A400C91071 /* JoinedFixtureViewCell.swift in Sources */,
 				84DE33182231D18100C91071 /* ClubTableViewCell.swift in Sources */,
 				843412D3222CBDEA0098CFEA /* AppDelegate.swift in Sources */,
 				846B6644222D70550090CAF2 /* User.swift in Sources */,
 				84DE33202231D82E00C91071 /* LoginViewController.swift in Sources */,
+				84DE332A22328BDD00C91071 /* JoinedSquadViewController.swift in Sources */,
 				846B6646222D70790090CAF2 /* Club.swift in Sources */,
 				846B6650222EAE150090CAF2 /* FixtureViewController.swift in Sources */,
+				84DE332422327E8B00C91071 /* JoinedClubTableViewCell.swift in Sources */,
 				846B6648222D70AE0090CAF2 /* Squad.swift in Sources */,
 				84DE331422318FBF00C91071 /* ClubViewController.swift in Sources */,
 				846B6657222ED9760090CAF2 /* ChallengeViewController.swift in Sources */,

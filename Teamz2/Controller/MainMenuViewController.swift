@@ -35,9 +35,19 @@ class MainMenuViewController: UIViewController {
     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "clubSegue") {
         let destinationVC = segue.destination as! ClubViewController
         
         destinationVC.selectedUser = UserLoggedIn
+            
+        }
+        
+        if (segue.identifier == "joinedClubSegue") {
+            let destinationVC = segue.destination as! JoinedClubViewController
+            
+            destinationVC.selectedUser = UserLoggedIn
+            
+        }
     }
     
     
@@ -72,6 +82,16 @@ class MainMenuViewController: UIViewController {
     
     
     
+    @IBAction func joinedClubsButtonPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "joinedClubSegue", sender: self)
+    }
+    
+    
+    @IBAction func joinNewClubButtonPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "searchSegue", sender: self)
+    }
     
     func initialiseData() {
         let User1 = User()
@@ -99,6 +119,14 @@ class MainMenuViewController: UIViewController {
         print(SSCC.name)
         
         //        SSCC.admin = User1
+        SSCC.members.append(User1)
+        SSCC.members.append(User2)
+        SSCC.members.append(User3)
+        
+        
+        let MUFC = Club()
+        MUFC.name = "MUFC"
+        
         SSCC.members.append(User1)
         SSCC.members.append(User2)
         SSCC.members.append(User3)
@@ -231,6 +259,16 @@ class MainMenuViewController: UIViewController {
         
         
         User1.clubs.append(SSCC)
+        User2.clubs.append(SSCC)
+        
+         User1.joinedClubs.append(SSCC)
+         User2.joinedClubs.append(SSCC)
+         User3.joinedClubs.append(SSCC)
+        
+        User1.joinedClubs.append(MUFC)
+        User2.joinedClubs.append(MUFC)
+        User3.joinedClubs.append(MUFC)
+        
         
         UserLoggedIn = User1
     }
