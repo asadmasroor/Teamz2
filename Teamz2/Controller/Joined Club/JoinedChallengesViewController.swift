@@ -1,75 +1,70 @@
 //
-//  JoinedFixturesViewController.swift
+//  JoinedChallengesViewController.swift
 //  Teamz2
 //
-//  Created by Asad Masroor on 08/03/2019.
+//  Created by Asad Masroor on 24/03/2019.
 //  Copyright © 2019 Asad Masroor. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate {
-    
-    
+class JoinedChallengesViewController: UITableViewController, joinedChallengeDelegate  {
+   
     var iPath = 0
     
-    var fixtures = List<Fixture>()
+    var challenges = List<Challenge>()
     
-    var selectedSquad : Squad? {
+    
+    var selectedFixture : Fixture? {
         didSet {
-            fixtures = (selectedSquad?.fixtures)!
+            challenges = (selectedFixture?.challenges)!
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        print(challenges.count)
     }
 
     // MARK: - Table view data source
 
    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fixtures.count
+        
+        return challenges.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fixtureCell", for: indexPath) as! JoinedFixtureViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "joinedChallengeCell", for: indexPath) as! JoinedChallengeViewCell
         
-        cell.setFixture(fixture: fixtures[indexPath.row])
+        let challenge = challenges[indexPath.row]
         cell.delegate = self
+
+        cell.setChallenge(challenge: challenge)
         
 
         return cell
     }
-    
-    func challengeButtonPressed(cell: JoinedFixtureViewCell) {
+ 
+    func attemptChallenegeButtonPressed(cell: JoinedChallengeViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
         iPath = indexPath!.row
-        print(iPath)
         
-        performSegue(withIdentifier: "joinedChallengeSegue", sender: self)
+        
+        performSegue(withIdentifier: "attemptChallenegeSegue", sender: self)
     }
-    
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! JoinedChallengesViewController
-        
-        destinationVC.selectedFixture = fixtures[iPath]
+        let destinationVC = segue.destination as! AttemptChallengeController
+        print(challenges[iPath].name)
+        destinationVC.selectedChallenge = challenges[iPath]
     }
-    
- 
 
     /*
     // Override to support conditional editing of the table view.

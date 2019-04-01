@@ -8,13 +8,23 @@
 
 import UIKit
 
+protocol joinedFixtureDelegate: AnyObject {
+    func challengeButtonPressed(cell: JoinedFixtureViewCell)
+  
+}
 class JoinedFixtureViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    weak var delegate: joinedFixtureDelegate?
+    
+    @IBAction func challengeButtonPressed(_ sender: Any) {
+        delegate?.challengeButtonPressed(cell: self)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
