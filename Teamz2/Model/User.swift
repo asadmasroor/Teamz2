@@ -20,6 +20,5 @@ class User: Object {
     var joinedClubs = List<Club>()
     
    
-
 }
 

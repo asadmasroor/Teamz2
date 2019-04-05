@@ -1,74 +1,46 @@
 //
-//  JoinedChallengesViewController.swift
+//  ChallenegeAttemptsViewController.swift
 //  Teamz2
 //
-//  Created by Asad Masroor on 24/03/2019.
+//  Created by Asad Masroor on 05/04/2019.
 //  Copyright © 2019 Asad Masroor. All rights reserved.
 //
 
 import UIKit
-import RealmSwift
 
-class JoinedChallengesViewController: UITableViewController, joinedChallengeDelegate  {
-   
-    var iPath = 0
-    
-    var challenges = List<Challenge>()
-    
-    
-    var selectedFixture : Fixture? {
-        didSet {
-            challenges = (selectedFixture?.challenges)!
-        }
-    }
-    
-    var userLoggedIn : User? 
+class ChallenegeAttemptsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(challenges.count)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
-   
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
-        return challenges.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "joinedChallengeCell", for: indexPath) as! JoinedChallengeViewCell
-        
-        let challenge = challenges[indexPath.row]
-        cell.delegate = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        cell.setChallenge(challenge: challenge)
-        
+        // Configure the cell...
 
         return cell
     }
- 
-    func attemptChallenegeButtonPressed(cell: JoinedChallengeViewCell) {
-        let indexPath = self.tableView.indexPath(for: cell)
-        
-        iPath = indexPath!.row
-        
-        
-        performSegue(withIdentifier: "attemptChallenegeSegue", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AttemptChallengeController
-        print(challenges[iPath].name)
-        destinationVC.selectedChallenge = challenges[iPath]
-        destinationVC.userLoggedIn = userLoggedIn
-        
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

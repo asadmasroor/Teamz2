@@ -21,6 +21,8 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
             fixtures = (selectedSquad?.fixtures)!
         }
     }
+    
+    var userLoggedIn : User? 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         let destinationVC = segue.destination as! JoinedChallengesViewController
         
         destinationVC.selectedFixture = fixtures[iPath]
+        destinationVC.userLoggedIn = userLoggedIn
     }
     
  

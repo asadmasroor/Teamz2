@@ -19,6 +19,8 @@ class JoinedSquadViewController: UITableViewController {
             squads = (selectedClub?.squads)!
         }
     }
+    
+    var userLoggedIn : User? 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,7 @@ class JoinedSquadViewController: UITableViewController {
         let destinationVC = segue.destination as! JoinedFixturesViewController
         
         destinationVC.selectedSquad = squads[indexPath1]
+        destinationVC.userLoggedIn = userLoggedIn
         
     }
     

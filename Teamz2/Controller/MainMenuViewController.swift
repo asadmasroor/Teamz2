@@ -90,6 +90,8 @@ class MainMenuViewController: UIViewController {
         performSegue(withIdentifier: "joinedClubSegue", sender: self)
     }
     
+   
+    
     
     @IBAction func joinNewClubButtonPressed(_ sender: UIButton) {
         
@@ -209,45 +211,45 @@ class MainMenuViewController: UIViewController {
         challenge1.miles = 20
         challenge1.name = "Stamina Test"
         
-        let result1 = Result()
-        result1.user = User1
-        result1.timeTaken = 60
-        
-        let result2 = Result()
-        result2.user = User2
-        result2.timeTaken = 55
-        
-        let result3 = Result()
-        result3.user = User3
-        result3.timeTaken = 64
+//        let result1 = Result()
+//        result1.user = User1
+//        result1.timeTaken = "60"
+//        
+//        let result2 = Result()
+//        result2.user = User2
+//        result2.timeTaken = "55"
+//        
+//        let result3 = Result()
+//        result3.user = User3
+//        result3.timeTaken = "64"
         
         let challenge2 =  Challenge()
         challenge2.desc = "This is to test sprinting speed"
         challenge2.miles = 1
         challenge2.name = "Sprinting Test"
         
-        let result4 = Result()
-        result4.user = User1
-        result4.timeTaken = 6
+//        let result4 = Result()
+//        result4.user = User1
+//        result4.timeTaken = "6"
+//
+//        let result5 = Result()
+//        result5.user = User2
+//        result5.timeTaken = "3"
+//
+//        let result6 = Result()
+//        result6.user = User3
+//        result6.timeTaken = "10"
         
-        let result5 = Result()
-        result5.user = User2
-        result5.timeTaken = 3
-        
-        let result6 = Result()
-        result6.user = User3
-        result6.timeTaken = 10
         
         
-        
-        challenge1.results.append(result1)
-        challenge1.results.append(result2)
-        challenge1.results.append(result3)
-        
-        challenge2.results.append(result4)
-        challenge2.results.append(result5)
-        challenge2.results.append(result6)
-        
+//        challenge1.results.append(result1)
+//        challenge1.results.append(result2)
+//        challenge1.results.append(result3)
+//        
+//        challenge2.results.append(result4)
+//        challenge2.results.append(result5)
+//        challenge2.results.append(result6)
+//        
         
         fixture1.challenges.append(challenge1)
         fixture2.challenges.append(challenge2)

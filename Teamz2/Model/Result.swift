@@ -11,7 +11,9 @@ import RealmSwift
 
 class Result: Object {
     
-    @objc dynamic var timeTaken : Int = 0 ;
+//    @objc dynamic var timeTaken : String = "" 
     @objc dynamic var user : User?
+    @objc dynamic var details : Run?
     var parentChallenge = LinkingObjects(fromType: Challenge.self, property: "results")
+    
 }

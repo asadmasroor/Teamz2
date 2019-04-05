@@ -29,8 +29,14 @@
 		846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */; };
 		846B665F223033010090CAF2 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B665E223033010090CAF2 /* SelectionViewController.swift */; };
 		846B666122304D0C0090CAF2 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B666022304D0C0090CAF2 /* ResultViewController.swift */; };
+		8483A4092254FFF1004D2304 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A4082254FFF1004D2304 /* Run.swift */; };
+		8483A40B22550014004D2304 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A40A22550014004D2304 /* Location.swift */; };
+		8483A40D2255047E004D2304 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A40C2255047E004D2304 /* FormatDisplay.swift */; };
+		8483A40F225504BC004D2304 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A40E225504BC004D2304 /* LocationManager.swift */; };
+		8483A41122551345004D2304 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A41022551345004D2304 /* UnitExtensions.swift */; };
 		848AE4BD224838E900471AA0 /* JoinedChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */; };
 		848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */; };
+		84C436EE2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */; };
 		84DE33122231851A00C91071 /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33112231851A00C91071 /* SquadViewController.swift */; };
 		84DE331422318FBF00C91071 /* ClubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE331322318FBF00C91071 /* ClubViewController.swift */; };
 		84DE33162231C55500C91071 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33152231C55500C91071 /* MainMenuViewController.swift */; };
@@ -95,8 +101,14 @@
 		846B665C222EFC250090CAF2 /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		846B665E223033010090CAF2 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		846B666022304D0C0090CAF2 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		8483A4082254FFF1004D2304 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		8483A40A22550014004D2304 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		8483A40C2255047E004D2304 /* FormatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
+		8483A40E225504BC004D2304 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8483A41022551345004D2304 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengesViewController.swift; sourceTree = "<group>"; };
 		848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengeViewCell.swift; sourceTree = "<group>"; };
+		84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallenegeAttemptsViewController.swift; sourceTree = "<group>"; };
 		84DE33112231851A00C91071 /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
 		84DE331322318FBF00C91071 /* ClubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewController.swift; sourceTree = "<group>"; };
 		84DE33152231C55500C91071 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +242,8 @@
 				846B6649222D71F30090CAF2 /* Fixture.swift */,
 				846B664B222DCE620090CAF2 /* Challenge.swift */,
 				846B664D222DE6AB0090CAF2 /* Result.swift */,
+				8483A4082254FFF1004D2304 /* Run.swift */,
+				8483A40A22550014004D2304 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,12 +251,16 @@
 		846B6655222ED9490090CAF2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8483A40E225504BC004D2304 /* LocationManager.swift */,
+				8483A41022551345004D2304 /* UnitExtensions.swift */,
 				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
 				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
 				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
 				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
+				8483A40C2255047E004D2304 /* FormatDisplay.swift */,
 				84DE33312232C10B00C91071 /* My Clubs */,
 				84DE33322232C17300C91071 /* Joined Club */,
+				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,6 +414,11 @@
 				TargetAttributes = {
 					843412CE222CBDEA0098CFEA = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					843412E2222CBDEC0098CFEA = {
 						CreatedOnToolsVersion = 10.1;
@@ -553,11 +576,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DE33162231C55500C91071 /* MainMenuViewController.swift in Sources */,
+				8483A40B22550014004D2304 /* Location.swift in Sources */,
 				846B666122304D0C0090CAF2 /* ResultViewController.swift in Sources */,
 				84DE332622327ED300C91071 /* JoinedClubViewController.swift in Sources */,
 				84DE332822328BBB00C91071 /* JoinedSquadTableViewCell.swift in Sources */,
 				84DE33222231D93B00C91071 /* ResultsTableViewCell.swift in Sources */,
 				84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */,
+				8483A41122551345004D2304 /* UnitExtensions.swift in Sources */,
 				846B664C222DCE620090CAF2 /* Challenge.swift in Sources */,
 				846B665F223033010090CAF2 /* SelectionViewController.swift in Sources */,
 				84DE332C22328F3D00C91071 /* SearchViewController.swift in Sources */,
@@ -568,6 +593,7 @@
 				84DE33202231D82E00C91071 /* LoginViewController.swift in Sources */,
 				84DE332A22328BDD00C91071 /* JoinedSquadViewController.swift in Sources */,
 				845BBF592252B9AB005649D5 /* AttemptChallengeController.swift in Sources */,
+				8483A40F225504BC004D2304 /* LocationManager.swift in Sources */,
 				846B6646222D70790090CAF2 /* Club.swift in Sources */,
 				846B6650222EAE150090CAF2 /* FixtureViewController.swift in Sources */,
 				84DE332422327E8B00C91071 /* JoinedClubTableViewCell.swift in Sources */,
@@ -577,11 +603,14 @@
 				846B6657222ED9760090CAF2 /* ChallengeViewController.swift in Sources */,
 				84DE331A2231D56D00C91071 /* SquadTableViewCell.swift in Sources */,
 				846B664E222DE6AB0090CAF2 /* Result.swift in Sources */,
+				8483A4092254FFF1004D2304 /* Run.swift in Sources */,
 				846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */,
 				848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */,
 				84DE33122231851A00C91071 /* SquadViewController.swift in Sources */,
 				846B664A222D71F30090CAF2 /* Fixture.swift in Sources */,
+				8483A40D2255047E004D2304 /* FormatDisplay.swift in Sources */,
 				846B6654222EB4B40090CAF2 /* FixtureTableViewCell.swift in Sources */,
+				84C436EE2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift in Sources */,
 				84DE33342232C1AD00C91071 /* JoinedFixturesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

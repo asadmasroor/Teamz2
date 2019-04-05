@@ -49,6 +49,7 @@ class JoinedClubViewController: UITableViewController {
         let desitinationVC =  segue.destination as! JoinedSquadViewController
         
         desitinationVC.selectedClub = joinedClubs[indexpath1]
+        desitinationVC.userLoggedIn = selectedUser
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
