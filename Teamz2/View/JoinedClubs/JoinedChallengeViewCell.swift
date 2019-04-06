@@ -10,6 +10,7 @@ import UIKit
 
 protocol joinedChallengeDelegate: AnyObject {
     func attemptChallenegeButtonPressed(cell: JoinedChallengeViewCell)
+    func viewAttemptsButtonPressed(cell: JoinedChallengeViewCell)
     
 }
 class JoinedChallengeViewCell: UITableViewCell {
@@ -26,7 +27,10 @@ class JoinedChallengeViewCell: UITableViewCell {
         delegate?.attemptChallenegeButtonPressed(cell: self)
     }
     
-
+    @IBAction func viewAttemptsButtonPressed(_ sender: Any) {
+        delegate?.viewAttemptsButtonPressed(cell: self)
+    }
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UITextView!

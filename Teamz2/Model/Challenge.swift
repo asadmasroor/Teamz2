@@ -14,7 +14,7 @@ class Challenge: Object {
     @objc dynamic var name : String = ""
     @objc dynamic var desc : String = ""
     @objc dynamic var miles : Int = 0
-    var parentFixture = LinkingObjects(fromType: Fixture.self, property: "fixtures")
+    var parentFixture = LinkingObjects(fromType: Fixture.self, property: "challenges")
     var results = List<Result>()
     
     

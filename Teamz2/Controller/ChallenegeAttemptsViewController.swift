@@ -7,40 +7,60 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ChallenegeAttemptsViewController: UITableViewController {
+    
+    var results = List<Result>()
+    var userResults = List<Result>()
+    
+    var userLoggedIn : User?
+    
+    var selectedChallenge : Challenge? {
+        didSet {
+            
+            self.title = "\((selectedChallenge?.name)!)"
+            results = (selectedChallenge?.results)!
+            
+            for result in results {
+                if (result.user == userLoggedIn){
+                    userResults.append(result)
+                }
+            }
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+   
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+       
+        return userResults.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
+        
+        
+        let result = userResults[indexPath.row]
+        
+        let resultNo = indexPath.row + 1
+        
+        cell.textLabel?.text = "\(resultNo) Attempt: \(result.details?.duration)"
+        
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

@@ -12,6 +12,7 @@ import CoreLocation
 
 class AttemptChallengeController: UIViewController {
     
+    let realm = try! Realm()
     
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -74,34 +75,42 @@ class AttemptChallengeController: UIViewController {
         if let miles = Double(milesString) {
             
             if (miles >= challangeMiles) {
-                
+        
                 print("Done")
                 self.stopRun()
                 
-                let newRun = Run()
-                newRun.distance = distance.value
-                newRun.duration = Int16(seconds)
-                newRun.timestamp = Date()
+                try! realm.write {
+                    let newRun = Run()
+                    newRun.distance = distance.value
+                    newRun.duration = Int16(seconds)
+                    newRun.timestamp = Date()
+                    
+                    for location in locationList {
+                        let locationObject = Location()
+                        locationObject.timestamp = location.timestamp
+                        locationObject.latitude = location.coordinate.latitude
+                        locationObject.longitude = location.coordinate.longitude
+                        newRun.locations.append(locationObject)
+                    }
+                    
+                    distanceLabel.text = "Distance:  \(distance.value)"
+                    timeLabel.text = "Time:  \(newRun.duration)"
+                    paceLabel.text = "Pace:  \("Hello")"
+                    
+                    run = newRun
+
+                    
+                    let result = Result()
+                    result.user = userLoggedIn
+                    result.details = run
+                    
+                    
+                    selectedChallenge?.results.append(result)
                 
-                for location in locationList {
-                    let locationObject = Location()
-                    locationObject.timestamp = location.timestamp
-                    locationObject.latitude = location.coordinate.latitude
-                    locationObject.longitude = location.coordinate.longitude
-                    newRun.locations.append(locationObject)
                 }
                 
-                distanceLabel.text = "Distance:  \(distance.value)"
-                timeLabel.text = "Time:  \(newRun.duration)"
-                paceLabel.text = "Pace:  \("Hello")"
                 
-                run = newRun
-                
-                let result = Result()
-                result.user = userLoggedIn
-                result.details = run
-                
-                selectedChallenge?.results.append(result)
+               
                 
                 let alertController = UIAlertController(title: "Challenge Finished",
                                                         message: "Do you wish to see your challenge attempt?",
@@ -110,7 +119,9 @@ class AttemptChallengeController: UIViewController {
                 
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive) { _ in
                     self.stopRun()
-                    _ = self.navigationController?.popToRootViewController(animated: true)
+                    
+                    self.performSegue(withIdentifier: "viewResultSegue", sender: self)
+                    
                 })
                 
                 present(alertController, animated: true)
@@ -127,6 +138,13 @@ class AttemptChallengeController: UIViewController {
         
     
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ChallenegeAttemptsViewController
+        
+        destinationVC.selectedChallenge = selectedChallenge
+        destinationVC.userLoggedIn = userLoggedIn
     }
     
     

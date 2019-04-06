@@ -153,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3QI-nr-bGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="1421"/>
+            <point key="canvasLocation" x="830" y="1569"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="Bpj-8n-bys">
@@ -245,7 +245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcU-vm-BWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1726" y="691"/>
+            <point key="canvasLocation" x="1673" y="681"/>
         </scene>
         <!--Results-->
         <scene sceneID="J0E-2t-Ih7">
@@ -708,6 +708,34 @@
             </objects>
             <point key="canvasLocation" x="1071" y="-33"/>
         </scene>
+        <!--Challenege Attempts View Controller-->
+        <scene sceneID="5n4-3f-cLT">
+            <objects>
+                <tableViewController id="cI4-nb-IKo" customClass="ChallenegeAttemptsViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I4q-VQ-XGN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" id="hUB-FP-LMp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hUB-FP-LMp" id="PvY-XA-Cyi">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cI4-nb-IKo" id="Meu-Ew-WHK"/>
+                            <outlet property="delegate" destination="cI4-nb-IKo" id="0Rt-7Z-UjC"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="glh-tG-AME" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3879" y="-864"/>
+        </scene>
         <!--Challenges-->
         <scene sceneID="TL0-I0-OEr">
             <objects>
@@ -744,8 +772,17 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bn3-G1-BvN">
-                                            <rect key="frame" x="141" y="209" width="88" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyX-VT-UsP">
+                                            <rect key="frame" x="220" y="209" width="100" height="30"/>
+                                            <state key="normal" title="View Attempts">
+                                                <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="viewAttemptsButtonPressed:" destination="bOt-Rt-vEw" eventType="touchUpInside" id="Bek-lm-3F9"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bn3-G1-BvN">
+                                            <rect key="frame" x="77" y="209" width="56" height="30"/>
                                             <state key="normal" title="Attempt">
                                                 <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
@@ -757,17 +794,22 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Tw9-KG-1v7" secondAttribute="trailing" constant="16" id="8xV-5d-9mw"/>
                                         <constraint firstItem="Bn3-G1-BvN" firstAttribute="leading" secondItem="VQn-yR-DCH" secondAttribute="leadingMargin" constant="125" id="90J-pf-9dG"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Bn3-G1-BvN" secondAttribute="trailing" constant="130" id="9ga-TC-5Gl"/>
+                                        <constraint firstItem="iyX-VT-UsP" firstAttribute="top" secondItem="SAe-Ew-gn9" secondAttribute="bottom" constant="7.6699999999999999" id="A0c-js-whf"/>
                                         <constraint firstItem="Tw9-KG-1v7" firstAttribute="top" secondItem="VQn-yR-DCH" secondAttribute="top" constant="17.999999999999886" id="AzH-Tk-hJa"/>
+                                        <constraint firstItem="iyX-VT-UsP" firstAttribute="leading" secondItem="Bn3-G1-BvN" secondAttribute="trailing" constant="23" id="C0r-du-Oba"/>
                                         <constraint firstItem="KLZ-hy-Yd8" firstAttribute="leading" secondItem="VQn-yR-DCH" secondAttribute="leading" constant="16" id="CgC-qU-GcI"/>
                                         <constraint firstItem="Tw9-KG-1v7" firstAttribute="leading" secondItem="VQn-yR-DCH" secondAttribute="leading" constant="16" id="E7J-WI-oHJ"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Bn3-G1-BvN" secondAttribute="bottom" constant="4" id="HX4-ae-2lS"/>
                                         <constraint firstItem="SAe-Ew-gn9" firstAttribute="top" secondItem="KLZ-hy-Yd8" secondAttribute="bottom" constant="16" id="Oe8-09-24V"/>
                                         <constraint firstItem="KLZ-hy-Yd8" firstAttribute="top" secondItem="Tw9-KG-1v7" secondAttribute="bottom" constant="8.6699999999999999" id="P30-br-pMG"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="iyX-VT-UsP" secondAttribute="trailing" constant="73" id="VUY-fz-VOd"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="iyX-VT-UsP" secondAttribute="bottom" constant="4" id="VXM-KG-zMA"/>
                                         <constraint firstAttribute="trailing" secondItem="KLZ-hy-Yd8" secondAttribute="trailing" constant="16" id="Ys7-Rg-zZz"/>
                                         <constraint firstItem="Bn3-G1-BvN" firstAttribute="top" secondItem="SAe-Ew-gn9" secondAttribute="bottom" constant="7.6699999999999999" id="ZhM-PA-LHZ"/>
                                         <constraint firstItem="SAe-Ew-gn9" firstAttribute="trailing" secondItem="VQn-yR-DCH" secondAttribute="trailingMargin" id="e4a-Ig-PTu"/>
+                                        <constraint firstItem="iyX-VT-UsP" firstAttribute="leading" secondItem="Bn3-G1-BvN" secondAttribute="trailing" constant="23" id="mnA-Ue-he6"/>
                                         <constraint firstItem="SAe-Ew-gn9" firstAttribute="leading" secondItem="VQn-yR-DCH" secondAttribute="leadingMargin" id="nAK-LA-l5D"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="iyX-VT-UsP" secondAttribute="trailing" constant="39" id="rcy-Az-Ui8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -788,11 +830,12 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="TrJ-ZK-DkI" kind="show" identifier="attemptChallenegeSegue" id="B3l-Fi-pLh"/>
+                        <segue destination="cI4-nb-IKo" kind="show" identifier="viewAttemptSegue" id="XPn-fg-s2a"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYA-hu-3Gs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="-33"/>
+            <point key="canvasLocation" x="1954" y="-33"/>
         </scene>
         <!--Attempt Challenge Controller-->
         <scene sceneID="RTL-MD-YOt">
@@ -857,12 +900,16 @@
                         <outlet property="milesLabel" destination="1M6-Sq-2pq" id="9zE-Ah-XGv"/>
                         <outlet property="paceLabel" destination="Cv8-OA-Hb4" id="uLk-Kd-9wt"/>
                         <outlet property="timeLabel" destination="x7u-HN-826" id="HrS-Fm-ahf"/>
+                        <segue destination="cI4-nb-IKo" kind="show" identifier="viewResultSegue" id="TLO-h0-d2d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="seF-wh-XKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2748" y="-41.379310344827587"/>
+            <point key="canvasLocation" x="3068" y="-33"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TLO-h0-d2d"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

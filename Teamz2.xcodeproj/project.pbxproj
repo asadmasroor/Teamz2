@@ -254,13 +254,13 @@
 				8483A40E225504BC004D2304 /* LocationManager.swift */,
 				8483A41022551345004D2304 /* UnitExtensions.swift */,
 				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
+				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
 				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
 				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
 				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
 				8483A40C2255047E004D2304 /* FormatDisplay.swift */,
 				84DE33312232C10B00C91071 /* My Clubs */,
 				84DE33322232C17300C91071 /* Joined Club */,
-				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
