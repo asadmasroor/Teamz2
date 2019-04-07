@@ -14,6 +14,7 @@ class JoinedSquadViewController: UITableViewController {
     
     var squads = List<Squad>()
     
+    
     var selectedClub : Club? {
         didSet {
             squads = (selectedClub?.squads)!

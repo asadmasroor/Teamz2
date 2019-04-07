@@ -46,8 +46,7 @@ class AttemptChallengeController: UIViewController {
     
     private func updateDisplay() {
         
-        
-        
+    
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
         let formattedPace = FormatDisplay.pace(distance: distance,
@@ -93,16 +92,17 @@ class AttemptChallengeController: UIViewController {
                         newRun.locations.append(locationObject)
                     }
                     
-                    distanceLabel.text = "Distance:  \(distance.value)"
-                    timeLabel.text = "Time:  \(newRun.duration)"
-                    paceLabel.text = "Pace:  \("Hello")"
+                    
                     
                     run = newRun
+                    timer?.invalidate()
 
                     
                     let result = Result()
                     result.user = userLoggedIn
                     result.details = run
+                    
+                    realm.add(result)
                     
                     
                     selectedChallenge?.results.append(result)
@@ -119,8 +119,13 @@ class AttemptChallengeController: UIViewController {
                 
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive) { _ in
                     self.stopRun()
-                    
+                    alertController.dismiss(animated: true, completion: nil)
                     self.performSegue(withIdentifier: "viewResultSegue", sender: self)
+                    
+                    self.distanceLabel.text = "Distance:"
+                    self.timeLabel.text = "Time:"
+                    self.paceLabel.text = "Pace:"
+                    
                     
                 })
                 
@@ -166,6 +171,8 @@ class AttemptChallengeController: UIViewController {
 //
 //        present(alertController, animated: true)
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         milesLabel.text = "Challenge: \(String((selectedChallenge?.miles)!)) miles"
@@ -180,7 +187,9 @@ class AttemptChallengeController: UIViewController {
         locationList.removeAll()
         updateDisplay()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            
             self.eachSecond()
+            
         }
         startLocationUpdates()
     }

@@ -11,9 +11,12 @@ import RealmSwift
 
 class JoinedClubViewController: UITableViewController {
     
+    let realm = try! Realm()
     var indexpath1 = 0
     
-    var joinedClubs = List<Club>()
+    var  joinedClubs = List<Club>()
+    
+    
     
     var selectedUser : User? {
         didSet {
@@ -23,7 +26,7 @@ class JoinedClubViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
       
     }
 

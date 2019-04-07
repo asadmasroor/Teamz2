@@ -33,8 +33,17 @@ class ChallenegeAttemptsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        for result in results {
+            if (result.user?.name == userLoggedIn?.name){
+                userResults.append(result)
+            }
+        }
 
         
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 
     // MARK: - Table view data source
@@ -43,7 +52,7 @@ class ChallenegeAttemptsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return userResults.count
+        return results.count
     }
 
     
@@ -51,11 +60,14 @@ class ChallenegeAttemptsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
         
         
+        
         let result = userResults[indexPath.row]
         
         let resultNo = indexPath.row + 1
         
-        cell.textLabel?.text = "\(resultNo) Attempt: \(result.details?.duration)"
+        let minutes = secondsToHoursMinutesSeconds(seconds: Int((result.details?.duration)!))
+        
+        cell.textLabel?.text = "\(resultNo)) Attempt: \(minutes.0):\(minutes.1):\(minutes.2)"
         
 
         return cell

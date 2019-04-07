@@ -10,16 +10,20 @@ import UIKit
 import RealmSwift
 
 class MainMenuViewController: UIViewController {
+   
+    
     let realm = try! Realm()
     @IBOutlet weak var welcomeLabel: UILabel!
     var UserLoggedIn = User()
     override func viewDidLoad() {
         super.viewDidLoad()
 //        initialiseData()
-        
+        let user = realm.objects(User.self).filter("username == 'asadmasroor'")
+        UserLoggedIn =  user[0]
         welcomeLabel.text = "Welcome \(UserLoggedIn.name)"
 
         // Do any additional setup after loading the view.
+//        print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     @IBAction func myClubButtonPressed(_ sender: UIButton) {
@@ -28,15 +32,7 @@ class MainMenuViewController: UIViewController {
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "clubSegue") {
@@ -61,9 +57,14 @@ class MainMenuViewController: UIViewController {
         let newClubAlert = UIAlertController(title: "Make New Club", message: "", preferredStyle: .alert)
         
         let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+            
+             try! self.realm.write {
              let newClub = Club()
              newClub.name = (textField.text)!
              self.UserLoggedIn.clubs.append(newClub)
+             self.realm.add(newClub)
+            
+            }
             
             self.performSegue(withIdentifier: "clubSegue", sender: self)
             
@@ -276,8 +277,14 @@ class MainMenuViewController: UIViewController {
 //        User1.joinedClubs.append(MUFC)
 //        User2.joinedClubs.append(MUFC)
 //        User3.joinedClubs.append(MUFC)
+//            
+//        realm.add(User1)
+//        realm.add(User2)
+//        realm.add(User3)
+//            
+//       
 //
-//            UserLoggedIn = User1
+//           
 //        }
 //
 //
