@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class JoinedSquadTableViewCell: UITableViewCell {
 
     @IBOutlet weak var squadLabel: UILabel!

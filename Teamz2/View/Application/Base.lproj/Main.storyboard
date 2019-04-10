@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" red="0.057708274679999998" green="0.33339018110000002" blue="0.68909893129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fixtureCell" rowHeight="147" id="pMb-hk-tWg" customClass="FixtureTableViewCell" customModule="Teamz2" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="fixtureCell" rowHeight="147" id="pMb-hk-tWg" customClass="FixtureTableViewCell" customModule="Teamz2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="147"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pMb-hk-tWg" id="bqY-2F-c3n">
@@ -146,7 +146,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Available Players" id="JUx-zM-1d5">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Vk3-P9-bpb"/>
+                        <barButtonItem key="rightBarButtonItem" title="Publish" id="ZeE-Ni-31t"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -383,47 +383,13 @@
                     <connections>
                         <outlet property="welcomeLabel" destination="txH-bg-bYq" id="7y9-By-gqp"/>
                         <segue destination="mUg-DE-HOH" kind="show" identifier="clubSegue" id="XN5-7p-PGG"/>
-                        <segue destination="2xf-6n-6T8" kind="show" identifier="searchSegue" id="F7G-CB-rcx"/>
                         <segue destination="hdE-8r-msd" kind="show" identifier="joinedClubSegue" id="TL2-T9-ybq"/>
+                        <segue destination="POb-zd-S6L" kind="show" identifier="searchSegue" id="nrg-WO-kPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpi-ey-pMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1575.2" y="678.32512315270935"/>
-        </scene>
-        <!--Search for Club-->
-        <scene sceneID="VZN-hM-hPd">
-            <objects>
-                <tableViewController id="2xf-6n-6T8" customClass="SearchViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Mv-yE-pSC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="Jru-nQ-eTf">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rJ2-ys-ziN">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rJ2-ys-ziN" id="UPb-yz-Lml">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="2xf-6n-6T8" id="IWc-I3-thq"/>
-                            <outlet property="delegate" destination="2xf-6n-6T8" id="7yI-Do-sHV"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Search for Club" id="stg-Wk-iRs"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tOX-E1-2ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1559" y="1472"/>
         </scene>
         <!--My Clubs-->
         <scene sceneID="7Fm-Sg-lP9">
@@ -745,7 +711,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="joinedChallengeCell" rowHeight="254" id="bOt-Rt-vEw" customClass="JoinedChallengeViewCell" customModule="Teamz2" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="joinedChallengeCell" rowHeight="254" id="bOt-Rt-vEw" customClass="JoinedChallengeViewCell" customModule="Teamz2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="254"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bOt-Rt-vEw" id="VQn-yR-DCH">
@@ -907,9 +873,78 @@
             </objects>
             <point key="canvasLocation" x="3068" y="-33"/>
         </scene>
+        <!--Search for Club-->
+        <scene sceneID="svk-IZ-O4P">
+            <objects>
+                <tableViewController title="Search for Club" id="POb-zd-S6L" customClass="SearchViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oBp-Yt-sel">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="notJoinedClubCell" rowHeight="210" id="sRV-Ur-8Eh" customClass="SearchTableViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="210"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sRV-Ur-8Eh" id="bcI-86-OVn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="209.66666666666666"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Rt-Fo-MXW">
+                                            <rect key="frame" x="16" y="40" width="343" height="200"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ya3-6S-xHf">
+                                            <rect key="frame" x="16" y="11" width="343" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6h-Xk-tOs">
+                                            <rect key="frame" x="172" y="158.33333333333334" width="30" height="30"/>
+                                            <state key="normal" title="Join">
+                                                <color key="titleColor" red="0.41555923080000001" green="0.65824104630000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="joinButtonPressed:" destination="sRV-Ur-8Eh" eventType="touchUpInside" id="lG1-ow-F5v"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5Rt-Fo-MXW" firstAttribute="leading" secondItem="bcI-86-OVn" secondAttribute="leadingMargin" id="0eg-Fz-KcD"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="E6h-Xk-tOs" secondAttribute="bottom" constant="10.67" id="FKc-ip-kRi"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="E6h-Xk-tOs" secondAttribute="trailing" constant="157" id="MB1-Yj-eDg"/>
+                                        <constraint firstItem="E6h-Xk-tOs" firstAttribute="top" secondItem="ya3-6S-xHf" secondAttribute="bottom" constant="127" id="ao4-FZ-Dav"/>
+                                        <constraint firstItem="ya3-6S-xHf" firstAttribute="trailing" secondItem="bcI-86-OVn" secondAttribute="trailingMargin" id="bEW-aI-Hpv"/>
+                                        <constraint firstItem="E6h-Xk-tOs" firstAttribute="leading" secondItem="bcI-86-OVn" secondAttribute="leadingMargin" constant="156" id="i9m-S5-QzS"/>
+                                        <constraint firstItem="E6h-Xk-tOs" firstAttribute="top" secondItem="ya3-6S-xHf" secondAttribute="bottom" constant="127" id="iK9-vI-2WI"/>
+                                        <constraint firstItem="ya3-6S-xHf" firstAttribute="top" secondItem="bcI-86-OVn" secondAttribute="topMargin" id="iVS-dL-Ls2"/>
+                                        <constraint firstItem="5Rt-Fo-MXW" firstAttribute="trailing" secondItem="bcI-86-OVn" secondAttribute="trailingMargin" id="q1s-N0-Bjb"/>
+                                        <constraint firstItem="ya3-6S-xHf" firstAttribute="leading" secondItem="bcI-86-OVn" secondAttribute="leadingMargin" id="vVH-xy-hfM"/>
+                                        <constraint firstItem="5Rt-Fo-MXW" firstAttribute="top" secondItem="ya3-6S-xHf" secondAttribute="bottom" constant="8.6699999999999999" id="xXR-kH-EUj"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descLabel" destination="5Rt-Fo-MXW" id="j8f-QZ-fzu"/>
+                                    <outlet property="nameLabel" destination="ya3-6S-xHf" id="Ey6-tD-moA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="POb-zd-S6L" id="DuI-ep-cnO"/>
+                            <outlet property="delegate" destination="POb-zd-S6L" id="va6-B4-zeX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i3h-Kg-leK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1575" y="1436"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TLO-h0-d2d"/>
+        <segue reference="XPn-fg-s2a"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

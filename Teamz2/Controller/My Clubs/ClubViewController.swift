@@ -17,6 +17,8 @@ class ClubViewController: UITableViewController {
             clubs = (selectedUser?.clubs)!
         }
     }
+    
+    
    
     
     var indexPath1 = 0
@@ -49,6 +51,7 @@ class ClubViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! SquadViewController
         
+        destinationVC.UserLoggedIn = selectedUser
         destinationVC.selectedClub = clubs[indexPath1]
     }
     
@@ -56,6 +59,7 @@ class ClubViewController: UITableViewController {
         indexPath1 = indexPath.row
         
         performSegue(withIdentifier: "squadSegue", sender: self)
+        
     }
     
 

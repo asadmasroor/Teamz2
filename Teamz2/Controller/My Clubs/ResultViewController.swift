@@ -42,10 +42,10 @@ class ResultViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
         
         let name = (selectedChallenge?.results[indexPath.row].user?.name)!
-//        let minutes = (results[indexPath.row].timeTaken)
+        let minutes = (selectedChallenge?.results[indexPath.row].details?.duration)!
         
         
-        cell.resultLabel.text = "\(name): 0 minutes"
+        cell.resultLabel.text = "\(name): \(minutes) seconds"
         
         return cell
     }

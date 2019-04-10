@@ -27,6 +27,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             fixtures = (selectedSquad?.fixtures)!
         }
     }
+    
+    var userLoggedIn : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +79,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             let destinationVC = segue.destination as! SelectionViewController
             
             destinationVC.selectedFixture = fixtures[uIndexPath]
+            destinationVC.userLoggedIn = userLoggedIn
             
         }
         
