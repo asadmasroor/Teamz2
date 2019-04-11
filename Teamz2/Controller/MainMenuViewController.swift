@@ -169,18 +169,37 @@ class MainMenuViewController: UIViewController {
         fixture1.title = "SSCC 1st XI vs NFC 1st XI"
         fixture1.address = "Ostler's Lane"
         
-        
+        let availbility = Available()
+        availbility.user = User1
             
-        fixture1.availablePlayers.append(User1)
-        fixture1.availablePlayers.append(User2)
-        fixture1.availablePlayers.append(User3)
+        let availbility2 = Available()
+        availbility2.user = User2
+    
+        let availbility3 = Available()
+        availbility3.user = User3
+            
+        fixture1.availablePlayers.append(availbility)
+        fixture1.availablePlayers.append(availbility2)
+        fixture1.availablePlayers.append(availbility3)
+            
+            
+        let availbility4 = Available()
+        availbility4.user = User1
+        
+        let availbility5 = Available()
+        availbility5.user = User2
+        
+        let availbility6 = Available()
+        availbility6.user = User3
 
-//        let fixture2 = Fixture()
-//        fixture2.title = "SSCC 1st XI vs MUFC 1st XI"
-//        fixture2.address = "Ostler's Lane"
-//        fixture2.availablePlayers.append(User1)
-//        fixture2.availablePlayers.append(User2)
-//        fixture2.availablePlayers.append(User3)
+        let fixture2 = Fixture()
+        fixture2.title = "SSCC 1st XI vs MUFC 1st XI"
+        fixture2.address = "Ostler's Lane"
+        fixture2.availablePlayers.append(availbility4)
+        fixture2.availablePlayers.append(availbility5)
+        fixture2.availablePlayers.append(availbility6)
+            
+        
 //
 //        let fixture3 = Fixture()
 //        fixture3.title = "MCFC 1st XI vs SSCC 1st XI"
@@ -193,8 +212,8 @@ class MainMenuViewController: UIViewController {
 //
 //
 //
-//        firstXI.fixtures.append(fixture1)
-//        firstXI.fixtures.append(fixture2)
+         firstXI.fixtures.append(fixture1)
+         firstXI.fixtures.append(fixture2)
 //        firstXI.fixtures.append(fixture3)
 //
 //        let fixture4 = Fixture()
@@ -220,7 +239,6 @@ class MainMenuViewController: UIViewController {
 //
 //        secondXI.fixtures.append(fixture4)
 //        secondXI.fixtures.append(fixture5)
-        secondXI.fixtures.append(fixture6)
 
 
         let challenge1 =  Challenge()
@@ -268,16 +286,16 @@ class MainMenuViewController: UIViewController {
 //        challenge2.results.append(result6)
 //
 
-        fixture1.challenges.append(challenge1)
-        fixture2.challenges.append(challenge2)
-        fixture3.challenges.append(challenge1)
-        fixture3.challenges.append(challenge2)
-        fixture4.challenges.append(challenge1)
-        fixture4.challenges.append(challenge2)
-        fixture5.challenges.append(challenge1)
-        fixture5.challenges.append(challenge2)
-        fixture6.challenges.append(challenge1)
-        fixture6 .challenges.append(challenge2)
+            fixture1.challenges.append(challenge1)
+            fixture2.challenges.append(challenge2)
+//        fixture3.challenges.append(challenge1)
+//        fixture3.challenges.append(challenge2)
+//        fixture4.challenges.append(challenge1)
+//        fixture4.challenges.append(challenge2)
+//        fixture5.challenges.append(challenge1)
+//        fixture5.challenges.append(challenge2)
+//        fixture6.challenges.append(challenge1)
+//        fixture6 .challenges.append(challenge2)
 
 
         User1.clubs.append(SSCC)

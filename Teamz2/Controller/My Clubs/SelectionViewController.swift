@@ -13,7 +13,7 @@ class SelectionViewController: UITableViewController {
     
     let realm = try! Realm()
     
-    var availablePlayers : List<User>?
+    var availablePlayers : List<Available>?
     var selectedPlayers : List<User>?
     var userLoggedIn : User?
     var availablePLayersName : [String] = []
@@ -22,7 +22,7 @@ class SelectionViewController: UITableViewController {
     var selectedFixture : Fixture? {
         didSet{
            
-            availablePlayers = (selectedFixture?.availablePlayers)!
+            // availablePlayers = (selectedFixture?.availablePlayers)!
             
             
         }
@@ -30,11 +30,12 @@ class SelectionViewController: UITableViewController {
     
     override func viewDidLoad() {
        
-        let predicate = NSPredicate(format: "title = %@", "\(selectedFixture?.title)")
+        let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
         let fixture = realm.objects(Fixture.self).filter(predicate)
         
         print(fixture.count)
-        
+        print("Pree In")
+
         if fixture.count != 0 {
         
         
@@ -42,10 +43,7 @@ class SelectionViewController: UITableViewController {
         print("In")
        
         
-        for player in selectedPlayers! {
-            
-            availablePLayersName.append(player.name)
-        }
+        
         
         }
         
@@ -53,11 +51,14 @@ class SelectionViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      let cell = tableView.dequeueReusableCell(withIdentifier: "selectionCell", for: indexPath) as! SelectionTableViewCell
         
-        cell.playerNameLabel.text = availablePlayers?[indexPath.row].name
+        cell.playerNameLabel.text = availablePlayers?[indexPath.row].user?.name
         
-        if (availablePLayersName.contains((availablePlayers?[indexPath.row].name)!)) {
+        if(availablePlayers?[indexPath.row].available == true){
             cell.accessoryType = .checkmark
+        } else {
+             cell.accessoryType = .none
         }
+
         
         return cell
     }
@@ -70,36 +71,24 @@ class SelectionViewController: UITableViewController {
         
       
        
-        if (tableView.cellForRow(at: indexPath)?.accessoryType == .none) {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        if(availablePlayers?[indexPath.row].available == true){
             
-//            try! realm.write {
-//
-//                let predicate = NSPredicate(format: "title = %@", "\(selectedFixture?.title)")
-//                let fixture = realm.objects(Fixture.self).filter(predicate)
-//
-//                if fixture != nil {
-//                    fixture[0].selectedPlayers.remove(at: indexPath.row)
-//                }
-//
-//            }
+            try! realm.write {
+                availablePlayers?[indexPath.row].available = false
+            }
+            
+           
             
         } else {
-             tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//               try! realm.write {
-//
-//                let predicate = NSPredicate(format: "title = %@", "\(selectedFixture?.title)")
-//                let fixture = realm.objects(Fixture.self).filter(predicate)
-//
-//                if fixture != nil {
-//                    fixture[0].selectedPlayers.append(selectedPlayers![indexPath.row])
-//                }
-//
-//            }
+            try! realm.write {
+                availablePlayers?[indexPath.row].available = true
+            }
         }
+
         
         
         
+        tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
         

@@ -16,10 +16,10 @@ class ResultViewController: UITableViewController {
     var results = List<Result>()
     var selectedChallenge : Challenge? {
         didSet{
-            print((selectedChallenge?.name)!)
+            
             results = (selectedChallenge?.results)!
             
-            print((selectedChallenge?.results[2].user?.name)!)
+              self.title = "\((selectedChallenge?.name)!)"
             
            
             
@@ -33,20 +33,34 @@ class ResultViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return results.count
+        if (results.count == 0 ){
+            return 1
+        } else {
+             return results.count
+        }
+       
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
         
-        let name = (selectedChallenge?.results[indexPath.row].user?.name)!
-        let minutes = (selectedChallenge?.results[indexPath.row].details?.duration)!
         
-        
-        cell.resultLabel.text = "\(name): \(minutes) seconds"
-        
+        if (results.count != 0 ) {
+            
+            let name = (selectedChallenge?.results[indexPath.row].user?.name)!
+            let minutes = (selectedChallenge?.results[indexPath.row].details?.duration)!
+            
+            
+            cell.resultLabel.text = "\(name): \(minutes) seconds"
+            
+        } else {
+           cell.resultLabel.text = "No Results Yet!"
+        }
+    
+    
         return cell
     }
 
