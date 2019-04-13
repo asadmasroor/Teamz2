@@ -11,6 +11,9 @@
 		522BA3D67DD9BDE3888B46F7 /* Pods_Teamz2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43190782B0C8FA715A78E95C /* Pods_Teamz2.framework */; };
 		62D99167026E76824905B303 /* Pods_Teamz2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B33278F5C58856CA7638CEC /* Pods_Teamz2UITests.framework */; };
 		8418BE08225DE925008EC203 /* Available.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE07225DE925008EC203 /* Available.swift */; };
+		8418BE0A225FA831008EC203 /* PlayerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */; };
+		8418BE0C225FD1B0008EC203 /* PlayerSelectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE0B225FD1B0008EC203 /* PlayerSelectionViewCell.swift */; };
+		8418BE0E2260E768008EC203 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE0D2260E768008EC203 /* Confirmation.swift */; };
 		843412D3222CBDEA0098CFEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843412D2222CBDEA0098CFEA /* AppDelegate.swift */; };
 		843412D8222CBDEA0098CFEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843412D6222CBDEA0098CFEA /* Main.storyboard */; };
 		843412DA222CBDEC0098CFEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843412D9222CBDEC0098CFEA /* Assets.xcassets */; };
@@ -79,6 +82,9 @@
 		42781DB90A3617C4CA5C07E6 /* Pods_Teamz2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43190782B0C8FA715A78E95C /* Pods_Teamz2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8418BE07225DE925008EC203 /* Available.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Available.swift; sourceTree = "<group>"; };
+		8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewController.swift; sourceTree = "<group>"; };
+		8418BE0B225FD1B0008EC203 /* PlayerSelectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewCell.swift; sourceTree = "<group>"; };
+		8418BE0D2260E768008EC203 /* Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirmation.swift; sourceTree = "<group>"; };
 		843412CF222CBDEA0098CFEA /* Teamz2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teamz2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843412D2222CBDEA0098CFEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843412D7222CBDEA0098CFEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 				8483A4082254FFF1004D2304 /* Run.swift */,
 				8483A40A22550014004D2304 /* Location.swift */,
 				8418BE07225DE925008EC203 /* Available.swift */,
+				8418BE0D2260E768008EC203 /* Confirmation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +263,7 @@
 		846B6655222ED9490090CAF2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */,
 				8483A40E225504BC004D2304 /* LocationManager.swift */,
 				8483A41022551345004D2304 /* UnitExtensions.swift */,
 				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
@@ -318,6 +326,7 @@
 				84DE332322327E8B00C91071 /* JoinedClubTableViewCell.swift */,
 				84DE332F223293A400C91071 /* JoinedFixtureViewCell.swift */,
 				848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */,
+				8418BE0B225FD1B0008EC203 /* PlayerSelectionViewCell.swift */,
 			);
 			path = JoinedClubs;
 			sourceTree = "<group>";
@@ -596,8 +605,10 @@
 				84DE332822328BBB00C91071 /* JoinedSquadTableViewCell.swift in Sources */,
 				84DE33222231D93B00C91071 /* ResultsTableViewCell.swift in Sources */,
 				84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */,
+				8418BE0C225FD1B0008EC203 /* PlayerSelectionViewCell.swift in Sources */,
 				8483A41122551345004D2304 /* UnitExtensions.swift in Sources */,
 				846B664C222DCE620090CAF2 /* Challenge.swift in Sources */,
+				8418BE0E2260E768008EC203 /* Confirmation.swift in Sources */,
 				846B665F223033010090CAF2 /* SelectionViewController.swift in Sources */,
 				84DE332C22328F3D00C91071 /* SearchViewController.swift in Sources */,
 				84DE3330223293A400C91071 /* JoinedFixtureViewCell.swift in Sources */,
@@ -621,6 +632,7 @@
 				84C436F1225AA11700BAAA68 /* SearchTableViewCell.swift in Sources */,
 				846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */,
 				848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */,
+				8418BE0A225FA831008EC203 /* PlayerSelectionViewController.swift in Sources */,
 				84DE33122231851A00C91071 /* SquadViewController.swift in Sources */,
 				846B664A222D71F30090CAF2 /* Fixture.swift in Sources */,
 				8483A40D2255047E004D2304 /* FormatDisplay.swift in Sources */,

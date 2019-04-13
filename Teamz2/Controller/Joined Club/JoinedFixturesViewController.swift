@@ -12,6 +12,7 @@ import RealmSwift
 class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate {
     
     
+     let realm = try! Realm()
     var iPath = 0
     
     var fixtures = List<Fixture>()
@@ -27,11 +28,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     // MARK: - Table view data source
@@ -48,6 +45,19 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         
         cell.setFixture(fixture: fixtures[indexPath.row])
         cell.delegate = self
+        
+        for available in fixtures[indexPath.row].availablePlayers {
+            if (available.user?.username ==  userLoggedIn?.username) {
+                if (available.available == true) {
+                    cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
+                    cell.accessoryType = .checkmark
+                    
+                } else if  (available.available == false){
+                   
+                    cell.accessoryType = .none
+                }
+            }
+        }
         
 
         return cell
@@ -73,50 +83,39 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     }
     
  
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let predicate = NSPredicate(format: "title = %@", "\(fixtures[indexPath.row].title)")
+        let fixture = realm.objects(Fixture.self).filter(predicate)
+        
+        let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
+        let user = fixture[0].availablePlayers.filter(predicate1)
+        
+      
+        
+        
+        let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
+        let available = realm.objects(Available.self).filter(predicate2)
+        
+        if available[0].parentFixture[0].title == fixtures[indexPath.row].title {
+            
+            try! realm.write {
+                
+            
+                
+                user[0].available = !user[0].available
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+                
+                
+                self.tableView.reloadData()
+                
+                
+                
+            }
+            
+        }
+        
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

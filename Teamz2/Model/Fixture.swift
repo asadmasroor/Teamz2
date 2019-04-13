@@ -17,7 +17,6 @@ class Fixture: Object {
     var parentSquad = LinkingObjects(fromType: Squad.self, property: "fixtures")
     var challenges = List<Challenge>()
     var availablePlayers = List<Available>()
-    
-//    var publishedSquad = List<User>()
+    var publishedSquad = List<Confirmation>()
     
 }

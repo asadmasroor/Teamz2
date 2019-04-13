@@ -18,6 +18,9 @@ class SelectionViewController: UITableViewController {
     var userLoggedIn : User?
     var availablePLayersName : [String] = []
     
+   
+    
+    
   
     var selectedFixture : Fixture? {
         didSet{
@@ -30,8 +33,8 @@ class SelectionViewController: UITableViewController {
     
     override func viewDidLoad() {
        
-        let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
-        let fixture = realm.objects(Fixture.self).filter(predicate)
+       let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
+       let fixture = realm.objects(Fixture.self).filter(predicate)
         
         print(fixture.count)
         print("Pree In")
@@ -98,6 +101,27 @@ class SelectionViewController: UITableViewController {
     
     
  
+    @IBAction func publishButtonPressed(_ sender: Any) {
+        
+        let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
+        let fixture = self.realm.objects(Fixture.self).filter(predicate)
+        
+        try! realm.write {
+            fixture[0].publishedSquad.removeAll()
+        }
+        
+        
+        for user in availablePlayers!{
+            if user.available == true {
+                try! realm.write {
+                    let confirmation = Confirmation()
+                    confirmation.user = user.user
+                    fixture[0].publishedSquad.append(confirmation)
+                }
+            }
+        }
+        
+    }
     
     
     

@@ -17,7 +17,7 @@ class MainMenuViewController: UIViewController {
     var UserLoggedIn = User()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        initialiseData()
+    //  initialiseData()
         let user = realm.objects(User.self).filter("username == 'asadmasroor'")
         UserLoggedIn =  user[0]
         welcomeLabel.text = "Welcome \(UserLoggedIn.name)"
@@ -51,6 +51,14 @@ class MainMenuViewController: UIViewController {
         
         if (segue.identifier == "searchSegue") {
             let destinationVC = segue.destination as! SearchViewController
+            
+            destinationVC.userLoggedIn = UserLoggedIn
+            
+            
+        }
+        
+        if (segue.identifier == "selectionSegue") {
+            let destinationVC = segue.destination as! PlayerSelectionViewController
             
             destinationVC.userLoggedIn = UserLoggedIn
             
@@ -107,6 +115,13 @@ class MainMenuViewController: UIViewController {
     @IBAction func joinNewClubButtonPressed(_ sender: UIButton) {
         
         performSegue(withIdentifier: "searchSegue", sender: self)
+        
+    }
+    
+    
+    @IBAction func selectionsButtonPressed(_ sender: Any) {
+        
+        performSegue(withIdentifier: "selectionSegue", sender: self)
         
     }
     
