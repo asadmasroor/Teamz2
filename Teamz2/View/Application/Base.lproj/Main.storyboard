@@ -538,6 +538,7 @@
                                 <connections>
                                     <outlet property="addressLabel" destination="m7x-z2-tMw" id="bcU-Nq-B5b"/>
                                     <outlet property="confirmButton" destination="V2S-hg-sfB" id="oLj-hp-yPq"/>
+                                    <outlet property="declineButton" destination="GoK-hV-OKL" id="bcX-oY-brk"/>
                                     <outlet property="titleLabel" destination="aLY-aO-VN6" id="BTH-nq-2c9"/>
                                 </connections>
                             </tableViewCell>

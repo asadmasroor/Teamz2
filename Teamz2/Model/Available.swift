@@ -13,5 +13,6 @@ class Available : Object {
     
     @objc dynamic var user : User?
     @objc dynamic var available : Bool = false
+    @objc dynamic var isSelected : Bool = false
     var parentFixture = LinkingObjects(fromType: Fixture.self, property: "availablePlayers")
 }

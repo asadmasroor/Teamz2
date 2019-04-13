@@ -53,7 +53,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
                     cell.accessoryType = .checkmark
                     
                 } else if  (available.available == false){
-                   
+                    cell.backgroundColor = UIColor(red:0.00, green:0.51, blue:1.00, alpha:1.0)
                     cell.accessoryType = .none
                 }
             }
@@ -91,13 +91,11 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
         let user = fixture[0].availablePlayers.filter(predicate1)
         
-      
-        
         
         let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
         let available = realm.objects(Available.self).filter(predicate2)
         
-        if available[0].parentFixture[0].title == fixtures[indexPath.row].title {
+     
             
             try! realm.write {
                 
@@ -111,7 +109,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
                 
                 
                 
-            }
+            
             
         }
         

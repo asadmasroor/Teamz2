@@ -81,16 +81,21 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             if user[0].available == true {
                 cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
             } else if (user[0].available == false) {
-               cell.backgroundColor = UIColor(red:0.73, green:0.04, blue:0.16, alpha:1.0)
+            //   cell.backgroundColor = UIColor(red:0.73, green:0.04, blue:0.16, alpha:1.0)
             }
             
             cell.titleLabel.text = fixture1.title
             cell.addressLabel.text =  fixture1.address
         } else {
-            cell.titleLabel.text = "You have not been selected yet"
-            cell.addressLabel.text = ""
+            cell.titleLabel.isHidden = true
+            cell.addressLabel.isHidden = true
+            cell.textLabel?.text = "You have not been selected yet."
+            cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor(red:0.00, green:0.51, blue:1.00, alpha:1.0)
             cell.confirmButton.isHidden = true
             cell.declineButton.isHidden = true
+           self.tableView.rowHeight = 50
+            
             
         }
         

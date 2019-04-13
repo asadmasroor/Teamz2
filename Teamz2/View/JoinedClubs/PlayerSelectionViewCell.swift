@@ -37,6 +37,7 @@ weak var delegate: playerSelectionDelegate?
     @IBOutlet weak var confirmButton: UIButton!
     
     @IBOutlet weak var declineButton: UIButton!
+    
     @IBAction func confirmButtonPressed(_ sender: Any) {
         delegate?.confirmButtonPressed(cell: self)
     }
