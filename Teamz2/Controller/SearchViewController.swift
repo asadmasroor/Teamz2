@@ -80,7 +80,7 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         let indexPath = self.tableView.indexPath(for: cell)
         indexpath = indexPath!.row
         
-        let predicate = NSPredicate(format: "name = %@", "\(notJoinedClubNames[indexpath])")
+        let predicate = NSPredicate(format: "name = %@", "\(notJoinedClubs![indexpath].name)")
         
         
         let club = realm.objects(Club.self).filter(predicate)
@@ -88,7 +88,9 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         print(club[0].name)
         
         try! realm.write {
-            userLoggedIn?.joinedClubs.append(club[0])
+           
+            
+            club[0].requests.append(userLoggedIn!)
         }
 
         

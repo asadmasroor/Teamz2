@@ -13,10 +13,14 @@ class Club: Object {
     
     @objc dynamic var name : String = ""
     var members = List<User>()
-//    var requests = List<User>()
+    var requests = List<User>()
 //    var admin : User?
     var squads = List<Squad>()
     var parentUser = LinkingObjects(fromType: User.self, property: "clubs")
     var parentmMember = LinkingObjects(fromType: User.self, property: "joinedClubs")
+    
+    override static func primaryKey() -> String? {
+        return "name"
+    }
 
 }
