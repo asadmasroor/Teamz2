@@ -19,7 +19,9 @@ class User: Object {
     var clubs = List<Club>()
     var joinedClubs = List<Club>()
     
-    
+    override static func primaryKey() -> String? {
+        return "username"
+    }
    
 }
 

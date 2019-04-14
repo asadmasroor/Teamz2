@@ -23,23 +23,33 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     var allClubNames : [String] = []
     var joinedClubNames : [String] = []
     var notJoinedClubNames : [String] = []
+    var notJoined = List<Club>()
+    var notJoinedClubs: Results<Club>? = nil
+   
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUnjoinedClubs()
+    
         
-    let allClubsResult = realm.objects(Club.self)
-   
+    }
+    
+    
+    func loadUnjoinedClubs() {
+        
+        let allClubsResult = realm.objects(Club.self)
+        
         for club in allClubsResult {
             
             allClubNames.append("\(club.name)")
-
+            
         }
         
         
         for club in ((userLoggedIn?.joinedClubs)!) {
-
+            
             joinedClubNames.append("\(club.name)")
         }
         
@@ -53,8 +63,19 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
             }
         }
         
+        
+        
+        
+        
+        let predicate = NSPredicate(format: "name IN %@", notJoinedClubNames)
+        notJoinedClubs = realm.objects(Club.self).filter(predicate)
+        
+       
+        
+        
+        
     }
-
+ 
     func joinButtonPressed(cell: SearchTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         indexpath = indexPath!.row
@@ -79,7 +100,11 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return notJoinedClubNames.count
+        if (notJoinedClubs != nil) && (notJoinedClubs!.count != 0) {
+            return notJoinedClubs!.count
+        } else {
+            return 1
+        }
     }
 
     
@@ -87,9 +112,15 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notJoinedClubCell", for: indexPath) as! SearchTableViewCell
         
         
-
-        cell.nameLabel.text = notJoinedClubNames[indexPath.row]
-        cell.descLabel.text = "Amatuer Sports Club"
+        if (notJoinedClubs != nil) && (notJoinedClubs!.count != 0){
+            cell.nameLabel.text = notJoinedClubs![indexPath.row].name
+            cell.descLabel.text = "Amatuer Sports Club"
+        } else {
+            cell.textLabel?.text = "No Clubs G"
+            cell.nameLabel.isHidden = true
+            cell.descLabel.isHidden = true
+        }
+        
         
         cell.delegate = self
         return cell
@@ -122,8 +153,9 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
-//        joinedClubNames = joinedClubNames.filter("title CONTAINS[cd] %@", searchBar.text)
-
+        notJoinedClubs = notJoinedClubs?.filter("name CONTAINS[cd] %@", searchBar.text!)
+      
+        
         tableView.reloadData()
     }
 
@@ -132,6 +164,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 
             tableView.reloadData()
+            
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
 
