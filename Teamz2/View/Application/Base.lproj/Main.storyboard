@@ -96,24 +96,64 @@
                     </navigationItem>
                     <connections>
                         <segue destination="lEP-Z8-l34" kind="show" identifier="challengeSegue" id="bWB-Pj-hah"/>
-                        <segue destination="19a-VB-w8Z" kind="show" identifier="selectionSegue" id="zxJ-ho-7zS"/>
+                        <segue destination="Qf4-0W-aGE" kind="show" identifier="tabSegue" id="SIb-pH-nNg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ich-Ct-TIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="829.60000000000002" y="677.58620689655174"/>
+            <point key="canvasLocation" x="919" y="728"/>
+        </scene>
+        <!--Selection-->
+        <scene sceneID="c3D-mp-8g4">
+            <objects>
+                <tabBarController title="Selection" id="Qf4-0W-aGE" customClass="MainSelectionController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="VuY-yo-aq8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.057708274679999998" green="0.33339018110000002" blue="0.68909893129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="19a-VB-w8Z" kind="relationship" relationship="viewControllers" id="u2d-kj-l4N"/>
+                        <segue destination="I6E-Nq-jzH" kind="relationship" relationship="viewControllers" id="lEg-Qv-Jsw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eDr-yv-s52" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="815" y="1550"/>
         </scene>
         <!--Selection-->
         <scene sceneID="cyC-sx-WC0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3QI-nr-bGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="Selection" id="19a-VB-w8Z" customClass="SelectionViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="id8-WT-hjT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="hk5-Rp-rQ9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.22860795259475708" green="0.42721280455589294" blue="0.72160053253173828" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                            <items>
+                                <navigationItem title="Avaialbile players" id="rtA-9J-wiP">
+                                    <barButtonItem key="rightBarButtonItem" title="Publish" id="ZeE-Ni-31t">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="publishButtonPressed:" destination="19a-VB-w8Z" id="jlo-ir-qeW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectionCell" rowHeight="66" id="7mU-w9-5uw" customClass="SelectionTableViewCell" customModule="Teamz2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7mU-w9-5uw" id="PU3-cS-2t7">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="65.666666666666671"/>
@@ -144,20 +184,79 @@
                             <outlet property="delegate" destination="19a-VB-w8Z" id="GcJ-VG-Ze6"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Available players" image="people" id="z4v-Aw-khA">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-5"/>
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Available Players" id="JUx-zM-1d5">
-                        <barButtonItem key="rightBarButtonItem" title="Publish" id="ZeE-Ni-31t">
-                            <connections>
-                                <action selector="publishButtonPressed:" destination="19a-VB-w8Z" id="jlo-ir-qeW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Available Players" id="JUx-zM-1d5"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3QI-nr-bGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="1569"/>
+            <point key="canvasLocation" x="1785" y="1473"/>
+        </scene>
+        <!--Published Squad-->
+        <scene sceneID="8jQ-YP-VMY">
+            <objects>
+                <tableViewController id="I6E-Nq-jzH" customClass="PublishedSquadViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JKJ-L6-QOa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="mDO-NC-tQl">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.23244690895080566" green="0.43115556240081787" blue="0.72552210092544556" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="barTintColor" red="0.2286079526" green="0.4272128046" blue="0.7216005325" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                            <items>
+                                <navigationItem title="Published Team" id="WxG-ip-8fp"/>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="publishedCell" rowHeight="68" id="GHy-ZN-lPy" customClass="PublishedSquadTableViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="68"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHy-ZN-lPy" id="Wje-wE-6o3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6I-IY-6ff">
+                                            <rect key="frame" x="20" y="18" width="334" height="31"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="g6I-IY-6ff" firstAttribute="leading" secondItem="Wje-wE-6o3" secondAttribute="leadingMargin" constant="4" id="hYK-c8-ukV"/>
+                                        <constraint firstItem="g6I-IY-6ff" firstAttribute="top" secondItem="Wje-wE-6o3" secondAttribute="topMargin" constant="7" id="hvJ-Tu-0aJ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="g6I-IY-6ff" secondAttribute="trailing" constant="5" id="kpc-9O-fuk"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="g6I-IY-6ff" secondAttribute="bottom" constant="8" id="qVp-yU-0on"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="g6I-IY-6ff" id="ppM-3n-sw5"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="I6E-Nq-jzH" id="buQ-wh-a2j"/>
+                            <outlet property="delegate" destination="I6E-Nq-jzH" id="UKn-Dr-ttv"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Published Squad" image="meeting" id="ezn-Yk-faj">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-5"/>
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Qd-AE-qsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1784.8" y="2168.7192118226603"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="Bpj-8n-bys">
@@ -1064,6 +1163,10 @@
             <point key="canvasLocation" x="-2412" y="1419"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="meeting" width="30" height="30"/>
+        <image name="people" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XPn-fg-s2a"/>
     </inferredMetricsTieBreakers>

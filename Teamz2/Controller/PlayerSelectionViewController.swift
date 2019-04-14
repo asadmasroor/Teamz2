@@ -31,22 +31,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         
        
         
-        let fixtures = realm.objects(Fixture.self)
-        
-        for fixture in fixtures {
-            
-            
-            publishedSquad = fixture.publishedSquad
-            
-            for user in publishedSquad {
-                if user.user?.username ==  userLoggedIn?.username {
-                    selectedFixtures.append(fixture)
-                }
-            }
-           
-        }
-        
-        print(selectedFixtures.count)
+       loadSelectedFixtures()
     
         
     }
@@ -56,7 +41,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ((selectedFixtures.count)) != nil &&  ((selectedFixtures.count)) != 0{
+        if ((selectedFixtures.count)) != 0{
             return (selectedFixtures.count)
         } else {
             return 1
@@ -81,7 +66,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             if user[0].available == true {
                 cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
             } else if (user[0].available == false) {
-            //   cell.backgroundColor = UIColor(red:0.73, green:0.04, blue:0.16, alpha:1.0)
+            cell.backgroundColor = UIColor(red:0.26, green:0.54, blue:0.98, alpha:1.0)
             }
             
             cell.titleLabel.text = fixture1.title
@@ -105,6 +90,27 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         cell.delegate = self
 
         return cell
+    }
+    
+    
+    func loadSelectedFixtures() {
+        
+        selectedFixtures.removeAll()
+        
+        let fixtures = realm.objects(Fixture.self)
+        
+        for fixture in fixtures {
+            
+            
+            publishedSquad = fixture.publishedSquad
+            
+            for user in publishedSquad {
+                if user.user?.username ==  userLoggedIn?.username {
+                    selectedFixtures.append(fixture)
+                }
+            }
+            
+        }
     }
  
 
@@ -146,47 +152,50 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     
     func declineButtonPressed(cell: PlayerSelectionViewCell) {
         
-        let indexPath = self.tableView.indexPath(for: cell)
+        let declineAlert = UIAlertController(title: "Decline selection for this fixture?", message: "", preferredStyle: .alert)
         
-        
-        let predicate = NSPredicate(format: "title = %@", "\(selectedFixtures[indexPath!.row].title)")
-        let fixture = realm.objects(Fixture.self).filter(predicate)
-        
-        let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
-        let user = fixture[0].publishedSquad.filter(predicate1)
-        
-        let ps = fixture[0].publishedSquad
-        
-        
-        let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
-        let confirmation = realm.objects(Confirmation.self).filter(predicate2)
-        
-        if confirmation[0].parentFixture[0].title == selectedFixtures[indexPath!.row].title {
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
             
-            try! realm.write {
-                
-                user[0].available = false
-                var count = -1
-                for user in ps {
-                    count += 1
-                    if user.user?.username == userLoggedIn?.username {
-                        
-                        realm.delete(confirmation)
-                        selectedFixtures.remove(at: count)
-                    }
-                    
-                }
-                
+            let indexPath = self.tableView.indexPath(for: cell)
+            
+            
+            let predicate = NSPredicate(format: "title = %@", "\(self.selectedFixtures[indexPath!.row].title)")
+            let fixture = self.realm.objects(Fixture.self).filter(predicate)
+            
+            let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn!.username)")
+            //let user = fixture[0].publishedSquad.filter(predicate1)
+            
+            
+            let confirmations = self.realm.objects(Confirmation.self)
+            
+            
+            try! self.realm.write {
                 
                 self.tableView.reloadData()
                 
-                
+                var count = -1
+                for confirmation in confirmations {
+                    count += 1
+                    if ((confirmation.user?.username == (self.userLoggedIn?.username)!) && (confirmation.fixture?.title == self.selectedFixtures[indexPath!.row].title)){
+                        self.realm.delete(confirmations[count])
+                    }
+                }
+                self.loadSelectedFixtures()
+                self.tableView.reloadData()
                 
             }
             
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+            declineAlert.dismiss(animated: true, completion: nil)
+        }
         
+        
+        declineAlert.addAction(yesAction)
+        declineAlert.addAction(cancelAction)
+        
+        present(declineAlert, animated: true, completion: nil)
         
         
     }

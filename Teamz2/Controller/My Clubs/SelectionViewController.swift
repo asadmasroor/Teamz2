@@ -110,8 +110,38 @@ class SelectionViewController: UITableViewController {
         let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
         let fixture = self.realm.objects(Fixture.self).filter(predicate)
         
+      //  let predicate1 = NSPredicate(format: "user.username = %@", "\((userLoggedIn?.username)!)")
+
+        let confirmations = self.realm.objects(Confirmation.self)
+       
+        
+        print(confirmations.count)
+        
+        
+        
+//            for confirmation in confirmations {
+//                count += 1
+//                if (confirmation.parentFixture[0].title == fixture[0].title) {
+//                     no.append(count)
+//                    print("count: \(count)")
+//
+//                }
+//            }
+        
+        
         try! realm.write {
             fixture[0].publishedSquad.removeAll()
+            
+            var count = -1
+            for confirmation in confirmations {
+                count += 1
+                if ((confirmation.user?.username == (userLoggedIn?.username)!) && (confirmation.fixture?.title == selectedFixture?.title)){
+                    realm.delete(confirmations[count])
+                }
+            }
+            
+
+            
         }
         
         
@@ -120,6 +150,7 @@ class SelectionViewController: UITableViewController {
                 try! realm.write {
                     let confirmation = Confirmation()
                     confirmation.user = user.user
+                    confirmation.fixture = selectedFixture
                     fixture[0].publishedSquad.append(confirmation)
                 }
             }

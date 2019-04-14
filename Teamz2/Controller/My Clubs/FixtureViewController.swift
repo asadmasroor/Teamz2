@@ -75,11 +75,18 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             
         }
         
-        if (segue.identifier == "selectionSegue") {
-            let destinationVC = segue.destination as! SelectionViewController
+        if (segue.identifier == "tabSegue") {
             
-            destinationVC.selectedFixture = fixtures[uIndexPath]
-            destinationVC.userLoggedIn = userLoggedIn
+            
+            let barViewControllers = segue.destination as! UITabBarController
+            let destinationViewController = barViewControllers.viewControllers?[0] as! SelectionViewController
+            destinationViewController.userLoggedIn = userLoggedIn
+            destinationViewController.selectedFixture = fixtures[uIndexPath]
+            
+             let destinationViewController1 = barViewControllers.viewControllers?[1] as! PublishedSquadViewController
+            
+            destinationViewController1.userLoggedIn = userLoggedIn
+            destinationViewController1.selectedFixture = fixtures[uIndexPath]
             
         }
         
@@ -105,7 +112,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         uIndexPath = indexPath!.row
         
         print(indexPath!.row)
-        performSegue(withIdentifier: "selectionSegue", sender: self)
+        performSegue(withIdentifier: "tabSegue", sender: self)
     }
     
     

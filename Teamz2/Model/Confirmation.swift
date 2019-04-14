@@ -13,6 +13,7 @@ class Confirmation : Object {
     
     @objc dynamic var user : User?
     @objc dynamic var available : Bool = false
+    @objc dynamic var fixture : Fixture?
     var parentFixture = LinkingObjects(fromType: Fixture.self, property: "publishedSquad")
 }
 
