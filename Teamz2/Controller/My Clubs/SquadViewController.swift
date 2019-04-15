@@ -89,4 +89,8 @@ class SquadViewController: UITableViewController {
         present(newSquadAlert, animated: true, completion: nil)
         
     }
+    
+    
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)    }
 }

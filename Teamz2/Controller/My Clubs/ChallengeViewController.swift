@@ -28,7 +28,10 @@ class ChallengeViewController: UITableViewController {
     // MARK: - Table view data source
 
    
-
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return challanges.count
@@ -128,6 +131,8 @@ extension ChallengeViewController: cellDelegateResult {
         print("dindexpath: \(dIndexPath)")
         performSegue(withIdentifier: "resultSegue", sender: self)
     }
+    
+    
     
     
     

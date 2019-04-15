@@ -88,11 +88,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Fixtures" leftItemsSupplementBackButton="YES" id="z7J-tc-bBC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YnN-Vt-B2U">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="PoD-WH-c0y" id="ci9-yn-X3f"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="YnN-Vt-B2U">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="PoD-WH-c0y" id="ci9-yn-X3f"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Home" image="home" id="fXc-hb-5sF">
+                                <connections>
+                                    <action selector="homeButtonPressed:" destination="PoD-WH-c0y" id="Wwy-Sd-EP3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="lEP-Z8-l34" kind="show" identifier="challengeSegue" id="bWB-Pj-hah"/>
@@ -124,11 +131,10 @@
             </objects>
             <point key="canvasLocation" x="815" y="1550"/>
         </scene>
-        <!--Selection-->
+        <!--Hello-->
         <scene sceneID="cyC-sx-WC0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3QI-nr-bGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController title="Selection" id="19a-VB-w8Z" customClass="SelectionViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Hello" id="19a-VB-w8Z" customClass="SelectionViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="id8-WT-hjT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +148,7 @@
                             </textAttributes>
                             <items>
                                 <navigationItem title="Avaialbile players" id="rtA-9J-wiP">
-                                    <barButtonItem key="rightBarButtonItem" title="Publish" id="ZeE-Ni-31t">
+                                    <barButtonItem key="rightBarButtonItem" title="Publish" springLoaded="YES" id="ZeE-Ni-31t">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="publishButtonPressed:" destination="19a-VB-w8Z" id="jlo-ir-qeW"/>
@@ -193,6 +199,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3QI-nr-bGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1785" y="1473"/>
         </scene>
@@ -204,7 +211,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="mDO-NC-tQl">
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="mDO-NC-tQl">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.23244690895080566" green="0.43115556240081787" blue="0.72552210092544556" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -335,11 +342,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Challenges" id="lp0-Cf-RkJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sKC-wc-eLZ">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="lEP-Z8-l34" id="GhE-AI-63p"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="sKC-wc-eLZ">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="lEP-Z8-l34" id="GhE-AI-63p"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Home" image="home" id="NtS-kp-etc">
+                                <connections>
+                                    <action selector="homeButtonPressed:" destination="lEP-Z8-l34" id="0Mg-dM-USY"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -391,7 +405,13 @@
                             <outlet property="delegate" destination="yRZ-Bn-T2m" id="PjP-5N-srH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Results" id="wg3-Cr-5FE"/>
+                    <navigationItem key="navigationItem" title="Results" id="wg3-Cr-5FE">
+                        <barButtonItem key="rightBarButtonItem" title="Home" image="home" id="GOh-Li-wj8">
+                            <connections>
+                                <action selector="homeButtonPressed:" destination="yRZ-Bn-T2m" id="9Jp-4X-q9R"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHP-Gw-HSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -694,11 +714,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Squads" id="Xbt-UA-dry">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S5t-M3-N5t">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="6fw-kY-P4J" id="ANt-bk-8MQ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="S5t-M3-N5t">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="6fw-kY-P4J" id="ANt-bk-8MQ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Home" image="home" id="nAd-sa-1cT">
+                                <connections>
+                                    <action selector="homeButtonPressed:" destination="6fw-kY-P4J" id="5Zd-Ao-Foz"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="PoD-WH-c0y" kind="show" identifier="fixtureSegue" id="qCv-jS-nqf"/>
@@ -799,7 +826,13 @@
                             <outlet property="delegate" destination="Djm-XY-ESf" id="yNq-Jj-exq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Squads" id="jDP-db-yE5"/>
+                    <navigationItem key="navigationItem" title="Squads" id="jDP-db-yE5">
+                        <barButtonItem key="rightBarButtonItem" title="Home" image="home" id="Fbt-61-a2g">
+                            <connections>
+                                <action selector="homeButtonPressed:" destination="Djm-XY-ESf" id="Nq3-Zu-HIi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="2wq-Lt-Mov" kind="show" identifier="joinedFixtureSegue" id="3aa-TA-chQ"/>
                     </connections>
@@ -885,7 +918,13 @@
                             <outlet property="delegate" destination="2wq-Lt-Mov" id="Hd6-SH-lfl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Fixtures" id="ibw-nN-RsO"/>
+                    <navigationItem key="navigationItem" title="Fixtures" id="ibw-nN-RsO">
+                        <barButtonItem key="rightBarButtonItem" title="Home" image="home" id="yI0-Kc-Dfi">
+                            <connections>
+                                <action selector="homeButtonPressed:" destination="2wq-Lt-Mov" id="AFa-7f-nio"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="CXE-Oc-nJQ" kind="show" identifier="joinedChallengeSegue" id="Jpa-Uv-4IF"/>
                     </connections>
@@ -920,7 +959,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glh-tG-AME" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3879" y="-864"/>
+            <point key="canvasLocation" x="3098" y="-712"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="TL0-I0-OEr">
@@ -1012,7 +1051,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Challenges" id="rDc-wo-ulW"/>
+                    <navigationItem key="navigationItem" title="Challenges" id="rDc-wo-ulW">
+                        <barButtonItem key="rightBarButtonItem" title="Home" image="home" id="oyA-2r-GcB">
+                            <connections>
+                                <action selector="homeButtonPressed:" destination="CXE-Oc-nJQ" id="2zq-qD-JXJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="TrJ-ZK-DkI" kind="show" identifier="attemptChallenegeSegue" id="B3l-Fi-pLh"/>
@@ -1120,7 +1165,7 @@
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Rt-Fo-MXW">
                                             <rect key="frame" x="16" y="40" width="343" height="200"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -1172,11 +1217,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home" width="30" height="30"/>
         <image name="meeting" width="30" height="30"/>
         <image name="people" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XPn-fg-s2a"/>
+        <segue reference="TLO-h0-d2d"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

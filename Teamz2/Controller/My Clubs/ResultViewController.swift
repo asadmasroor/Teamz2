@@ -32,6 +32,9 @@ class ResultViewController: UITableViewController {
         
     }
     
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (results.count == 0 ){
             return 1

@@ -155,5 +155,10 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         
         present(newClubAlert, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated:     true)
+    }
 }
 

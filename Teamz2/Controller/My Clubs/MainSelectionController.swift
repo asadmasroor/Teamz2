@@ -14,19 +14,18 @@ class MainSelectionController: UITabBarController {
 //    var selectedFixture : Fixture?
 
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
         
-//        print(userLoggedIn?.username)
+       
         
-      
-        
-//        let vc = self.tabBarController?.viewControllers?.count
-//        
-//       print(vc)
-//        vc.userLoggedIn = userLoggedIn
-//        vc.selectedFixture = selectedFixture
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
 
-        // Do any additional setup after loading the view.
+    }
+    
+    @objc func home(){
+        navigationController?.popToRootViewController(animated: true)
     }
     
 
@@ -41,3 +40,6 @@ class MainSelectionController: UITabBarController {
     */
 
 }
+
+
+

@@ -116,4 +116,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     }
 
 
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }

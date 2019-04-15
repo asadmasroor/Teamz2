@@ -177,6 +177,29 @@ class AttemptChallengeController: UIViewController {
         super.viewDidLoad()
         milesLabel.text = "Challenge: \(String((selectedChallenge?.miles)!)) miles"
         // Do any additional setup after loading the view.
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+        
+    }
+    
+    @objc func home(){
+        
+        
+        let alertController = UIAlertController(title: "Are you sure you want to go to the main menu?", message: "Attempt will not be saved", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+             self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+       
+        alertController.addAction(yesAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     private func startRun() {

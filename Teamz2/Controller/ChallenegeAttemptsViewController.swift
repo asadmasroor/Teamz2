@@ -38,8 +38,14 @@ class ChallenegeAttemptsViewController: UITableViewController {
                 userResults.append(result)
             }
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
 
         
+    }
+    
+    @objc func home(){
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {

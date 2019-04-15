@@ -65,4 +65,7 @@ class JoinedSquadViewController: UITableViewController {
     }
 
 
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
