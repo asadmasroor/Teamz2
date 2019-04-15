@@ -188,7 +188,9 @@ class AttemptChallengeController: UIViewController {
         let alertController = UIAlertController(title: "Are you sure you want to go to the main menu?", message: "Attempt will not be saved", preferredStyle: .alert)
         
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+             self.stopRun()
              self.navigationController?.popToRootViewController(animated: true)
+            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
