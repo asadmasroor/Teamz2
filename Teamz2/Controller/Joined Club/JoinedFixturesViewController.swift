@@ -78,7 +78,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! JoinedChallengesViewController
         
-        destinationVC.selectedFixture = fixtures[iPath]
+       // destinationVC.selectedFixture = fixtures[iPath]
         destinationVC.userLoggedIn = userLoggedIn
     }
     

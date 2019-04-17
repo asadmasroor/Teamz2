@@ -15,7 +15,7 @@ class Fixture: Object {
     
     @objc dynamic var address : String = ""
     var parentSquad = LinkingObjects(fromType: Squad.self, property: "fixtures")
-    var challenges = List<Challenge>()
+    
     var availablePlayers = List<Available>()
     var publishedSquad = List<Confirmation>()
     

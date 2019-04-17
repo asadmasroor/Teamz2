@@ -17,7 +17,7 @@ class MainMenuViewController: UIViewController {
     var UserLoggedIn = User()
     override func viewDidLoad() {
         super.viewDidLoad()
-  //   initialiseData()
+    initialiseData()
         let user = realm.objects(User.self).filter("username == 'asadmasroor'")
         UserLoggedIn =  user[0]
         welcomeLabel.text = "Welcome \(UserLoggedIn.name)"
@@ -59,6 +59,14 @@ class MainMenuViewController: UIViewController {
         
         if (segue.identifier == "selectionSegue") {
             let destinationVC = segue.destination as! PlayerSelectionViewController
+            
+            destinationVC.userLoggedIn = UserLoggedIn
+            
+            
+        }
+        
+        if (segue.identifier == "challenege1Segue") {
+            let destinationVC = segue.destination as! JoinedChallengesViewController
             
             destinationVC.userLoggedIn = UserLoggedIn
             
@@ -123,6 +131,12 @@ class MainMenuViewController: UIViewController {
         
         performSegue(withIdentifier: "selectionSegue", sender: self)
         
+    }
+    
+    
+    
+    @IBAction func challenegeButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "challenege1Segue", sender: self)
     }
     
     func initialiseData() {
@@ -260,6 +274,14 @@ class MainMenuViewController: UIViewController {
         challenge1.desc = "This is to test your stamina! Give it your best. Remember to pace yourself"
         challenge1.miles = 20
         challenge1.name = "Stamina Test"
+        challenge1.club = SSCC
+        
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let someDateTime = formatter.date(from: "2019/05/08 22:31")
+            
+            challenge1.expirydate = someDateTime!
+            
 
 //        let result1 = Result()
 //        result1.user = User1
@@ -277,6 +299,16 @@ class MainMenuViewController: UIViewController {
         challenge2.desc = "This is to test sprinting speed"
         challenge2.miles = 1
         challenge2.name = "Sprinting Test"
+             challenge2.club = SSCC
+            challenge2.expirydate = someDateTime!
+            
+            challenge2.formatTime(date: challenge2.dateCreated)
+            
+            challenge2.formatTime(date: challenge2.expirydate)
+            challenge1.formatTime(date: challenge1.expirydate)
+            
+            
+        
 
 //        let result4 = Result()
 //        result4.user = User1
@@ -301,8 +333,8 @@ class MainMenuViewController: UIViewController {
 //        challenge2.results.append(result6)
 //
 
-            fixture1.challenges.append(challenge1)
-            fixture2.challenges.append(challenge2)
+         SSCC.challenges.append(challenge1)
+         SSCC.challenges.append(challenge2)
 //        fixture3.challenges.append(challenge1)
 //        fixture3.challenges.append(challenge2)
 //        fixture4.challenges.append(challenge1)
@@ -312,6 +344,8 @@ class MainMenuViewController: UIViewController {
 //        fixture6.challenges.append(challenge1)
 //        fixture6 .challenges.append(challenge2)
 
+            
+     
 
         User1.clubs.append(SSCC)
         User2.clubs.append(SSCC)

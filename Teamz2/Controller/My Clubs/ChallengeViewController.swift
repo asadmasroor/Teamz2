@@ -16,7 +16,7 @@ class ChallengeViewController: UITableViewController {
     var selectedFixture : Fixture? {
         didSet{
             print(selectedFixture?.title)
-            challanges = (selectedFixture?.challenges)!
+           
             
         }
     }

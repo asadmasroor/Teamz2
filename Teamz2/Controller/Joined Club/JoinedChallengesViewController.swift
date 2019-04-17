@@ -11,21 +11,31 @@ import RealmSwift
 
 class JoinedChallengesViewController: UITableViewController, joinedChallengeDelegate  {
    
+    let realm = try! Realm()
+    
     var iPath = 0
     
     var challenges = List<Challenge>()
     
     
-    var selectedFixture : Fixture? {
-        didSet {
-            challenges = (selectedFixture?.challenges)!
-        }
-    }
     
     var userLoggedIn : User? 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        let predicate = NSPredicate(format: "username = %@", "\((userLoggedIn?.username)!)")
+        let user = realm.objects(User.self).filter(predicate)
+        
+        let joinedClubs = user[0].joinedClubs
+        
+        for club in joinedClubs {
+            for challenge in club.challenges {
+                challenges.append(challenge)
+            }
+        }
+        
+        
 
         print(challenges.count)
     }
@@ -47,6 +57,9 @@ class JoinedChallengesViewController: UITableViewController, joinedChallengeDele
         let challenge = challenges[indexPath.row]
         cell.delegate = self
 
+        let time = cell.calculateTimeleft(expiryDate: challenge.expirydate)
+        
+        
         cell.setChallenge(challenge: challenge)
         
 
@@ -80,7 +93,7 @@ class JoinedChallengesViewController: UITableViewController, joinedChallengeDele
         if (segue.identifier == "viewAttemptSegue") {
             let destinationVC = segue.destination as! ChallenegeAttemptsViewController
             destinationVC.userLoggedIn = userLoggedIn
-            destinationVC.selectedChallenge = selectedFixture?.challenges[iPath]
+     //       destinationVC.selectedChallenge = selectedFixture?.challenges[iPath]
             
         }
         
@@ -90,8 +103,9 @@ class JoinedChallengesViewController: UITableViewController, joinedChallengeDele
     
 
     @IBAction func homeButtonPressed(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+//        navigationController?.popToRootViewController(animated: true)
     }
+    
     
 
 }
