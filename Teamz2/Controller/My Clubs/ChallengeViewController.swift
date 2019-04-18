@@ -11,19 +11,26 @@ import RealmSwift
 
 class ChallengeViewController: UITableViewController {
     
+    let realm = try! Realm()
     var dIndexPath = 0
     var challanges = List<Challenge>()
-    var selectedFixture : Fixture? {
-        didSet{
-            print(selectedFixture?.title)
-           
-            
+    
+    
+    var selectedClub : Club? {
+        didSet {
+            loadChalleneges()
         }
     }
+    var userLoggedIn : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
+    
+   
+    
+   
 
     // MARK: - Table view data source
 
@@ -53,7 +60,28 @@ class ChallengeViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
+       self.tabBarController?.navigationItem.title = "Challeneges" 
         
+        let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChallenge))
+        self.tabBarController?.navigationItem.rightBarButtonItems = [addBarButton, homeButton]
+        
+        if selectedClub != nil {
+            loadChalleneges()
+        }
+        
+    }
+    
+    
+    @objc func home() {
+        navigationController?.popToRootViewController(animated: true)
+        
+    }
+    
+    @objc func addNewChallenge() {
+        
+       
+        performSegue(withIdentifier: "makeChallengeSegue", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -117,10 +145,23 @@ class ChallengeViewController: UITableViewController {
 extension ChallengeViewController: cellDelegateResult {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
+        if segue.identifier == "resultSegue" {
+            
             let destinationVC = segue.destination as! ResultViewController
             
             destinationVC.selectedChallenge = challanges[dIndexPath]
+            
+        }
+        
+        
+        if segue.identifier == "makeChallengeSegue" {
+            
+            let destinationVC = segue.destination as! makeChallenegeController
+            
+            destinationVC.SelectedClub = selectedClub
+            
+        }
             
         
     }
@@ -132,7 +173,22 @@ extension ChallengeViewController: cellDelegateResult {
         performSegue(withIdentifier: "resultSegue", sender: self)
     }
     
-    
+    func loadChalleneges() {
+        
+       
+        
+        challanges.removeAll()
+        
+        let predicate = NSPredicate(format: "club.name = %@", "\((selectedClub?.name)!)")
+        let challanges1 = realm.objects(Challenge.self).filter(predicate)
+        
+        for x in challanges1 {
+            challanges.append(x)
+        }
+        
+        
+        tableView.reloadData()
+    }
     
     
     

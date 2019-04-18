@@ -43,6 +43,8 @@
 		8483A41122551345004D2304 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A41022551345004D2304 /* UnitExtensions.swift */; };
 		848AE4BD224838E900471AA0 /* JoinedChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */; };
 		848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */; };
+		84AB35F12267E22E00901B20 /* SquadChallenegeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB35F02267E22E00901B20 /* SquadChallenegeTab.swift */; };
+		84AB35F32267F17A00901B20 /* makeChallenegeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB35F22267F17A00901B20 /* makeChallenegeController.swift */; };
 		84C436EE2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */; };
 		84C436F1225AA11700BAAA68 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C436F0225AA11700BAAA68 /* SearchTableViewCell.swift */; };
 		84DE33122231851A00C91071 /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33112231851A00C91071 /* SquadViewController.swift */; };
@@ -123,6 +125,8 @@
 		8483A41022551345004D2304 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengesViewController.swift; sourceTree = "<group>"; };
 		848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengeViewCell.swift; sourceTree = "<group>"; };
+		84AB35F02267E22E00901B20 /* SquadChallenegeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadChallenegeTab.swift; sourceTree = "<group>"; };
+		84AB35F22267F17A00901B20 /* makeChallenegeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeChallenegeController.swift; sourceTree = "<group>"; };
 		84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallenegeAttemptsViewController.swift; sourceTree = "<group>"; };
 		84C436F0225AA11700BAAA68 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		84DE33112231851A00C91071 /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +308,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		84AB35EF2267E20300901B20 /* TabBar controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8418BE4D226233C3008EC203 /* MainSelectionController.swift */,
+				84AB35F02267E22E00901B20 /* SquadChallenegeTab.swift */,
+			);
+			path = "TabBar controllers";
+			sourceTree = "<group>";
+		};
 		84C436EF225AA0F500BAAA68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,13 +354,14 @@
 		84DE33312232C10B00C91071 /* My Clubs */ = {
 			isa = PBXGroup;
 			children = (
+				84AB35EF2267E20300901B20 /* TabBar controllers */,
 				8418BE4F22633658008EC203 /* PublishedSquadViewController.swift */,
-				8418BE4D226233C3008EC203 /* MainSelectionController.swift */,
 				846B665E223033010090CAF2 /* SelectionViewController.swift */,
 				846B664F222EAE150090CAF2 /* FixtureViewController.swift */,
 				84DE33112231851A00C91071 /* SquadViewController.swift */,
 				84DE331322318FBF00C91071 /* ClubViewController.swift */,
 				846B6656222ED9760090CAF2 /* ChallengeViewController.swift */,
+				84AB35F22267F17A00901B20 /* makeChallenegeController.swift */,
 				846B666022304D0C0090CAF2 /* ResultViewController.swift */,
 			);
 			path = "My Clubs";
@@ -611,12 +625,14 @@
 				8483A40B22550014004D2304 /* Location.swift in Sources */,
 				846B666122304D0C0090CAF2 /* ResultViewController.swift in Sources */,
 				84DE332622327ED300C91071 /* JoinedClubViewController.swift in Sources */,
+				84AB35F12267E22E00901B20 /* SquadChallenegeTab.swift in Sources */,
 				84DE332822328BBB00C91071 /* JoinedSquadTableViewCell.swift in Sources */,
 				84DE33222231D93B00C91071 /* ResultsTableViewCell.swift in Sources */,
 				8418BE5022633658008EC203 /* PublishedSquadViewController.swift in Sources */,
 				84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */,
 				8418BE0C225FD1B0008EC203 /* PlayerSelectionViewCell.swift in Sources */,
 				8483A41122551345004D2304 /* UnitExtensions.swift in Sources */,
+				84AB35F32267F17A00901B20 /* makeChallenegeController.swift in Sources */,
 				846B664C222DCE620090CAF2 /* Challenge.swift in Sources */,
 				8418BE0E2260E768008EC203 /* Confirmation.swift in Sources */,
 				846B665F223033010090CAF2 /* SelectionViewController.swift in Sources */,

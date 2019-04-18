@@ -26,6 +26,10 @@ class SquadViewController: UITableViewController {
         super.viewDidLoad()
            
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.title = "Squads"
+    }
 
     // MARK: - Table view data source
 
@@ -56,6 +60,8 @@ class SquadViewController: UITableViewController {
         findexPath = indexPath.row
         
         performSegue(withIdentifier: "fixtureSegue", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
  

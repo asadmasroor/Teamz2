@@ -68,12 +68,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
-        if (segue.identifier == "challengeSegue") {
-            let destinationVC = segue.destination as! ChallengeViewController
-            
-            destinationVC.selectedFixture = fixtures[uIndexPath]
-            
-        }
+       
         
         if (segue.identifier == "tabSegue") {
             

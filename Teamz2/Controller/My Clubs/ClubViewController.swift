@@ -27,6 +27,8 @@ class ClubViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+    
+    
 
     // MARK: - Table view data source
 
@@ -49,16 +51,32 @@ class ClubViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! SquadViewController
         
-        destinationVC.UserLoggedIn = selectedUser
-        destinationVC.selectedClub = clubs[indexPath1]
+        if (segue.identifier == "squadchallenegeSegue") {
+            let barViewControllers = segue.destination as! SquadChallenegeTab
+            let destinationViewController = barViewControllers.viewControllers?[0] as! SquadViewController
+            destinationViewController.UserLoggedIn = selectedUser
+            destinationViewController.selectedClub = clubs[indexPath1]
+            
+            let destinationViewController1 = barViewControllers.viewControllers?[1] as! ChallengeViewController
+            
+            destinationViewController1.userLoggedIn = selectedUser
+            destinationViewController1.selectedClub = clubs[indexPath1]
+            
+            print(clubs[indexPath1].name)
+            
+        }
+        
+        
+       
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexPath1 = indexPath.row
         
-        performSegue(withIdentifier: "squadSegue", sender: self)
+        performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
+        
+        
         
     }
     
