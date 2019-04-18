@@ -88,6 +88,52 @@ class ChallengeViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete this Challenege", preferredStyle: .alert)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+                
+                print(self.challanges[indexPath.row].name)
+                
+                //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
+                let predicate = NSPredicate(format: "name = %@", "\(self.challanges[indexPath.row].name)")
+                let challenege1 = self.realm.objects(Challenge.self).filter(predicate)
+                try! self.realm.write {
+
+                    if challenege1.count != 0 {
+                        self.challanges.remove(at: indexPath.row)
+                        self.tableView.reloadData()
+                        self.realm.delete(challenege1[0])
+                        self.loadChalleneges()
+                    }
+
+                    
+                }
+
+                
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
+                confirmation.dismiss(animated: true, completion: nil)
+            }
+            
+            confirmation.addAction(yesAction)
+            confirmation.addAction(cancelAction)
+            
+            self.present(confirmation, animated: true, completion: nil)
+            
+        }
+        
+        return [deleteAction]
+    }
+    
     
     
     @IBAction func addButtonPressed(_ sender: Any) {

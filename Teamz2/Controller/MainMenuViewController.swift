@@ -18,7 +18,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     //initialiseData()
-        let user = realm.objects(User.self).filter("username == 'asadmasroor'")
+        let user = realm.objects(User.self).filter("username == 'elizamasroor'")
         UserLoggedIn =  user[0]
         welcomeLabel.text = "Welcome \(UserLoggedIn.name)"
 
