@@ -13,7 +13,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     
-    
+    let realm = try! Realm()
     
     
     // Global variable to store the indexpath of the table
@@ -154,6 +154,53 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     @IBAction func homeButtonPressed(_ sender: Any) {
         navigationController?.popToRootViewController(animated:     true)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(self.fixtures[indexPath.row].title)?", preferredStyle: .alert)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+                
+                
+                
+                //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
+                let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
+                let fixture = self.realm.objects(Fixture.self).filter(predicate)
+                try! self.realm.write {
+                    
+                    if fixture.count != 0 {
+                        self.fixtures.remove(at: indexPath.row)
+                        tableView.reloadData()
+                        self.realm.delete(fixture[0])
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
+                confirmation.dismiss(animated: true, completion: nil)
+            }
+            
+            confirmation.addAction(yesAction)
+            confirmation.addAction(cancelAction)
+            
+            self.present(confirmation, animated: true, completion: nil)
+            
+        }
+        
+        return [deleteAction]
     }
 }
 

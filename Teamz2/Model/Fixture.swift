@@ -12,8 +12,8 @@ import RealmSwift
 class Fixture: Object {
     
     @objc dynamic var title : String = ""
-    
     @objc dynamic var address : String = ""
+   // @objc dynamic var date = Date()
     var parentSquad = LinkingObjects(fromType: Squad.self, property: "fixtures")
     
     var availablePlayers = List<Available>()

@@ -60,7 +60,7 @@ class ChallengeViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
-       self.tabBarController?.navigationItem.title = "Challeneges" 
+        self.tabBarController?.navigationItem.title = "Challeneges"
         
         let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChallenge))
@@ -95,7 +95,7 @@ class ChallengeViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
-            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete this Challenege", preferredStyle: .alert)
+            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(self.challanges[indexPath.row].name)?", preferredStyle: .alert)
             
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
                 
