@@ -234,31 +234,14 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="publishedCell" rowHeight="68" id="GHy-ZN-lPy" customClass="PublishedSquadTableViewCell" customModule="Teamz2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="68"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="publishedCell" id="GHy-ZN-lPy" customClass="PublishedSquadTableViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHy-ZN-lPy" id="Wje-wE-6o3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6I-IY-6ff">
-                                            <rect key="frame" x="20" y="18" width="334" height="31"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="g6I-IY-6ff" firstAttribute="leading" secondItem="Wje-wE-6o3" secondAttribute="leadingMargin" constant="4" id="hYK-c8-ukV"/>
-                                        <constraint firstItem="g6I-IY-6ff" firstAttribute="top" secondItem="Wje-wE-6o3" secondAttribute="topMargin" constant="7" id="hvJ-Tu-0aJ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="g6I-IY-6ff" secondAttribute="trailing" constant="5" id="kpc-9O-fuk"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="g6I-IY-6ff" secondAttribute="bottom" constant="8" id="qVp-yU-0on"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <outlet property="nameLabel" destination="g6I-IY-6ff" id="ppM-3n-sw5"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -678,11 +661,7 @@
                         <viewLayoutGuide key="safeArea" id="jNd-yJ-H49"/>
                     </view>
                     <navigationItem key="navigationItem" title="Main Menu" id="JQ4-aM-fFq">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="tAP-s6-loy">
-                            <connections>
-                                <action selector="signOutButtonPressed:" destination="hWx-bn-TM6" id="hdL-bW-gVL"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="tAP-s6-loy"/>
                     </navigationItem>
                     <connections>
                         <outlet property="welcomeLabel" destination="txH-bg-bYq" id="7y9-By-gqp"/>

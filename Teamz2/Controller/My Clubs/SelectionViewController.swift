@@ -116,17 +116,7 @@ class SelectionViewController: UITableViewController {
        
         
         print(confirmations.count)
-        
-        
-        
-//            for confirmation in confirmations {
-//                count += 1
-//                if (confirmation.parentFixture[0].title == fixture[0].title) {
-//                     no.append(count)
-//                    print("count: \(count)")
-//
-//                }
-//            }
+
         
         
         try! realm.write {
@@ -144,7 +134,6 @@ class SelectionViewController: UITableViewController {
             
         }
         
-        
         for user in availablePlayers{
             if user.isSelected == true {
                 try! realm.write {
@@ -155,6 +144,17 @@ class SelectionViewController: UITableViewController {
                 }
             }
         }
+        
+        let alertController = UIAlertController(title: "Squad Published", message: "", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(ok)
+        
+        present(alertController, animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 1
         
     }
     
