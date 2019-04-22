@@ -43,6 +43,8 @@
 		8483A41122551345004D2304 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483A41022551345004D2304 /* UnitExtensions.swift */; };
 		848AE4BD224838E900471AA0 /* JoinedChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */; };
 		848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */; };
+		849DBE4E226DCA170088DEBD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBE4D226DCA170088DEBD /* Constants.swift */; };
+		849DBE50226DCEB80088DEBD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBE4F226DCEB80088DEBD /* SignUpViewController.swift */; };
 		84AB35F12267E22E00901B20 /* SquadChallenegeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB35F02267E22E00901B20 /* SquadChallenegeTab.swift */; };
 		84AB35F32267F17A00901B20 /* makeChallenegeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB35F22267F17A00901B20 /* makeChallenegeController.swift */; };
 		84C436EE2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */; };
@@ -125,6 +127,8 @@
 		8483A41022551345004D2304 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		848AE4BC224838E900471AA0 /* JoinedChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengesViewController.swift; sourceTree = "<group>"; };
 		848AE4BE2248398700471AA0 /* JoinedChallengeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedChallengeViewCell.swift; sourceTree = "<group>"; };
+		849DBE4D226DCA170088DEBD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		849DBE4F226DCEB80088DEBD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		84AB35F02267E22E00901B20 /* SquadChallenegeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadChallenegeTab.swift; sourceTree = "<group>"; };
 		84AB35F22267F17A00901B20 /* makeChallenegeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeChallenegeController.swift; sourceTree = "<group>"; };
 		84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallenegeAttemptsViewController.swift; sourceTree = "<group>"; };
@@ -273,15 +277,17 @@
 		846B6655222ED9490090CAF2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */,
-				8483A40E225504BC004D2304 /* LocationManager.swift */,
-				8483A41022551345004D2304 /* UnitExtensions.swift */,
-				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
-				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
+				849DBE4F226DCEB80088DEBD /* SignUpViewController.swift */,
 				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
 				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
 				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
+				8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */,
+				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
+				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
 				8483A40C2255047E004D2304 /* FormatDisplay.swift */,
+				8483A41022551345004D2304 /* UnitExtensions.swift */,
+				849DBE4D226DCA170088DEBD /* Constants.swift */,
+				8483A40E225504BC004D2304 /* LocationManager.swift */,
 				84DE33312232C10B00C91071 /* My Clubs */,
 				84DE33322232C17300C91071 /* Joined Club */,
 			);
@@ -644,6 +650,7 @@
 				8418BE4E226233C3008EC203 /* MainSelectionController.swift in Sources */,
 				84DE33202231D82E00C91071 /* LoginViewController.swift in Sources */,
 				84DE332A22328BDD00C91071 /* JoinedSquadViewController.swift in Sources */,
+				849DBE4E226DCA170088DEBD /* Constants.swift in Sources */,
 				845BBF592252B9AB005649D5 /* AttemptChallengeController.swift in Sources */,
 				8483A40F225504BC004D2304 /* LocationManager.swift in Sources */,
 				846B6646222D70790090CAF2 /* Club.swift in Sources */,
@@ -656,6 +663,7 @@
 				84DE331A2231D56D00C91071 /* SquadTableViewCell.swift in Sources */,
 				846B664E222DE6AB0090CAF2 /* Result.swift in Sources */,
 				8483A4092254FFF1004D2304 /* Run.swift in Sources */,
+				849DBE50226DCEB80088DEBD /* SignUpViewController.swift in Sources */,
 				84C436F1225AA11700BAAA68 /* SearchTableViewCell.swift in Sources */,
 				846B665D222EFC250090CAF2 /* ChallengeTableViewCell.swift in Sources */,
 				848AE4BF2248398700471AA0 /* JoinedChallengeViewCell.swift in Sources */,

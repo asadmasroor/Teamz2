@@ -15,15 +15,27 @@ class MainMenuViewController: UIViewController {
     let realm = try! Realm()
     @IBOutlet weak var welcomeLabel: UILabel!
     var UserLoggedIn : User?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    //initialiseData()
-//        let user = realm.objects(User.self).filter("username == 'asadmasroor'")
-//        UserLoggedIn =  user[0]
+        
+
         welcomeLabel.text = "Welcome \((UserLoggedIn!.name))"
 
         // Do any additional setup after loading the view.
         print(Realm.Configuration.defaultConfiguration.fileURL)
+    }
+    
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration()
+        realm = try! Realm(configuration: config!)
+        
+        
+    
+        super.init(nibName: nil, bundle: nil)
     }
     
     @IBAction func myClubButtonPressed(_ sender: UIButton) {

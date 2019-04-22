@@ -20,7 +20,10 @@ class LoginViewController: UIViewController {
       //  initialiseData()
         
         let user = realm.objects(User.self).filter("username == 'asadmasroor'")
-        userLoggedIn =  user[0]
+        if user.count != 0 {
+             userLoggedIn =  user[0]
+        }
+       
 
         // Do any additional setup after loading the view.
     }
@@ -35,20 +38,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        
+        
         performSegue(withIdentifier: "loginSegue", sender: self)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    func initialiseData() {
+    
+    @IBAction func signUpButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: ("signUpSegue"), sender: self)
+    }
+    
+    
+   func initialiseData() {
         
         try! realm.write {
             let User1 = User()
@@ -279,5 +281,5 @@ class LoginViewController: UIViewController {
         
     }
 
-
 }
+
