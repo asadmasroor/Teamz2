@@ -11,12 +11,12 @@ import RealmSwift
 
 class makeChallenegeController: UIViewController {
     
-    let realm = try! Realm()
+    let realm: Realm
      var club: Results<Club>? = nil 
     
-    var SelectedClub : Club? {
+    var SelectedClubName : String? {
         didSet {
-            let predicate = NSPredicate(format: "name = %@", "\((SelectedClub?.name)!)")
+            let predicate = NSPredicate(format: "name = %@", "\((SelectedClubName)!)")
             club = realm.objects(Club.self).filter(predicate)
         }
     }
@@ -24,18 +24,30 @@ class makeChallenegeController: UIViewController {
    
     
     @IBOutlet weak var nameTF: UITextField!
-    
     @IBOutlet weak var descriptionTV: UITextView!
     @IBOutlet weak var expiryTF: UITextField!
+    @IBOutlet weak var milesTF: UITextField!
     let datePicker = UIDatePicker()
+    
+    
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
          showDatePicker()
       
-
-        // Do any additional setup after loading the view.
     }
     
    
@@ -81,15 +93,15 @@ class makeChallenegeController: UIViewController {
                 try! self.realm.write {
                     let challenege = Challenge()
                     challenege.name = self.nameTF.text!
-                    challenege.club = self.SelectedClub
+                    challenege.club = self.club![0]
                     challenege.expirydate = self.datePicker.date
+                    challenege.miles = Int(self.milesTF.text!)!
                     challenege.desc = self.descriptionTV.text!
                     
                     self.realm.add(challenege)
                     self.club?[0].challenges.append(challenege)
-                    
-                    
-                    
+                
+                    print("hello")
                 }
                 
                 self.navigationController?.popViewController(animated: true)
@@ -119,16 +131,6 @@ class makeChallenegeController: UIViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

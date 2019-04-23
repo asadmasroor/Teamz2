@@ -11,27 +11,90 @@ import RealmSwift
 
 class SquadViewController: UITableViewController {
     
-    let realm = try! Realm()
+    let realm: Realm
+    var selectedClubName : String?
     
     var squads = List<Squad>()
     var findexPath = 0
     
-    var selectedClub : Club? {
-        didSet {
-            squads = (selectedClub?.squads)!
-        }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(nibName: nil, bundle: nil)
     }
     
-    var UserLoggedIn : User?
-
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-           
+        
+       loadSquads()
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Squads"
-    }
+        override func viewWillAppear(_ animated: Bool) {
+            
+            self.tabBarController?.navigationItem.title = "Squads"
+            
+            let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+            let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewSqaud))
+            
+            self.tabBarController?.navigationItem.rightBarButtonItems = [addBarButton, homeButton]
+            
+            
+            
+        }
+        
+        
+        @objc func addNewSqaud() {
+            var textField = UITextField()
+            let newSquadAlert = UIAlertController(title: "Make New Squad", message: "", preferredStyle: .alert)
+            
+            let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+                
+                let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+                let club = self.realm.objects(Club.self).filter(predicate)
+                
+                let newSquad = Squad()
+                newSquad.name = (textField.text)!
+                
+                if club.count != 0 {
+                    try! self.realm.write {
+                        club[0].squads.append(newSquad)
+                    }
+                }
+                
+                self.loadSquads()
+                
+                self.tableView.reloadData()
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
+                newSquadAlert.dismiss(animated: true, completion: nil)
+            }
+            
+            newSquadAlert.addTextField { (UITextField) in
+                UITextField.placeholder = "Enter name for squad"
+                textField = UITextField
+            }
+            
+            newSquadAlert.addAction(action)
+            newSquadAlert.addAction(cancelAction)
+            
+            present(newSquadAlert, animated: true, completion: nil)
+            
+        }
+        
+        
+        @objc func home() {
+            navigationController?.popToRootViewController(animated: true)
+            
+        }
 
     // MARK: - Table view data source
 
@@ -54,7 +117,7 @@ class SquadViewController: UITableViewController {
         let destinationVC = segue.destination as! FixtureViewController
         
         destinationVC.selectedSquad = squads[findexPath]
-        destinationVC.userLoggedIn = UserLoggedIn
+//        destinationVC.userLoggedIn = UserLoggedIn
         
     }
     
@@ -112,39 +175,24 @@ class SquadViewController: UITableViewController {
         
         return [deleteAction]
     }
- 
     
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+    func loadSquads(){
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        let club = realm.objects(Club.self).filter(predicate)
         
-        var textField = UITextField()
-        let newSquadAlert = UIAlertController(title: "Make New Squad", message: "", preferredStyle: .alert)
         
-        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
-            let newSquad = Squad()
-            newSquad.name = (textField.text)!
-            self.selectedClub?.squads.append(newSquad)
-            
-            self.tableView.reloadData()
-            
+        
+        if club.count != 0 {
+            let clubSquads = club[0].squads
+            squads.removeAll()
+            for squad in clubSquads {
+                squads.append(squad)
+            }
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
-            newSquadAlert.dismiss(animated: true, completion: nil)
-        }
-        
-        newSquadAlert.addTextField { (UITextField) in
-            UITextField.placeholder = "Enter name for squad"
-            textField = UITextField
-        }
-        
-        newSquadAlert.addAction(action)
-        newSquadAlert.addAction(cancelAction)
-        
-        present(newSquadAlert, animated: true, completion: nil)
-        
     }
-    
-    
-    @IBAction func homeButtonPressed(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)    }
+        
 }
+    
+
+    
+

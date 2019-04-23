@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let locationManager = LocationManager.shared
         locationManager.requestWhenInUseAuthorization()
+        
+        
         return true
     }
 

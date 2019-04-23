@@ -11,33 +11,51 @@ import RealmSwift
 
 class MainMenuViewController: UIViewController {
    
+    let realm: Realm
     
-    let realm = try! Realm()
-    @IBOutlet weak var welcomeLabel: UILabel!
     var UserLoggedIn : User?
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-
-        welcomeLabel.text = "Welcome \((UserLoggedIn!.name))"
-
-        // Do any additional setup after loading the view.
-        print(Realm.Configuration.defaultConfiguration.fileURL)
-    }
-    
+    @IBOutlet weak var welcomeLabel: UILabel!
+    var username : String?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        let config = SyncUser.current?.configuration()
-        realm = try! Realm(configuration: config!)
-        
-        
-    
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
         super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(coder: aDecoder)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        let user = realm.objects(User.self).filter(predicate)
+        
+       
+        
+        if user.count == 0 {
+            let newUser = User()
+            newUser.username = "\(username!)"
+            newUser.owner = (SyncUser.current?.identity)!
+            welcomeLabel.text = "Welcome \(username!)"
+            
+            
+            try! self.realm.write {
+                self.realm.add(newUser)
+            }
+        } else {
+           welcomeLabel.text = "Welcome \(user[0].username)"
+           UserLoggedIn = user[0]
+        }
+     
+    }
+    
+
     @IBAction func myClubButtonPressed(_ sender: UIButton) {
         
         performSegue(withIdentifier: "clubSegue", sender: self)
@@ -50,7 +68,6 @@ class MainMenuViewController: UIViewController {
         if (segue.identifier == "clubSegue") {
         let destinationVC = segue.destination as! ClubViewController
         
-        destinationVC.selectedUser = UserLoggedIn
             
         }
         
@@ -94,11 +111,16 @@ class MainMenuViewController: UIViewController {
         
         let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
             
+            let newClub = Club()
+            newClub.name = (textField.text)!
+            
+            let predicate = NSPredicate(format: "username = %@", "\((self.username)!)")
+            let user = self.realm.objects(User.self).filter(predicate)
+            
              try! self.realm.write {
-             let newClub = Club()
-             newClub.name = (textField.text)!
-                self.UserLoggedIn!.clubs.append(newClub)
-             self.UserLoggedIn!.joinedClubs.append(newClub)
+             
+             user[0].clubs.append(newClub)
+             user[0].joinedClubs.append(newClub)
              self.realm.add(newClub)
             
             }
@@ -152,7 +174,22 @@ class MainMenuViewController: UIViewController {
     }
     
     
+    
+    
+    
     @IBAction func signOutButtonPressed(_ sender: Any) {
+        let alertController = UIAlertController(title: "Logout", message: "", preferredStyle: .alert);
+        alertController.addAction(UIAlertAction(title: "Yes, Logout", style: .destructive, handler: {
+            alert -> Void in
+            SyncUser.current?.logOut()
+            
+          
+            self.navigationController?.popToRootViewController(animated: true)
+         //   self.navigationController?.setViewControllers([WelcomeViewController()], animated: true)
+            print("Logged Out")
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

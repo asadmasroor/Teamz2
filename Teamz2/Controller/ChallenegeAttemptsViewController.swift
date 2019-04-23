@@ -34,7 +34,7 @@ class ChallenegeAttemptsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         for result in results {
-            if (result.user?.name == userLoggedIn?.name){
+            if (result.user?.username == userLoggedIn?.username){
                 userResults.append(result)
             }
         }

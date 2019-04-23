@@ -11,26 +11,31 @@ import RealmSwift
 
 class ChallengeViewController: UITableViewController {
     
-    let realm = try! Realm()
+    let realm: Realm
     var dIndexPath = 0
     var challanges = List<Challenge>()
     
     
-    var selectedClub : Club? {
-        didSet {
-            loadChalleneges()
-        }
-    }
+    var selectedClubName : String?
     var userLoggedIn : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadChalleneges()
        
     }
     
-   
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(nibName: nil, bundle: nil)
+    }
     
-   
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(coder: aDecoder)
+    }
 
     // MARK: - Table view data source
 
@@ -66,10 +71,7 @@ class ChallengeViewController: UITableViewController {
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChallenge))
         self.tabBarController?.navigationItem.rightBarButtonItems = [addBarButton, homeButton]
         
-        if selectedClub != nil {
-            loadChalleneges()
-        }
-        
+       loadChalleneges()
     }
     
     
@@ -134,55 +136,7 @@ class ChallengeViewController: UITableViewController {
         return [deleteAction]
     }
     
-    
-    
-    @IBAction func addButtonPressed(_ sender: Any) {
-        var textField = UITextField()
-        var descField = UITextField()
-        var mileField = UITextField()
-        let newChallengeAlert = UIAlertController(title: "Add New Challenge", message: "", preferredStyle: .alert)
-        
-        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
-            let newChallenge = Challenge()
-            newChallenge.name = (textField.text)!
-            newChallenge.desc = (descField.text)!
-            newChallenge.miles = Int((mileField.text)!)!
-            
-            self.challanges.append(newChallenge)
-            
-            self.tableView.reloadData()
-            
-            
-            
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
-            newChallengeAlert.dismiss(animated: true, completion: nil)
-        }
-        
-        newChallengeAlert.addTextField { (UITextField) in
-            UITextField.placeholder = "Enter name for Challenge"
-            textField = UITextField
-        }
-        
-        newChallengeAlert.addTextField { (UIDescriptionTextField) in
-            UIDescriptionTextField.placeholder = "Enter description for Challenge Name"
-            descField = UIDescriptionTextField
-        }
-        
-        newChallengeAlert.addTextField { (UIMilesTextField) in
-            UIMilesTextField.placeholder = "Enter miles for Challenge"
-            mileField = UIMilesTextField
-        }
-        
-        
-        
-        newChallengeAlert.addAction(action)
-        newChallengeAlert.addAction(cancelAction)
-        
-        present(newChallengeAlert, animated: true, completion: nil)
-    }
+
     
  
 
@@ -205,7 +159,7 @@ extension ChallengeViewController: cellDelegateResult {
             
             let destinationVC = segue.destination as! makeChallenegeController
             
-            destinationVC.SelectedClub = selectedClub
+            destinationVC.SelectedClubName = selectedClubName
             
         }
             
@@ -221,17 +175,25 @@ extension ChallengeViewController: cellDelegateResult {
     
     func loadChalleneges() {
         
-       
+        print("hello this loadchallenges with \(selectedClubName!)")
         
-        challanges.removeAll()
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        let club = realm.objects(Club.self).filter(predicate)
         
-        let predicate = NSPredicate(format: "club.name = %@", "\((selectedClub?.name)!)")
-        let challanges1 = realm.objects(Challenge.self).filter(predicate)
+        print(club.count)
         
-        for x in challanges1 {
-            challanges.append(x)
+        if club.count != 0 {
+            challanges.removeAll()
+            
+           
+            let challenges1 = club[0].challenges
+            
+            for x in challenges1 {
+                challanges.append(x)
+            }
+            
         }
-        
+
         
         tableView.reloadData()
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F3X-BI-cKG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qhc-55-PkT">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -388,13 +388,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge Expiry Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vb7-Pw-zVH">
-                                <rect key="frame" x="15" y="399" width="180" height="23"/>
+                                <rect key="frame" x="16" y="480" width="180" height="23"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NdU-AK-rTv">
-                                <rect key="frame" x="15" y="430" width="344" height="30"/>
+                                <rect key="frame" x="15" y="518" width="344" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -408,8 +408,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge Miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocx-5l-csS">
+                                <rect key="frame" x="15" y="402" width="128" height="23"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yjD-N9-Sct">
+                                <rect key="frame" x="16" y="433" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDB-BN-L8Q">
-                                <rect key="frame" x="130" y="483" width="116" height="30"/>
+                                <rect key="frame" x="129" y="570" width="116" height="30"/>
                                 <color key="backgroundColor" red="0.41555923080000001" green="0.65824104630000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Add Challenege"/>
                                 <connections>
@@ -420,24 +432,30 @@
                         <color key="backgroundColor" red="0.2286079526" green="0.4272128046" blue="0.7216005325" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="top" secondItem="wZo-t1-AdT" secondAttribute="bottom" constant="13" id="0dt-cc-t1u"/>
-                            <constraint firstItem="Vb7-Pw-zVH" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="15" id="26G-Rn-nSy"/>
                             <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="EtL-Ti-q9n" secondAttribute="trailing" constant="16" id="3QS-MU-5m9"/>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="16" id="5PF-aJ-fbU"/>
-                            <constraint firstItem="xDB-BN-L8Q" firstAttribute="top" secondItem="NdU-AK-rTv" secondAttribute="bottom" constant="23" id="85p-by-4sc"/>
-                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="xDB-BN-L8Q" secondAttribute="trailing" constant="129" id="9Us-ks-he1"/>
+                            <constraint firstItem="yjD-N9-Sct" firstAttribute="top" secondItem="ocx-5l-csS" secondAttribute="bottom" constant="8" id="5bj-hs-Zoo"/>
+                            <constraint firstItem="xDB-BN-L8Q" firstAttribute="top" secondItem="NdU-AK-rTv" secondAttribute="bottom" constant="22" id="85p-by-4sc"/>
+                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="xDB-BN-L8Q" secondAttribute="trailing" constant="130" id="9Us-ks-he1"/>
+                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="ocx-5l-csS" secondAttribute="trailing" constant="232" id="9zb-Ou-ThG"/>
                             <constraint firstItem="Ec2-Mx-Yhh" firstAttribute="top" secondItem="EtL-Ti-q9n" secondAttribute="bottom" constant="18" id="AMf-jU-EPA"/>
-                            <constraint firstItem="NdU-AK-rTv" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="15" id="BQ2-cZ-Pdu"/>
-                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="Vb7-Pw-zVH" secondAttribute="trailing" constant="180" id="D5K-zO-lMG"/>
+                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="Vb7-Pw-zVH" secondAttribute="trailing" constant="179" id="D5K-zO-lMG"/>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="trailing" secondItem="dQI-Oy-uC2" secondAttribute="trailing" id="ENS-kC-vbV"/>
-                            <constraint firstItem="NdU-AK-rTv" firstAttribute="top" secondItem="Vb7-Pw-zVH" secondAttribute="bottom" constant="8" id="K8L-fU-qap"/>
+                            <constraint firstItem="ocx-5l-csS" firstAttribute="top" secondItem="dQI-Oy-uC2" secondAttribute="bottom" constant="21" id="Fqz-i6-MTW"/>
                             <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="dQI-Oy-uC2" secondAttribute="trailing" constant="16" id="KqW-bR-J4X"/>
                             <constraint firstItem="dQI-Oy-uC2" firstAttribute="top" secondItem="Ec2-Mx-Yhh" secondAttribute="bottom" constant="14" id="Ms8-B6-xaF"/>
                             <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="wZo-t1-AdT" secondAttribute="trailing" constant="223" id="NfD-5q-WHu"/>
+                            <constraint firstItem="Vb7-Pw-zVH" firstAttribute="top" secondItem="yjD-N9-Sct" secondAttribute="bottom" constant="17" id="OKh-zp-Vto"/>
+                            <constraint firstItem="yjD-N9-Sct" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="16" id="PVR-TF-pID"/>
+                            <constraint firstItem="NdU-AK-rTv" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="15" id="PgY-jz-9D1"/>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="top" secondItem="WM4-mS-K3y" secondAttribute="top" constant="190" id="Qpm-yp-ZXQ"/>
-                            <constraint firstItem="Vb7-Pw-zVH" firstAttribute="top" secondItem="dQI-Oy-uC2" secondAttribute="bottom" constant="18" id="S7d-RO-v0L"/>
+                            <constraint firstItem="NdU-AK-rTv" firstAttribute="top" secondItem="Vb7-Pw-zVH" secondAttribute="bottom" constant="15" id="TQ2-Op-G8N"/>
                             <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="Ec2-Mx-Yhh" secondAttribute="trailing" constant="180" id="adZ-pZ-NdV"/>
-                            <constraint firstItem="xDB-BN-L8Q" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="130" id="fNG-aM-gt5"/>
+                            <constraint firstItem="xDB-BN-L8Q" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="129" id="fNG-aM-gt5"/>
+                            <constraint firstItem="ocx-5l-csS" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="15" id="gyx-TJ-Yfy"/>
+                            <constraint firstItem="zmR-KU-kLi" firstAttribute="trailing" secondItem="yjD-N9-Sct" secondAttribute="trailing" constant="16" id="iyJ-iS-yyp"/>
                             <constraint firstItem="Ec2-Mx-Yhh" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="16" id="j1Z-sT-Noh"/>
+                            <constraint firstItem="Vb7-Pw-zVH" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="16" id="mlF-S4-RYy"/>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="leading" secondItem="Ec2-Mx-Yhh" secondAttribute="leading" id="o5I-TM-CcW"/>
                             <constraint firstItem="EtL-Ti-q9n" firstAttribute="leading" secondItem="dQI-Oy-uC2" secondAttribute="leading" id="qzb-rQ-Pqo"/>
                             <constraint firstItem="wZo-t1-AdT" firstAttribute="leading" secondItem="zmR-KU-kLi" secondAttribute="leading" constant="16" id="rkf-Fx-JeR"/>
@@ -449,6 +467,7 @@
                     <connections>
                         <outlet property="descriptionTV" destination="dQI-Oy-uC2" id="MZS-Aj-K0T"/>
                         <outlet property="expiryTF" destination="NdU-AK-rTv" id="BW3-4d-G4U"/>
+                        <outlet property="milesTF" destination="yjD-N9-Sct" id="oJv-Fb-m7A"/>
                         <outlet property="nameTF" destination="EtL-Ti-q9n" id="Ix9-Nn-5gf"/>
                     </connections>
                 </viewController>
@@ -574,7 +593,6 @@
                         <outlet property="nameTextField" destination="ohR-9h-gI0" id="sZh-4s-EUr"/>
                         <outlet property="passwordTextField" destination="h6o-mh-Gly" id="aaV-tF-z3K"/>
                         <outlet property="usernameTextField" destination="XGk-Pe-phT" id="8tU-HY-Rak"/>
-                        <segue destination="qhc-55-PkT" kind="show" identifier="signedUpSegue" id="khJ-kN-Ocz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opN-HS-Kgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -648,17 +666,36 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="QEc-sP-ogR"/>
                     <connections>
-                        <segue destination="qhc-55-PkT" kind="show" identifier="loginSegue" id="PGF-Ll-KZb"/>
                         <segue destination="C5J-4n-khz" kind="show" identifier="signUpSegue" id="D2O-Br-xaz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fl1-zE-0QD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3037.5999999999999" y="680.54187192118229"/>
+            <point key="canvasLocation" x="-3356" y="681"/>
+        </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="iPo-Js-El2">
+            <objects>
+                <viewController storyboardIdentifier="vc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xah-EA-hGX" customClass="WelcomeViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eOC-oI-id6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2Rq-17-Vo3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nu0-EC-Fua"/>
+                    <connections>
+                        <segue destination="hWx-bn-TM6" kind="show" identifier="signedInSegue" id="lKj-1g-Vej"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8z-bJ-VRZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1751" y="681"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qAN-l4-5UB">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YkK-n6-52I" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qhc-55-PkT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1FK-4A-7I9">
@@ -671,12 +708,11 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="hWx-bn-TM6" kind="relationship" relationship="rootViewController" id="ucx-eu-yBt"/>
+                        <segue destination="Xah-EA-hGX" kind="relationship" relationship="rootViewController" id="V88-Qa-f3t"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YkK-n6-52I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2037.5999999999999" y="680.54187192118229"/>
+            <point key="canvasLocation" x="-2663" y="669"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="vD5-l1-DeD">
@@ -722,7 +758,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txH-bg-bYq">
                                 <rect key="frame" x="16" y="172" width="333" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -764,7 +800,11 @@
                         <viewLayoutGuide key="safeArea" id="jNd-yJ-H49"/>
                     </view>
                     <navigationItem key="navigationItem" title="Main Menu" id="JQ4-aM-fFq">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="tAP-s6-loy"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="tAP-s6-loy">
+                            <connections>
+                                <action selector="signOutButtonPressed:" destination="hWx-bn-TM6" id="3Hm-8T-agE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="welcomeLabel" destination="txH-bg-bYq" id="7y9-By-gqp"/>
@@ -1514,8 +1554,7 @@
         <image name="people" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XPn-fg-s2a"/>
-        <segue reference="khJ-kN-Ocz"/>
+        <segue reference="TLO-h0-d2d"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

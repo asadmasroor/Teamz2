@@ -11,20 +11,37 @@ import RealmSwift
 class ClubViewController: UITableViewController {
     
     var clubs = List<Club>()
-    
-    var selectedUser : User? {
-        didSet {
-            clubs = (selectedUser?.clubs)!
-        }
-    }
-    
-    
-   
+    let realm: Realm
     
     var indexPath1 = 0
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+       let user = realm.objects(User.self).filter(predicate)
+        
+        if user.count != 0 {
+            let myClubs = user[0].clubs
+            
+            for club in myClubs {
+                clubs.append(club)
+            }
+        }
+        
+       
         
     }
     
@@ -55,13 +72,13 @@ class ClubViewController: UITableViewController {
         if (segue.identifier == "squadchallenegeSegue") {
             let barViewControllers = segue.destination as! SquadChallenegeTab
             let destinationViewController = barViewControllers.viewControllers?[0] as! SquadViewController
-            destinationViewController.UserLoggedIn = selectedUser
-            destinationViewController.selectedClub = clubs[indexPath1]
+           
+            destinationViewController.selectedClubName = clubs[indexPath1].name
             
             let destinationViewController1 = barViewControllers.viewControllers?[1] as! ChallengeViewController
             
-            destinationViewController1.userLoggedIn = selectedUser
-            destinationViewController1.selectedClub = clubs[indexPath1]
+            
+            destinationViewController1.selectedClubName = clubs[indexPath1].name
             
             print(clubs[indexPath1].name)
             

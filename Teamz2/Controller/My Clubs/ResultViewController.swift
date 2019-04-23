@@ -14,14 +14,13 @@ class ResultViewController: UITableViewController {
     
     
     var results = List<Result>()
-    var selectedChallenge : Challenge? {
+    var selectedChallengeName : String? {
         didSet{
             
-            results = (selectedChallenge?.results)!
+            let challenege 
             
               self.title = "\((selectedChallenge?.name)!)"
             
-           
             
         }
     }
@@ -53,7 +52,7 @@ class ResultViewController: UITableViewController {
         
         if (results.count != 0 ) {
             
-            let name = (selectedChallenge?.results[indexPath.row].user?.name)!
+            let name = (selectedChallenge?.results[indexPath.row].user?.username)!
             let minutes = (selectedChallenge?.results[indexPath.row].details?.duration)!
             
             

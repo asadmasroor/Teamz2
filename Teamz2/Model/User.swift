@@ -14,6 +14,7 @@ import RealmSwift
 class User: Object {
     
     @objc dynamic var username : String = ""
+    @objc dynamic var owner : String = ""
   // @objc dynamic var password : String = ""
   //  @objc dynamic var name : String = ""
   //   @objc dynamic var email : String = ""

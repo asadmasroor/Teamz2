@@ -58,7 +58,7 @@ class SelectionViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      let cell = tableView.dequeueReusableCell(withIdentifier: "selectionCell", for: indexPath) as! SelectionTableViewCell
         
-        cell.playerNameLabel.text = availablePlayers[indexPath.row].user?.name
+        cell.playerNameLabel.text = availablePlayers[indexPath.row].user?.username
         
         if(availablePlayers[indexPath.row].isSelected == true){
             cell.accessoryType = .checkmark

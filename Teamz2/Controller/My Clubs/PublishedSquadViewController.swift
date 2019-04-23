@@ -60,12 +60,12 @@ class PublishedSquadViewController: UITableViewController {
         
         if player.available == true {
              cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
-            cell.nameLabel?.text = ("\((player.user?.name)!): Confirmed")
+            cell.nameLabel?.text = ("\((player.user?.username)!): Confirmed")
             
             
         } else if player.available == false {
             cell.backgroundColor = UIColor(red:0.26, green:0.54, blue:0.98, alpha:1.0)
-            cell.nameLabel?.text = ("\((player.user?.name)!): Awaiting Confirmation")
+            cell.nameLabel?.text = ("\((player.user?.username)!): Awaiting Confirmation")
         }
 
         return cell
