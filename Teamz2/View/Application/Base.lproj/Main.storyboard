@@ -882,7 +882,7 @@
                         <viewLayoutGuide key="safeArea" id="jNd-yJ-H49"/>
                     </view>
                     <navigationItem key="navigationItem" title="Main Menu" id="JQ4-aM-fFq">
-                        <barButtonItem key="backBarButtonItem" title="Hello" id="geL-dM-hTu"/>
+                        <barButtonItem key="backBarButtonItem" title="Home" id="geL-dM-hTu"/>
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="tAP-s6-loy">
                             <connections>
                                 <action selector="signOutButtonPressed:" destination="hWx-bn-TM6" id="3Hm-8T-agE"/>

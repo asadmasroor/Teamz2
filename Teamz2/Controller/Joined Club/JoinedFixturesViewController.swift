@@ -11,8 +11,7 @@ import RealmSwift
 
 class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate {
     
-    let realm = try! Realm()
-    
+    let realm: Realm
     
     var iPath = 0
     
@@ -20,16 +19,30 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     let tick = "\u{2705}"
     let cross = "\u{274c}"
     
+    var allClubs : Results<Club>
+    var userLoggedIn : Results<User>
     
+    var selectedSquadName : String?
+    var selectedClubName : String?
     
-    var selectedSquad : Squad? {
-        didSet {
-            fixtures = (selectedSquad?.fixtures)!
-        }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        self.userLoggedIn = realm.objects(User.self).filter(predicate)
+        super.init(nibName: nil, bundle: nil)
     }
     
-    var userLoggedIn : User? 
-
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        self.userLoggedIn = realm.objects(User.self).filter(predicate)
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,28 +54,34 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fixtures.count
+        return fixtures.count == 0 ? 1 : fixtures.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "fixtureCell", for: indexPath) as! JoinedFixtureViewCell
-        
-        cell.setFixture(fixture: fixtures[indexPath.row])
         cell.delegate = self
         
-        for available in fixtures[indexPath.row].availablePlayers {
-            if (available.user?.username ==  userLoggedIn?.username) {
-                if (available.available == true) {
-                    cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
-                 //   cell.accessoryType = .checkmark
-                    
-                } else if  (available.available == false){
-                    cell.backgroundColor = UIColor(red:0.00, green:0.51, blue:1.00, alpha:1.0)
-                //    cell.accessoryType = .none
+        if (fixtures.count != 0){
+            cell.setFixture(fixture: fixtures[indexPath.row])
+            
+            
+            for available in fixtures[indexPath.row].availablePlayers {
+                if (available.user?.username ==  userLoggedIn[0].username) {
+                    if (available.available == true) {
+                        cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
+                        //   cell.accessoryType = .checkmark
+                        
+                    } else if  (available.available == false){
+                        cell.backgroundColor = UIColor(red:0.00, green:0.51, blue:1.00, alpha:1.0)
+                        //    cell.accessoryType = .none
+                    }
                 }
             }
+        } else {
+            cell.textLabel?.text = "No fixture's yet"
         }
+        
         
 
         return cell
@@ -81,11 +100,11 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
         let fixture = self.realm.objects(Fixture.self).filter(predicate)
         
-        let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn!.username)")
+        let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn[0].username)")
         let user = fixture[0].availablePlayers.filter(predicate1)
         
         
-        let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
+        let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn[0].username)")
         let available = self.realm.objects(Available.self).filter(predicate2)
         
         let makeAvailable = UIContextualAction(style: .normal, title: "\(tick)") { (action, self, nil) in
@@ -135,7 +154,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         let destinationVC = segue.destination as! JoinedChallengesViewController
         
        // destinationVC.selectedFixture = fixtures[iPath]
-        destinationVC.userLoggedIn = userLoggedIn
+        //destinationVC.userLoggedIn = userLoggedIn[0]
     }
     
  
@@ -145,8 +164,28 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         
     }
 
-
     @IBAction func homeButtonPressed(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func loadFixtures() {
+        
+        fixtures.removeAll()
+        
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        let club = allClubs.filter(predicate)
+        
+        if club.count != 0 {
+             let predicate = NSPredicate(format: "name = %@", "\((selectedSquadName)!)")
+            let squad = club[0].squads.filter(predicate)
+            
+            if squad.count != 0 {
+                for fixture in squad[0].fixtures {
+                    fixtures.append(fixture)
+                }
+            }
+        }
+        
+        
     }
 }

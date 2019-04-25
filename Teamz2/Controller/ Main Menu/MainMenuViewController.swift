@@ -99,7 +99,7 @@ class MainMenuViewController: UIViewController {
         if (segue.identifier == "challenege1Segue") {
             let destinationVC = segue.destination as! JoinedChallengesViewController
             
-            destinationVC.userLoggedIn = UserLoggedIn
+       //    destinationVC.userLoggedIn = UserLoggedIn
             
             
         }
