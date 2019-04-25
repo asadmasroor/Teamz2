@@ -13,35 +13,79 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     
-    let realm = try! Realm()
-    
-    
+    let realm: Realm
+
     // Global variable to store the indexpath of the table
     var uIndexPath = 0
     
     // Store fixtures of the current club's squad
     var fixtures = List<Fixture>()
+    var selectedSquadName : String?
+    var selectedClubName: String?
+    var notificationToken: NotificationToken?
+    let club: Results<Club>
     
-    var selectedSquad : Squad? {
-        didSet {
-            fixtures = (selectedSquad?.fixtures)!
-        }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.club = realm.objects(Club.self)
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
-    var userLoggedIn : User?
-
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.club = realm.objects(Club.self)
+        
+        super.init(coder: aDecoder)
+    }
+    
+    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadFixtures()
+        
+        
+        notificationToken = club.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self!.loadFixtures()
+                //                tableView.beginUpdates()
+                //                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                //                                     with: .automatic)
+                //                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                //                                     with: .automatic)
+                //                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                //                                     with: .automatic)
+            //                tableView.endUpdates()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
         
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadFixtures()
+        
     }
 
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fixtures.count
+        return fixtures.count == 0 ? 1 : fixtures.count
+//        result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
     }
     
     
@@ -57,10 +101,23 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "fixtureCell", for: indexPath) as! FixtureTableViewCell
         
-        let fixture = fixtures[indexPath.row]
+        if fixtures.count != 0 {
+            let fixture = fixtures[indexPath.row]
+            
+            cell.setFixture(fixture: fixture)
+            cell.delegate = self
+        } else {
+            cell.textLabel?.text = "No Fixture's yet"
+            cell.addressLabel.isHidden = true
+            cell.datetimeLabel.isHidden = true
+            cell.titleLabel.isHidden = true
+            cell.selectionButton.isHidden = true
+            
+            
+        }
+       
         
-        cell.setFixture(fixture: fixture)
-        cell.delegate = self
+    
 
         return cell
     }
@@ -75,13 +132,23 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             
             let barViewControllers = segue.destination as! UITabBarController
             let destinationViewController = barViewControllers.viewControllers?[0] as! SelectionViewController
-            destinationViewController.userLoggedIn = userLoggedIn
+         //   destinationViewController.userLoggedIn = userLoggedIn
             destinationViewController.selectedFixture = fixtures[uIndexPath]
             
              let destinationViewController1 = barViewControllers.viewControllers?[1] as! PublishedSquadViewController
             
-            destinationViewController1.userLoggedIn = userLoggedIn
+      //      destinationViewController1.userLoggedIn = userLoggedIn
             destinationViewController1.selectedFixture = fixtures[uIndexPath]
+            
+        }
+        
+        if (segue.identifier == "newFixtureSegue") {
+            
+            
+            let destinationVC = segue.destination as! MakeNewFixture
+            destinationVC.SelectedClubName = selectedClubName
+            destinationVC.SelectedSquadName = selectedSquadName
+           
             
         }
         
@@ -115,40 +182,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        var textField = UITextField()
-        var addressField = UITextField()
-        let newClubAlert = UIAlertController(title: "Add New Fixture", message: "", preferredStyle: .alert)
         
-        let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
-            let newFixture = Fixture()
-            newFixture.title = (textField.text)!
-            newFixture.address = (addressField.text)!
-            
-            self.fixtures.append(newFixture)
-            
-            self.tableView.reloadData()
-            
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
-            newClubAlert.dismiss(animated: true, completion: nil)
-        }
-        
-        newClubAlert.addTextField { (UITextField) in
-            UITextField.placeholder = "Enter title for fixture"
-            textField = UITextField
-        }
-        
-        newClubAlert.addTextField { (UIAddressTextField) in
-            UIAddressTextField.placeholder = "Enter address for fixture"
-            addressField = UIAddressTextField
-        }
-        
-        newClubAlert.addAction(action)
-        newClubAlert.addAction(cancelAction)
-        
-        present(newClubAlert, animated: true, completion: nil)
+        performSegue(withIdentifier: "newFixtureSegue", sender: self)
     }
     
     
@@ -158,10 +193,16 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if (fixtures.count != 0) {
+         return true
+        }
+        else {
+            return false
+        }
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
@@ -182,11 +223,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
                         self.realm.delete(fixture[0])
                     }
                     
-                    
                 }
-                
-                
-                
+            
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
@@ -201,6 +239,22 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         }
         
         return [deleteAction]
+    }
+    
+    
+    func loadFixtures() {
+        fixtures.removeAll()
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        let club1 = club.filter(predicate)
+        
+        let predicate1 = NSPredicate(format: "name = %@", "\((selectedSquadName)!)")
+        let squad = club1[0].squads.filter(predicate1)
+        
+        for fixture in squad[0].fixtures {
+            fixtures.append(fixture)
+        }
+        
+        tableView.reloadData()
     }
 }
 

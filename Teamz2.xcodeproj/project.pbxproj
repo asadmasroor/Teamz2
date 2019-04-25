@@ -11,6 +11,9 @@
 		522BA3D67DD9BDE3888B46F7 /* Pods_Teamz2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43190782B0C8FA715A78E95C /* Pods_Teamz2.framework */; };
 		62D99167026E76824905B303 /* Pods_Teamz2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B33278F5C58856CA7638CEC /* Pods_Teamz2UITests.framework */; };
 		84157F54226F2DFB0004B385 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84157F53226F2DFB0004B385 /* WelcomeViewController.swift */; };
+		84157F5622706C960004B385 /* requestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84157F5522706C960004B385 /* requestsTableViewController.swift */; };
+		84157F5B227092B80004B385 /* MakeNewFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84157F5A227092B80004B385 /* MakeNewFixture.swift */; };
+		8415D3C32271B53F00CBA0A3 /* requestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415D3C22271B53F00CBA0A3 /* requestsTableViewCell.swift */; };
 		8418BE08225DE925008EC203 /* Available.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE07225DE925008EC203 /* Available.swift */; };
 		8418BE0A225FA831008EC203 /* PlayerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */; };
 		8418BE0C225FD1B0008EC203 /* PlayerSelectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BE0B225FD1B0008EC203 /* PlayerSelectionViewCell.swift */; };
@@ -90,6 +93,9 @@
 		42781DB90A3617C4CA5C07E6 /* Pods_Teamz2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43190782B0C8FA715A78E95C /* Pods_Teamz2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teamz2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84157F53226F2DFB0004B385 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		84157F5522706C960004B385 /* requestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestsTableViewController.swift; sourceTree = "<group>"; };
+		84157F5A227092B80004B385 /* MakeNewFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewFixture.swift; sourceTree = "<group>"; };
+		8415D3C22271B53F00CBA0A3 /* requestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestsTableViewCell.swift; sourceTree = "<group>"; };
 		8418BE07225DE925008EC203 /* Available.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Available.swift; sourceTree = "<group>"; };
 		8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewController.swift; sourceTree = "<group>"; };
 		8418BE0B225FD1B0008EC203 /* PlayerSelectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewCell.swift; sourceTree = "<group>"; };
@@ -198,6 +204,68 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84157F59227092600004B385 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				846B6656222ED9760090CAF2 /* ChallengeViewController.swift */,
+				84AB35F22267F17A00901B20 /* makeChallenegeController.swift */,
+				846B666022304D0C0090CAF2 /* ResultViewController.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		84157F5C227092C50004B385 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				84DE33112231851A00C91071 /* SquadViewController.swift */,
+				846B664F222EAE150090CAF2 /* FixtureViewController.swift */,
+				84157F5A227092B80004B385 /* MakeNewFixture.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		84157F5D227092FE0004B385 /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				8418BE4F22633658008EC203 /* PublishedSquadViewController.swift */,
+				846B665E223033010090CAF2 /* SelectionViewController.swift */,
+			);
+			path = Selection;
+			sourceTree = "<group>";
+		};
+		84157F5E2270946C0004B385 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				849DBE4F226DCEB80088DEBD /* SignUpViewController.swift */,
+				84157F53226F2DFB0004B385 /* WelcomeViewController.swift */,
+				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		84157F5F2270947E0004B385 /* Supprting FIles 2 */ = {
+			isa = PBXGroup;
+			children = (
+				8483A40C2255047E004D2304 /* FormatDisplay.swift */,
+				8483A41022551345004D2304 /* UnitExtensions.swift */,
+				849DBE4D226DCA170088DEBD /* Constants.swift */,
+				8483A40E225504BC004D2304 /* LocationManager.swift */,
+			);
+			path = "Supprting FIles 2";
+			sourceTree = "<group>";
+		};
+		84157F60227094980004B385 /*  Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
+				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
+				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
+				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
+				8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */,
+			);
+			path = " Main Menu";
+			sourceTree = "<group>";
+		};
 		843412C6222CBDEA0098CFEA = {
 			isa = PBXGroup;
 			children = (
@@ -279,18 +347,9 @@
 		846B6655222ED9490090CAF2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				84157F53226F2DFB0004B385 /* WelcomeViewController.swift */,
-				849DBE4F226DCEB80088DEBD /* SignUpViewController.swift */,
-				84DE331F2231D82E00C91071 /* LoginViewController.swift */,
-				84DE33152231C55500C91071 /* MainMenuViewController.swift */,
-				84DE332B22328F3D00C91071 /* SearchViewController.swift */,
-				8418BE09225FA831008EC203 /* PlayerSelectionViewController.swift */,
-				845BBF582252B9AB005649D5 /* AttemptChallengeController.swift */,
-				84C436ED2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift */,
-				8483A40C2255047E004D2304 /* FormatDisplay.swift */,
-				8483A41022551345004D2304 /* UnitExtensions.swift */,
-				849DBE4D226DCA170088DEBD /* Constants.swift */,
-				8483A40E225504BC004D2304 /* LocationManager.swift */,
+				84157F5E2270946C0004B385 /* Login */,
+				84157F60227094980004B385 /*  Main Menu */,
+				84157F5F2270947E0004B385 /* Supprting FIles 2 */,
 				84DE33312232C10B00C91071 /* My Clubs */,
 				84DE33322232C17300C91071 /* Joined Club */,
 			);
@@ -344,6 +403,7 @@
 				84DE33192231D56D00C91071 /* SquadTableViewCell.swift */,
 				84DE33212231D93B00C91071 /* ResultsTableViewCell.swift */,
 				8418BE51226337A7008EC203 /* PublishedSquadTableViewCell.swift */,
+				8415D3C22271B53F00CBA0A3 /* requestsTableViewCell.swift */,
 			);
 			path = MyClubs;
 			sourceTree = "<group>";
@@ -363,15 +423,12 @@
 		84DE33312232C10B00C91071 /* My Clubs */ = {
 			isa = PBXGroup;
 			children = (
-				84AB35EF2267E20300901B20 /* TabBar controllers */,
-				8418BE4F22633658008EC203 /* PublishedSquadViewController.swift */,
-				846B665E223033010090CAF2 /* SelectionViewController.swift */,
-				846B664F222EAE150090CAF2 /* FixtureViewController.swift */,
-				84DE33112231851A00C91071 /* SquadViewController.swift */,
 				84DE331322318FBF00C91071 /* ClubViewController.swift */,
-				846B6656222ED9760090CAF2 /* ChallengeViewController.swift */,
-				84AB35F22267F17A00901B20 /* makeChallenegeController.swift */,
-				846B666022304D0C0090CAF2 /* ResultViewController.swift */,
+				84157F5522706C960004B385 /* requestsTableViewController.swift */,
+				84AB35EF2267E20300901B20 /* TabBar controllers */,
+				84157F5C227092C50004B385 /* Fixtures */,
+				84157F59227092600004B385 /* Challenges */,
+				84157F5D227092FE0004B385 /* Selection */,
 			);
 			path = "My Clubs";
 			sourceTree = "<group>";
@@ -640,6 +697,7 @@
 				8418BE5022633658008EC203 /* PublishedSquadViewController.swift in Sources */,
 				84DE331E2231D78300C91071 /* SelectionTableViewCell.swift in Sources */,
 				8418BE0C225FD1B0008EC203 /* PlayerSelectionViewCell.swift in Sources */,
+				84157F5B227092B80004B385 /* MakeNewFixture.swift in Sources */,
 				8483A41122551345004D2304 /* UnitExtensions.swift in Sources */,
 				84AB35F32267F17A00901B20 /* makeChallenegeController.swift in Sources */,
 				846B664C222DCE620090CAF2 /* Challenge.swift in Sources */,
@@ -663,6 +721,7 @@
 				846B6648222D70AE0090CAF2 /* Squad.swift in Sources */,
 				84157F54226F2DFB0004B385 /* WelcomeViewController.swift in Sources */,
 				84DE331422318FBF00C91071 /* ClubViewController.swift in Sources */,
+				84157F5622706C960004B385 /* requestsTableViewController.swift in Sources */,
 				846B6657222ED9760090CAF2 /* ChallengeViewController.swift in Sources */,
 				84DE331A2231D56D00C91071 /* SquadTableViewCell.swift in Sources */,
 				846B664E222DE6AB0090CAF2 /* Result.swift in Sources */,
@@ -678,6 +737,7 @@
 				8483A40D2255047E004D2304 /* FormatDisplay.swift in Sources */,
 				846B6654222EB4B40090CAF2 /* FixtureTableViewCell.swift in Sources */,
 				84C436EE2257F96E00BAAA68 /* ChallenegeAttemptsViewController.swift in Sources */,
+				8415D3C32271B53F00CBA0A3 /* requestsTableViewCell.swift in Sources */,
 				8418BE08225DE925008EC203 /* Available.swift in Sources */,
 				84DE33342232C1AD00C91071 /* JoinedFixturesViewController.swift in Sources */,
 			);

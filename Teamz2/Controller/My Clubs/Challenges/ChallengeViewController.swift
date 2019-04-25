@@ -150,7 +150,8 @@ extension ChallengeViewController: cellDelegateResult {
             
             let destinationVC = segue.destination as! ResultViewController
             
-            destinationVC.selectedChallenge = challanges[dIndexPath]
+            destinationVC.selectedClubName = selectedClubName 
+            destinationVC.selectedChallengeName = challanges[dIndexPath].name
             
         }
         

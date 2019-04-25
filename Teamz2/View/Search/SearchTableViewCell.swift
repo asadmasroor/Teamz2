@@ -21,7 +21,9 @@ class SearchTableViewCell :  UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var descLabel: UITextView!
+    @IBOutlet weak var requestedLabel: UILabel!
     
+    @IBOutlet weak var joinButton: UIButton!
     @IBAction func joinButtonPressed(_ sender: Any) {
         delegate?.joinButtonPressed(cell: self)
     }

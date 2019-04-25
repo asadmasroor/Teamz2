@@ -13,18 +13,34 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     
     var indexpath = 0
     
-    let realm = try! Realm()
+   let realm: Realm
     
     var userLoggedIn : User?
-    
-   
-    
-    
+
+    var allClubs : Results<Club>
     var allClubNames : [String] = []
     var joinedClubNames : [String] = []
     var notJoinedClubNames : [String] = []
-    var notJoined = List<Club>()
+    //var notJoined = List<Club>()
     var notJoinedClubs: Results<Club>? = nil
+    var user: Results<User>? = nil
+    
+    var notificationToken : NotificationToken?
+
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+        super.init(coder: aDecoder)
+    }
    
     
 
@@ -32,6 +48,21 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         super.viewDidLoad()
         
         loadUnjoinedClubs()
+        
+        notificationToken = allClubs.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                 self!.loadUnjoinedClubs()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self!.loadUnjoinedClubs()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
     
         
     }
@@ -39,17 +70,19 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     
     func loadUnjoinedClubs() {
         
-        let allClubsResult = realm.objects(Club.self)
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        user = realm.objects(User.self).filter(predicate)
         
-        for club in allClubsResult {
+       
+        
+        for club in allClubs {
             
             allClubNames.append("\(club.name)")
             
         }
         
         
-        for club in ((userLoggedIn?.joinedClubs)!) {
-            
+        for club in (user![0].joinedClubs) {
             joinedClubNames.append("\(club.name)")
         }
         
@@ -64,13 +97,10 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         }
         
         
+        let predicate1 = NSPredicate(format: "name IN %@", notJoinedClubNames)
+        notJoinedClubs = realm.objects(Club.self).filter(predicate1)
         
-        
-        
-        let predicate = NSPredicate(format: "name IN %@", notJoinedClubNames)
-        notJoinedClubs = realm.objects(Club.self).filter(predicate)
-        
-       
+       tableView.reloadData()
         
         
         
@@ -81,21 +111,27 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         indexpath = indexPath!.row
         
         let predicate = NSPredicate(format: "name = %@", "\(notJoinedClubs![indexpath].name)")
-        
-        
         let club = realm.objects(Club.self).filter(predicate)
         
         print(club[0].name)
-        
-        try! realm.write {
-           
-            
-            club[0].requests.append(userLoggedIn!)
-        }
 
         
-        
+        let predicate1 = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        let user1 = club[0].requests.filter(predicate1)
+
+        if user1.count == 0 {
+            
+            try! realm.write {
+                club[0].requests.append(user![0])
+                
             }
+        }
+        
+        
+        
+        tableView.reloadData()
+       // loadUnjoinedClubs()
+       }
     // MARK: - Table view data source
 
     
@@ -117,10 +153,29 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         if (notJoinedClubs != nil) && (notJoinedClubs!.count != 0){
             cell.nameLabel.text = notJoinedClubs![indexPath.row].name
             cell.descLabel.text = "Amatuer Sports Club"
+            
+            let predicate = NSPredicate(format: "name = %@", "\(notJoinedClubs![indexPath.row].name)")
+            let club = realm.objects(Club.self).filter(predicate)
+
+            let predicate1 = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+            let user = club[0].requests.filter(predicate1)
+
+            if (user.count != 0 ){
+                
+                print(user[0].username)
+
+                cell.backgroundColor = UIColor.gray
+                cell.joinButton.isHidden = true
+                cell.requestedLabel.isHidden = false
+                //tableView.reloadData()
+            }
+           
         } else {
             cell.textLabel?.text = "No Clubs G"
             cell.nameLabel.isHidden = true
             cell.descLabel.isHidden = true
+            cell.joinButton.isHidden = true
+            tableView.reloadData()
         }
         
         
@@ -135,18 +190,6 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         
     }
 
-    
-
- 
-
-    
-//    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//    }
 
 
 }

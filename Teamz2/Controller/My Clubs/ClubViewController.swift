@@ -30,16 +30,7 @@ class ClubViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
-       let user = realm.objects(User.self).filter(predicate)
-        
-        if user.count != 0 {
-            let myClubs = user[0].clubs
-            
-            for club in myClubs {
-                clubs.append(club)
-            }
-        }
+      loadClubs()
         
        
         
@@ -80,8 +71,11 @@ class ClubViewController: UITableViewController {
             
             destinationViewController1.selectedClubName = clubs[indexPath1].name
             
-            print(clubs[indexPath1].name)
+            let destinationViewController2 = barViewControllers.viewControllers?[2] as! requestsTableViewController
             
+            destinationViewController2.selectedClubName = clubs[indexPath1].name
+            
+       
         }
         
         
@@ -92,9 +86,22 @@ class ClubViewController: UITableViewController {
         indexPath1 = indexPath.row
         
         performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
+    
         
+    }
+    
+    func loadClubs() {
+       
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        let user = realm.objects(User.self).filter(predicate)
         
-        
+        if user.count != 0 {
+            let myClubs = user[0].clubs
+            
+            for club in myClubs {
+                clubs.append(club)
+            }
+        }
     }
     
 

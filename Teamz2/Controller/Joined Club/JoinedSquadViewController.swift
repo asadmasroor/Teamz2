@@ -12,25 +12,51 @@ class JoinedSquadViewController: UITableViewController {
     
     var indexPath1 = 0
     
+    let realm: Realm
+    var allClubs : Results<Club>
     var squads = List<Squad>()
+    var selectedClubName : String?
+    var notificationToken : NotificationToken?
     
     
-    var selectedClub : Club? {
-        didSet {
-            squads = (selectedClub?.squads)!
-        }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+//        let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+        self.allClubs = realm.objects(Club.self)
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
-    var userLoggedIn : User? 
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+     //    let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+         self.allClubs = realm.objects(Club.self)
+       
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadSquads()
+        
+        notificationToken = allClubs.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                self!.loadSquads()
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self!.loadSquads()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -53,8 +79,8 @@ class JoinedSquadViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! JoinedFixturesViewController
         
-        destinationVC.selectedSquad = squads[indexPath1]
-        destinationVC.userLoggedIn = userLoggedIn
+       // destinationVC.selectedSquad = squads[indexPath1]
+     //   destinationVC.userLoggedIn = userLoggedIn
         
     }
     
@@ -67,5 +93,16 @@ class JoinedSquadViewController: UITableViewController {
 
     @IBAction func homeButtonPressed(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func loadSquads() {
+        
+       // squads.removeAll()
+    
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        let club = allClubs.filter(predicate)
+        squads = club[0].squads
+        
+        tableView.reloadData()
     }
 }

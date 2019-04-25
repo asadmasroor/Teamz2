@@ -52,6 +52,8 @@ class MainMenuViewController: UIViewController {
            welcomeLabel.text = "Welcome \(user[0].username)"
            UserLoggedIn = user[0]
         }
+        
+        self.navigationItem.setHidesBackButton(true, animated:true);
      
     }
     
@@ -74,7 +76,7 @@ class MainMenuViewController: UIViewController {
         if (segue.identifier == "joinedClubSegue") {
             let destinationVC = segue.destination as! JoinedClubViewController
             
-            destinationVC.selectedUser = UserLoggedIn
+            //destinationVC.selectedUser = UserLoggedIn
             
         }
         
@@ -114,14 +116,15 @@ class MainMenuViewController: UIViewController {
             let newClub = Club()
             newClub.name = (textField.text)!
             
-            let predicate = NSPredicate(format: "username = %@", "\((self.username)!)")
+            let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
             let user = self.realm.objects(User.self).filter(predicate)
             
              try! self.realm.write {
-             
+            
+        
+             self.realm.add(newClub)
              user[0].clubs.append(newClub)
              user[0].joinedClubs.append(newClub)
-             self.realm.add(newClub)
             
             }
             

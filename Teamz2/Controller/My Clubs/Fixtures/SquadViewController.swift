@@ -116,8 +116,9 @@ class SquadViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! FixtureViewController
         
-        destinationVC.selectedSquad = squads[findexPath]
-//        destinationVC.userLoggedIn = UserLoggedIn
+        destinationVC.selectedSquadName = squads[findexPath].name
+        destinationVC.selectedClubName = selectedClubName
+
         
     }
     
@@ -129,6 +130,8 @@ class SquadViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -180,11 +183,9 @@ class SquadViewController: UITableViewController {
         let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
         let club = realm.objects(Club.self).filter(predicate)
         
-        
-        
         if club.count != 0 {
             let clubSquads = club[0].squads
-            squads.removeAll()
+            
             for squad in clubSquads {
                 squads.append(squad)
             }

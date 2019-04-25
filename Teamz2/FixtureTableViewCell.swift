@@ -19,6 +19,9 @@ class FixtureTableViewCell: UITableViewCell {
     
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var datetimeLabel: UILabel!
+    
+    @IBOutlet weak var selectionButton: UIButton!
     weak var delegate: cellDelegateChallenge?
     
     @IBAction func challengeButtonPressed(_ sender: Any) {
@@ -43,6 +46,21 @@ class FixtureTableViewCell: UITableViewCell {
     func setFixture(fixture: Fixture){
         self.titleLabel.text = fixture.title
         self.addressLabel.text =  fixture.address
+        self.datetimeLabel.text = ("Date: \(fixtureDate(date: fixture.date)) Time: \(time(date: fixture.time)) ")
+    }
+    
+    func time(date: Date) -> String{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
+    }
+    
+    func fixtureDate(date: Date) -> String{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: date)
     }
 
 }
