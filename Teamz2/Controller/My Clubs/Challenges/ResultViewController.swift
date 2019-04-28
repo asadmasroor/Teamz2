@@ -60,7 +60,7 @@ class ResultViewController: UITableViewController {
             
             let minutes = results[indexPath.row].details?.duration
             
-            cell.resultLabel.text = "\(name): \(minutes) seconds"
+            cell.resultLabel.text = "\((name)!): \((minutes)!) seconds"
             
         } else {
            cell.resultLabel.text = "No Results Yet!"

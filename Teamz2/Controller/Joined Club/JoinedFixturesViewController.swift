@@ -11,6 +11,9 @@ import RealmSwift
 
 class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate {
     
+    
+   
+    
     let realm: Realm
     
     var iPath = 0
@@ -25,11 +28,13 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     var selectedSquadName : String?
     var selectedClubName : String?
     
+    var notificationToken : NotificationToken?
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.allClubs = realm.objects(Club.self)
-         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
         self.userLoggedIn = realm.objects(User.self).filter(predicate)
         super.init(nibName: nil, bundle: nil)
     }
@@ -45,7 +50,22 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      loadFixtures()
+        
+        notificationToken = allClubs.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                self!.loadFixtures()
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self!.loadFixtures()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
         
     }
 
@@ -91,52 +111,143 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
         return true
     }
     
-  
-    
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func availableButtonPressed(cell: JoinedFixtureViewCell) {
         
-        let realm = try! Realm()
+        let indexPath = self.tableView.indexPath(for: cell)
         
-        let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
+        let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[(indexPath?.row)!].title)")
         let fixture = self.realm.objects(Fixture.self).filter(predicate)
         
-        let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn[0].username)")
+        let predicate1 = NSPredicate(format: "user.username = %@", "\((userLoggedIn[0].username))")
         let user = fixture[0].availablePlayers.filter(predicate1)
         
-        
-        let predicate2 = NSPredicate(format: "user.username = %@", "\(userLoggedIn[0].username)")
-        let available = self.realm.objects(Available.self).filter(predicate2)
-        
-        let makeAvailable = UIContextualAction(style: .normal, title: "\(tick)") { (action, self, nil) in
+        if user.count == 0 {
+            
+            let available = Available()
+            available.user = userLoggedIn[0]
+            available.available = true
+            
             
             try! realm.write {
-                user[0].available = true
-                
-               tableView.reloadData()
-                
+                realm.add(available)
+                fixture[iPath].availablePlayers.append(available)
             }
+        
+        } else {
+            try! realm.write {
+                user[0].available = true
+            }
+            
         }
         
+        loadFixtures()
+        
+    }
+    
+    func notAvailableButtonPressed(cell: JoinedFixtureViewCell) {
        
+        let indexPath = self.tableView.indexPath(for: cell)
         
-        makeAvailable.backgroundColor = UIColor.white
+        let predicate = NSPredicate(format: "title = %@", "\(fixtures[(indexPath?.row)!].title)")
+        let fixture = self.realm.objects(Fixture.self).filter(predicate)
         
-        let notAvailable = UIContextualAction(style: .normal, title: "\(cross)") { (action, self, nil) in
+        let predicate1 = NSPredicate(format: "user.username = %@", "\((userLoggedIn[0].username))")
+        let user = fixture[0].availablePlayers.filter(predicate1)
+        
+        if user.count == 0 {
+            
+            print("hello")
+            let available = Available()
+            available.user = userLoggedIn[0]
+            available.available = false
+            
+            
+            try! realm.write {
+                realm.add(available)
+                fixture[iPath].availablePlayers.append(available)
+            }
+            
+        } else {
             
             try! realm.write {
                 user[0].available = false
-                
-                tableView.reloadData()
-                
             }
+
+            
         }
         
-        notAvailable.backgroundColor = UIColor.gray
-        
-        let configuration = UISwipeActionsConfiguration(actions: [makeAvailable, notAvailable])
-        configuration.performsFirstActionWithFullSwipe = false
-        return configuration
+        loadFixtures()
     }
+    
+    
+  
+    
+//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        let realm = try! Realm()
+//
+//        let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
+//        let fixture = self.realm.objects(Fixture.self).filter(predicate)
+//
+//        let predicate1 = NSPredicate(format: "user.username = %@", "\((userLoggedIn[0].username))")
+//        let user = fixture[0].availablePlayers.filter(predicate1)
+//
+//
+//
+//        let userloggedin2 = userLoggedIn[0]
+//
+//
+//        let makeAvailable = UIContextualAction(style: .normal, title: "\(tick)") { (action, self, nil) in
+//
+//
+//
+//                if user.count == 0 {
+//
+//                    print("hi")
+//                    let available = Available()
+//                    available.user = userloggedin2
+//                    available.available = true
+//
+//
+//                    self.addAvailbility(available: available)
+//
+//
+//                } else {
+//                    print("hi")
+//                    user[0].available = true
+//                }
+//
+//
+//               tableView.reloadData()
+//
+//
+//        }
+//
+//        makeAvailable.backgroundColor = UIColor.white
+//
+//        let notAvailable = UIContextualAction(style: .normal, title: "\(cross)") { (action, self, nil) in
+//
+//            try! realm.write {
+//
+//                if user.count == 0 {
+//                    let available = Available()
+//                    available.user = userloggedin2
+//                    available.available = false
+//                    realm.add(available)
+//                } else {
+//                user[0].available = false
+//
+//                tableView.reloadData()
+//                }
+//            }
+//        }
+//
+//        notAvailable.backgroundColor = UIColor.gray
+//
+//        let configuration = UISwipeActionsConfiguration(actions: [makeAvailable, notAvailable])
+//        configuration.performsFirstActionWithFullSwipe = false
+//        return configuration
+//    }
     
     func challengeButtonPressed(cell: JoinedFixtureViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
@@ -158,11 +269,13 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     }
     
  
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//
+//
+//
+//
+//    }
 
     @IBAction func homeButtonPressed(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -186,6 +299,15 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
             }
         }
         
+        tableView.reloadData()
         
     }
+//
+//    func addAvailbility(available: Available){
+//
+//        try! realm.write {
+//            realm.add(available)
+//        }
+//
+//    }
 }

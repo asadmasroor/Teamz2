@@ -58,6 +58,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the UITableView
                 self!.loadFixtures()
+                tableView.reloadData()
                 //                tableView.beginUpdates()
                 //                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
                 //                                     with: .automatic)

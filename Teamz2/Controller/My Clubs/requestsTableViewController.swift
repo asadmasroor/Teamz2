@@ -71,7 +71,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Challeneges"
+        self.tabBarController?.navigationItem.title = "Request's"
     }
     
 

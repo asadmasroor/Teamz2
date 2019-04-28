@@ -1230,11 +1230,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fixtureCell" rowHeight="147" id="E0L-pL-9Ee" customClass="JoinedFixtureViewCell" customModule="Teamz2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="147"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="fixtureCell" rowHeight="167" id="E0L-pL-9Ee" customClass="JoinedFixtureViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E0L-pL-9Ee" id="3WU-4m-ruS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="146.66666666666666"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E0L-pL-9Ee" id="3WU-4m-ruS">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="166.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KfQ-MS-evW">
@@ -1267,23 +1267,45 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="loc-7u-Kjh">
+                                            <rect key="frame" x="88" y="125.33333333333331" width="61" height="30"/>
+                                            <state key="normal" title="Available"/>
+                                            <connections>
+                                                <action selector="availableButtonPressed:" destination="E0L-pL-9Ee" eventType="touchUpInside" id="egv-ev-wqh"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfL-TC-bV2">
+                                            <rect key="frame" x="213" y="126" width="90" height="29.999999999999986"/>
+                                            <state key="normal" title="Not Available"/>
+                                            <connections>
+                                                <action selector="notAvailableButtonPressed:" destination="E0L-pL-9Ee" eventType="touchUpInside" id="rpz-Vi-d7v"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="loc-7u-Kjh" secondAttribute="bottom" constant="11.333333333333343" id="0WG-TC-i1Y"/>
                                         <constraint firstItem="KfQ-MS-evW" firstAttribute="top" secondItem="3WU-4m-ruS" secondAttribute="topMargin" constant="10" id="1c9-7V-PY4"/>
+                                        <constraint firstItem="KfL-TC-bV2" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leading" constant="213" id="3dl-Gf-DNt"/>
+                                        <constraint firstItem="KfL-TC-bV2" firstAttribute="top" secondItem="7jm-s8-KWv" secondAttribute="bottom" constant="8" id="FWG-9g-7aJ"/>
                                         <constraint firstItem="Zsb-6D-yxB" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leadingMargin" id="H0x-rK-rPj"/>
+                                        <constraint firstItem="loc-7u-Kjh" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leading" constant="88" id="V2Q-WN-CHR"/>
                                         <constraint firstItem="7jm-s8-KWv" firstAttribute="top" secondItem="Zsb-6D-yxB" secondAttribute="bottom" constant="8" symbolic="YES" id="VLD-eq-GOz"/>
                                         <constraint firstItem="KfQ-MS-evW" firstAttribute="leading" secondItem="3WU-4m-ruS" secondAttribute="leadingMargin" id="ZzV-8s-xe6"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Zsb-6D-yxB" secondAttribute="trailing" id="azW-5E-UfF"/>
                                         <constraint firstItem="Zsb-6D-yxB" firstAttribute="top" secondItem="KfQ-MS-evW" secondAttribute="bottom" constant="8" id="b44-fu-dZC"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="KfQ-MS-evW" secondAttribute="trailing" id="bJp-fh-Q8b"/>
-                                        <constraint firstAttribute="bottom" secondItem="7jm-s8-KWv" secondAttribute="bottom" constant="28.666666666666657" id="gFc-hI-PVU"/>
+                                        <constraint firstAttribute="bottom" secondItem="KfL-TC-bV2" secondAttribute="bottom" constant="10.666666666666657" id="dnm-hb-Asq"/>
+                                        <constraint firstItem="KfL-TC-bV2" firstAttribute="leading" secondItem="loc-7u-Kjh" secondAttribute="trailing" constant="64" id="f8t-XF-6Aj"/>
+                                        <constraint firstAttribute="bottom" secondItem="7jm-s8-KWv" secondAttribute="bottom" constant="48.666666666666657" id="gFc-hI-PVU"/>
                                         <constraint firstItem="Zsb-6D-yxB" firstAttribute="leading" secondItem="7jm-s8-KWv" secondAttribute="leading" id="gJc-Ud-9Ez"/>
                                         <constraint firstItem="Zsb-6D-yxB" firstAttribute="top" secondItem="KfQ-MS-evW" secondAttribute="bottom" constant="8" id="ryT-Xb-0s0"/>
+                                        <constraint firstItem="loc-7u-Kjh" firstAttribute="top" secondItem="7jm-s8-KWv" secondAttribute="bottom" constant="7.3333333333333428" id="sDP-S0-dOg"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="addressLabel" destination="Zsb-6D-yxB" id="dL0-Op-VEr"/>
+                                    <outlet property="dateLabel" destination="7jm-s8-KWv" id="z6T-ow-LU1"/>
                                     <outlet property="titleLabel" destination="KfQ-MS-evW" id="PSj-Id-ARS"/>
                                 </connections>
                             </tableViewCell>

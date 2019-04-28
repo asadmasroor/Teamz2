@@ -79,8 +79,9 @@ class JoinedSquadViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! JoinedFixturesViewController
         
-       // destinationVC.selectedSquad = squads[indexPath1]
-     //   destinationVC.userLoggedIn = userLoggedIn
+        destinationVC.selectedClubName = selectedClubName
+        destinationVC.selectedSquadName = squads[indexPath1].name
+    
         
     }
     

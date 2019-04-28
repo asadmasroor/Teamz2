@@ -131,7 +131,7 @@ class JoinedChallengesViewController: UITableViewController, joinedChallengeDele
         if (segue.identifier == "viewAttemptSegue") {
             let destinationVC = segue.destination as! ChallenegeAttemptsViewController
              destinationVC.userLoggedIn = userLoggedIn[0]
-       //     destinationVC.selectedChallenge = selectedFixture?.challenges[iPath]
+             destinationVC.selectedChallenge = challenges[iPath]
             
         }
         

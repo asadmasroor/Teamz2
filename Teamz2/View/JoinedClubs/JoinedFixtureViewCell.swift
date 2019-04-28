@@ -9,7 +9,9 @@
 import UIKit
 
 protocol joinedFixtureDelegate: AnyObject {
-    func challengeButtonPressed(cell: JoinedFixtureViewCell)
+   
+    func availableButtonPressed(cell: JoinedFixtureViewCell)
+    func notAvailableButtonPressed(cell: JoinedFixtureViewCell)
   
 }
 class JoinedFixtureViewCell: UITableViewCell {
@@ -21,9 +23,7 @@ class JoinedFixtureViewCell: UITableViewCell {
     
     weak var delegate: joinedFixtureDelegate?
     
-    @IBAction func challengeButtonPressed(_ sender: Any) {
-        delegate?.challengeButtonPressed(cell: self)
-    }
+  
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -31,11 +31,36 @@ class JoinedFixtureViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+ 
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var dateLabel: UILabel!
     func setFixture(fixture: Fixture){
         self.addressLabel.text = fixture.address
         self.titleLabel.text = fixture.title
+        self.dateLabel.text = "Date: \(fixtureDate(date: fixture.date)), Time: \(fixtureTime(date: fixture.time)) "
     }
+    @IBAction func availableButtonPressed(_ sender: UIButton) {
+        delegate?.availableButtonPressed(cell: self)
+    }
+    
+    @IBAction func notAvailableButtonPressed(_ sender: Any) {
+        delegate?.notAvailableButtonPressed(cell: self)
+    }
+    
+    func fixtureTime(date: Date) -> String{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
+    }
+    
+    func fixtureDate(date: Date) -> String{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: date)
+    }
+
 }
