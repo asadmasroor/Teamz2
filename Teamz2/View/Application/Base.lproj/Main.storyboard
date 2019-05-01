@@ -246,14 +246,44 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="publishedCell" id="GHy-ZN-lPy" customClass="PublishedSquadTableViewCell" customModule="Teamz2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="publishedCell" rowHeight="93" id="GHy-ZN-lPy" customClass="PublishedSquadTableViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHy-ZN-lPy" id="Wje-wE-6o3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="469-wG-J7I">
+                                            <rect key="frame" x="16" y="11" width="343" height="36"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="21"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmX-lG-RnQ">
+                                            <rect key="frame" x="16" y="55" width="343" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="qxF-nF-eTM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="469-wG-J7I" firstAttribute="centerX" secondItem="Wje-wE-6o3" secondAttribute="centerX" id="Cgr-df-tpa"/>
+                                        <constraint firstItem="bmX-lG-RnQ" firstAttribute="top" secondItem="469-wG-J7I" secondAttribute="bottom" constant="8" id="QZV-q1-R3R"/>
+                                        <constraint firstItem="469-wG-J7I" firstAttribute="top" secondItem="Wje-wE-6o3" secondAttribute="top" constant="11" id="U2P-IW-46z"/>
+                                        <constraint firstItem="bmX-lG-RnQ" firstAttribute="leading" secondItem="469-wG-J7I" secondAttribute="leading" id="WVV-oI-cwM"/>
+                                        <constraint firstAttribute="bottom" secondItem="bmX-lG-RnQ" secondAttribute="bottom" constant="16.666666666666671" id="Wsc-7h-MV7"/>
+                                        <constraint firstItem="bmX-lG-RnQ" firstAttribute="centerX" secondItem="Wje-wE-6o3" secondAttribute="centerX" id="enr-RC-m9I"/>
+                                        <constraint firstItem="bmX-lG-RnQ" firstAttribute="leading" secondItem="Wje-wE-6o3" secondAttribute="leadingMargin" id="yIj-XE-GVe"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.27434059979999997" green="0.51933473350000003" blue="0.88239192960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <outlet property="statusLabel" destination="bmX-lG-RnQ" id="9hM-uF-xz0"/>
+                                    <outlet property="usernameLabel" destination="469-wG-J7I" id="BKd-by-Pgb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -268,7 +298,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qd-AE-qsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2118" y="2158"/>
+            <point key="canvasLocation" x="2117.5999999999999" y="2157.6354679802957"/>
         </scene>
         <!--Requests-->
         <scene sceneID="4El-Oe-fR8">

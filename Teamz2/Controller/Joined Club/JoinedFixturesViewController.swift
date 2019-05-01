@@ -182,72 +182,6 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     
   
     
-//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let realm = try! Realm()
-//
-//        let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
-//        let fixture = self.realm.objects(Fixture.self).filter(predicate)
-//
-//        let predicate1 = NSPredicate(format: "user.username = %@", "\((userLoggedIn[0].username))")
-//        let user = fixture[0].availablePlayers.filter(predicate1)
-//
-//
-//
-//        let userloggedin2 = userLoggedIn[0]
-//
-//
-//        let makeAvailable = UIContextualAction(style: .normal, title: "\(tick)") { (action, self, nil) in
-//
-//
-//
-//                if user.count == 0 {
-//
-//                    print("hi")
-//                    let available = Available()
-//                    available.user = userloggedin2
-//                    available.available = true
-//
-//
-//                    self.addAvailbility(available: available)
-//
-//
-//                } else {
-//                    print("hi")
-//                    user[0].available = true
-//                }
-//
-//
-//               tableView.reloadData()
-//
-//
-//        }
-//
-//        makeAvailable.backgroundColor = UIColor.white
-//
-//        let notAvailable = UIContextualAction(style: .normal, title: "\(cross)") { (action, self, nil) in
-//
-//            try! realm.write {
-//
-//                if user.count == 0 {
-//                    let available = Available()
-//                    available.user = userloggedin2
-//                    available.available = false
-//                    realm.add(available)
-//                } else {
-//                user[0].available = false
-//
-//                tableView.reloadData()
-//                }
-//            }
-//        }
-//
-//        notAvailable.backgroundColor = UIColor.gray
-//
-//        let configuration = UISwipeActionsConfiguration(actions: [makeAvailable, notAvailable])
-//        configuration.performsFirstActionWithFullSwipe = false
-//        return configuration
-//    }
     
     func challengeButtonPressed(cell: JoinedFixtureViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
@@ -260,13 +194,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
     
     
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! JoinedChallengesViewController
-        
-       // destinationVC.selectedFixture = fixtures[iPath]
-        //destinationVC.userLoggedIn = userLoggedIn[0]
-    }
+
     
  
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

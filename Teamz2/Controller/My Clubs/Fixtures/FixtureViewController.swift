@@ -134,12 +134,16 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
             let barViewControllers = segue.destination as! UITabBarController
             let destinationViewController = barViewControllers.viewControllers?[0] as! SelectionViewController
          //   destinationViewController.userLoggedIn = userLoggedIn
-            destinationViewController.selectedFixture = fixtures[uIndexPath]
+            destinationViewController.selectedClubName = selectedClubName
+            destinationViewController.selectedFixtureName = fixtures[uIndexPath].title
+            destinationViewController.selectedSquadName = selectedSquadName
             
              let destinationViewController1 = barViewControllers.viewControllers?[1] as! PublishedSquadViewController
             
-      //      destinationViewController1.userLoggedIn = userLoggedIn
-            destinationViewController1.selectedFixture = fixtures[uIndexPath]
+     
+            destinationViewController1.selectedClubName = selectedClubName
+            destinationViewController1.selectedFixtureName = fixtures[uIndexPath].title
+            destinationViewController1.selectedSquadName = selectedSquadName
             
         }
         

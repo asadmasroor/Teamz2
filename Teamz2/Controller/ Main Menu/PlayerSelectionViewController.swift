@@ -11,28 +11,67 @@ import RealmSwift
 
 class PlayerSelectionViewController: UITableViewController, playerSelectionDelegate {
   
-    var userLoggedIn : User?
-    let realm = try! Realm()
     
-    var fixtures: Results<Fixture>? = nil
+    let realm: Realm
+    
+    
+    
+    let fixtures: Results<Fixture>
+    let confirmations: Results<Confirmation>
+    let userLoggedIn: Results<User>
     var selectedFixtures = List<Fixture>()
    
     var publishedSquad = List<Confirmation>()
+
+    var notificationToken: NotificationToken?
    
     
     var stringUser : [String] = []
      var number : [Int] = []
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.fixtures = realm.objects(Fixture.self)
+        self.confirmations = realm.objects(Confirmation.self)
+        
+        
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        self.userLoggedIn = realm.objects(User.self).filter(predicate)
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.fixtures = realm.objects(Fixture.self)
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        self.userLoggedIn = realm.objects(User.self).filter(predicate)
+         self.confirmations = realm.objects(Confirmation.self)
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-       
-        
        loadSelectedFixtures()
     
+        notificationToken = confirmations.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                print("717171717171")
+                self?.loadSelectedFixtures()
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self?.loadSelectedFixtures()
+                tableView.reloadData()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
         
     }
 
@@ -41,11 +80,13 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ((selectedFixtures.count)) != 0{
-            return (selectedFixtures.count)
-        } else {
-            return 1
-        }
+//        if ((selectedFixtures.count)) != 0{
+//            return (selectedFixtures.count)
+//        } else {
+//            return 1
+//        }
+        
+       return selectedFixtures.count
        
     }
 
@@ -60,7 +101,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             let predicate = NSPredicate(format: "title = %@", "\(selectedFixtures[indexPath.row].title)")
             let fixture = realm.objects(Fixture.self).filter(predicate)
             
-            let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
+            let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn[0].username)")
             let user = fixture[0].publishedSquad.filter(predicate1)
             
             if user[0].available == true {
@@ -99,20 +140,20 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         
         selectedFixtures.removeAll()
         
-        let fixtures = realm.objects(Fixture.self)
-        
         for fixture in fixtures {
-            
             
             publishedSquad = fixture.publishedSquad
             
             for user in publishedSquad {
-                if user.user?.username ==  userLoggedIn?.username {
+                if user.user?.owner ==  userLoggedIn[0].owner {
                     selectedFixtures.append(fixture)
                 }
             }
             
         }
+        
+       
+        tableView.reloadData()
     }
  
 
@@ -133,7 +174,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         let predicate = NSPredicate(format: "title = %@", "\(selectedFixtures[indexPath!.row].title)")
         let fixture = realm.objects(Fixture.self).filter(predicate)
         
-        let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn!.username)")
+        let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn[0].username)")
         let user = fixture[0].publishedSquad.filter(predicate1)
         
         
@@ -164,7 +205,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             let predicate = NSPredicate(format: "title = %@", "\(self.selectedFixtures[indexPath!.row].title)")
             let fixture = self.realm.objects(Fixture.self).filter(predicate)
             
-            let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn!.username)")
+            let predicate1 = NSPredicate(format: "user.username = %@", "\(self.userLoggedIn[0].username)")
             //let user = fixture[0].publishedSquad.filter(predicate1)
             
             
@@ -178,7 +219,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
                 var count = -1
                 for confirmation in confirmations {
                     count += 1
-                    if ((confirmation.user?.username == (self.userLoggedIn?.username)!) && (confirmation.fixture?.title == self.selectedFixtures[indexPath!.row].title)){
+                    if ((confirmation.user?.username == (self.userLoggedIn[0].username)) && (confirmation.fixture?.title == self.selectedFixtures[indexPath!.row].title)){
                         self.realm.delete(confirmations[count])
                     }
                 }

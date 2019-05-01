@@ -11,35 +11,65 @@ import RealmSwift
 
 class PublishedSquadViewController: UITableViewController {
     
-    let realm = try! Realm()
+    let realm : Realm
     
-    var userLoggedIn : User?
-    var selectedFixture: Fixture?
+    var selectedClubName : String?
+    var selectedSquadName : String?
+    var selectedFixtureName : String?
+    
+    
+    let allClubs: Results<Club>
+    var club : Results<Club>? = nil
+    var squad : Results<Squad>? = nil
+    var fixture : Results<Fixture>? = nil
+    
+     var notificationToken: NotificationToken?
     
     var selectedPlayers = List<Confirmation>()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        self.allClubs = realm.objects(Club.self)
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let predicate = NSPredicate(format: "title = %@", "\((selectedFixture?.title)!)")
-        let fixture = realm.objects(Fixture.self).filter(predicate)
+        loadPublishedSquad()
         
-        print(fixture.count)
-        
-        
-        if fixture.count != 0 {
-            
-            let predicate1 = NSPredicate(format: "available = true")
-            let publishedSquad = fixture[0].publishedSquad
-            
-            for players in publishedSquad {
-                selectedPlayers.append(players)
+        notificationToken = selectedPlayers.observe { [weak self] (changes) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                self!.loadPublishedSquad()
+                
+                //                tableView.beginUpdates()
+                //                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                //                                     with: .automatic)
+                //                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                //                                     with: .automatic)
+                //                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                //                                     with: .automatic)
+            //                tableView.endUpdates()
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
             }
-
-        
-        
-    }
+        }
     }
 
     // MARK: - Table view data source
@@ -56,65 +86,38 @@ class PublishedSquadViewController: UITableViewController {
         
         let player = selectedPlayers[indexPath.row]
 
-        
-        
         if player.available == true {
              cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
-            cell.nameLabel?.text = ("\((player.user?.username)!): Confirmed")
+            cell.usernameLabel.text = player.user?.username
+            cell.statusLabel.text = "Confirmed"
             
             
         } else if player.available == false {
             cell.backgroundColor = UIColor(red:0.26, green:0.54, blue:0.98, alpha:1.0)
-            cell.nameLabel?.text = ("\((player.user?.username)!): Awaiting Confirmation")
+            cell.usernameLabel.text = player.user?.username
+            cell.statusLabel.text = "Awaiting for confirmation"
         }
 
         return cell
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func loadPublishedSquad() {
+        
+        let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
+        club = realm.objects(Club.self).filter(predicate)
+        
+        let predicate1 = NSPredicate(format: "name = %@", "\((selectedSquadName)!)")
+        squad = club![0].squads.filter(predicate1)
+        
+        let predicate2 = NSPredicate(format: "title = %@", "\((selectedFixtureName)!)")
+        fixture = squad![0].fixtures.filter(predicate2)
+        
+        
+        
+        selectedPlayers = fixture![0].publishedSquad
+        
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

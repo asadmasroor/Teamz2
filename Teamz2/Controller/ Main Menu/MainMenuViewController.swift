@@ -91,7 +91,7 @@ class MainMenuViewController: UIViewController {
         if (segue.identifier == "selectionSegue") {
             let destinationVC = segue.destination as! PlayerSelectionViewController
             
-            destinationVC.userLoggedIn = UserLoggedIn
+            
             
             
         }

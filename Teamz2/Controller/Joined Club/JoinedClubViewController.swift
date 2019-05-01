@@ -19,7 +19,7 @@ class JoinedClubViewController: UITableViewController {
   
     let UserLoggedIn: Results<User>
     
-    
+    var ownedClubs = List<Club>()
     
     var notificationToken : NotificationToken?
     
@@ -78,6 +78,8 @@ class JoinedClubViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "joinedclubCell", for: indexPath) as! JoinedClubTableViewCell
         
         cell.clubLabel.text = joinedClubs[indexPath.row].name
+        
+        
 
         return cell
     }
@@ -104,6 +106,9 @@ class JoinedClubViewController: UITableViewController {
         for club in UserLoggedIn[0].joinedClubs {
             joinedClubs.append(club)
         }
+        
+        
+        
         tableView.reloadData()
     }
 
