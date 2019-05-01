@@ -12,41 +12,66 @@ import RealmSwift
 class LoginViewController: UIViewController {
     
     let realm = try! Realm()
-    var userLoggedIn : User?
+   
 
+    @IBOutlet weak var usernameTF: UITextField!
+    @IBOutlet weak var passwordTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
       //  initialiseData()
         
-        let user = realm.objects(User.self).filter("username == 'asadmasroor'")
-        if user.count != 0 {
-             userLoggedIn =  user[0]
-        }
-       
 
         // Do any additional setup after loading the view.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loginSegue" {
-            let destinationNavigationController = segue.destination as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! MainMenuViewController
+        if segue.identifier == "signedInSegue" {
+            let destinationNavigationController = segue.destination as! MainMenuViewController
+            destinationNavigationController.username = (usernameTF.text)!
             
-            targetController.UserLoggedIn = userLoggedIn
         }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        if let _ = SyncUser.current {
+            performSegue(withIdentifier: "signedInSegue", sender: self)
+            //  self.navigationController?.pushViewController(MainMenuViewController(), animated: true)
+        } else {
+            
+            if checkInputs(username: usernameTF, password: passwordTF) == true {
+                let creds    = SyncCredentials.usernamePassword(username: "\((usernameTF.text)!)", password: "\((passwordTF.text)!)", register: false)
+                
+                SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
+                    if let _ = user {
+                        self!.performSegue(withIdentifier: "signedInSegue", sender: self)
+                    } else if let error = err {
+                        print("user does not exist")
+                    }
+                })
+            } else {
+                print("Fill the fields")
+            }
+            
+            
+        }
         
-        
-        performSegue(withIdentifier: "loginSegue", sender: self)
     }
     
     
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: ("signUpSegue"), sender: self)
+    }
+    
+    func checkInputs(username: UITextField, password: UITextField) -> Bool {
+        
+        if username.text!.count != 0 && password.text!.count != 0{
+            return true
+        } else {
+            return false
+        }
     }
     
     
