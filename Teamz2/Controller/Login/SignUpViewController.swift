@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ProgressHUD
 
 class SignUpViewController: UIViewController {
     
@@ -23,18 +24,22 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let _ = SyncUser.current {
+            
+            performSegue(withIdentifier: "signedUpSegue", sender: self)
+            
+        }
        
     }
     
 
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        if let _ = SyncUser.current {
-            performSegue(withIdentifier: "signedUpSegue", sender: self)
-            //  self.navigationController?.pushViewController(MainMenuViewController(), animated: true)
-        } else {
-            
-           
+        
+        
+        
+        
+        ProgressHUD.show("Signing Up")
             
             if checkInputs(username: usernameTextField, password: passwordTextField) == true {
                 let creds    = SyncCredentials.usernamePassword(username: "\((usernameTextField.text)!)", password: "\((passwordTextField.text)!)", register: true)
@@ -42,7 +47,9 @@ class SignUpViewController: UIViewController {
                 
                 SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
                     if let _ = user {
+                        
                         self!.performSegue(withIdentifier: "signedUpSegue", sender: self)
+                        ProgressHUD.dismiss()
                     } else if let error = err {
                         print("user ALREADY exist")
                     }
@@ -52,7 +59,7 @@ class SignUpViewController: UIViewController {
             }
             
             
-        }
+        
         
     }
     

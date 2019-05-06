@@ -33,6 +33,15 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let permission = SyncPermission(realmPath: "*",
+                                        identity: "*",
+                                        accessLevel: .write)
+        SyncUser.current!.apply(permission) { error in
+            // permission applied or an error occurred
+        }
+        
+        
         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
         let user = realm.objects(User.self).filter(predicate)
         
@@ -67,18 +76,18 @@ class MainMenuViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "clubSegue") {
-        let destinationVC = segue.destination as! ClubViewController
-        
-            
-        }
-        
-        if (segue.identifier == "joinedClubSegue") {
-            let destinationVC = segue.destination as! JoinedClubViewController
-            
-            //destinationVC.selectedUser = UserLoggedIn
-            
-        }
+//        if (segue.identifier == "clubSegue") {
+//        let destinationVC = segue.destination as! ClubViewController
+//
+//
+//        }
+//
+//        if (segue.identifier == "joinedClubSegue") {
+//            let destinationVC = segue.destination as! JoinedClubViewController
+//
+//            //destinationVC.selectedUser = UserLoggedIn
+//
+//        }
         
         if (segue.identifier == "searchSegue") {
             let destinationVC = segue.destination as! SearchViewController
@@ -88,21 +97,21 @@ class MainMenuViewController: UIViewController {
             
         }
         
-        if (segue.identifier == "selectionSegue") {
-            let destinationVC = segue.destination as! PlayerSelectionViewController
-            
-            
-            
-            
-        }
-        
-        if (segue.identifier == "challenege1Segue") {
-            let destinationVC = segue.destination as! JoinedChallengesViewController
-            
-       //    destinationVC.userLoggedIn = UserLoggedIn
-            
-            
-        }
+//        if (segue.identifier == "selectionSegue") {
+//            let destinationVC = segue.destination as! PlayerSelectionViewController
+//
+//
+//
+//
+//        }
+//
+//        if (segue.identifier == "challenege1Segue") {
+//            let destinationVC = segue.destination as! JoinedChallengesViewController
+//
+//       //    destinationVC.userLoggedIn = UserLoggedIn
+//
+//
+//        }
     }
     
     

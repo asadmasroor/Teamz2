@@ -14,7 +14,7 @@ class Club: Object {
     @objc dynamic var name : String = ""
     var members = List<User>()
     var requests = List<User>()
-//    var admin : User?
+    
     var squads = List<Squad>()
     var challenges = List<Challenge>()
     var parentUser = LinkingObjects(fromType: User.self, property: "clubs")

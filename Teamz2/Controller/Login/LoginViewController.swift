@@ -8,10 +8,11 @@
 
 import UIKit
 import RealmSwift
+import ProgressHUD
 
 class LoginViewController: UIViewController {
     
-    let realm = try! Realm()
+ 
    
 
     @IBOutlet weak var usernameTF: UITextField!
@@ -20,10 +21,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  initialiseData()
-        
+   
+        if let _ = SyncUser.current {
+           
+            performSegue(withIdentifier: "signedInSegue", sender: self)
+           
+        }
 
-        // Do any additional setup after loading the view.
+      
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,18 +40,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        if let _ = SyncUser.current {
-            performSegue(withIdentifier: "signedInSegue", sender: self)
-            //  self.navigationController?.pushViewController(MainMenuViewController(), animated: true)
-        } else {
+        ProgressHUD.show("Loginning In")
+        
             
             if checkInputs(username: usernameTF, password: passwordTF) == true {
                 let creds    = SyncCredentials.usernamePassword(username: "\((usernameTF.text)!)", password: "\((passwordTF.text)!)", register: false)
                 
                 SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
                     if let _ = user {
+                        
+                        ProgressHUD.dismiss()
                         self!.performSegue(withIdentifier: "signedInSegue", sender: self)
                     } else if let error = err {
+                        ProgressHUD.dismiss()
                         print("user does not exist")
                     }
                 })
@@ -55,7 +61,7 @@ class LoginViewController: UIViewController {
             }
             
             
-        }
+        
         
     }
     
