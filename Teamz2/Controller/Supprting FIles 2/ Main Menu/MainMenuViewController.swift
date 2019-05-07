@@ -15,6 +15,7 @@ class MainMenuViewController: UIViewController {
     
     var UserLoggedIn : User?
     
+    @IBOutlet weak var clubRequestsButton: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
     var username : String?
     
@@ -34,13 +35,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let permission = SyncPermission(realmPath: "*",
-                                        identity: "*",
-                                        accessLevel: .write)
-        SyncUser.current!.apply(permission) { error in
-            // permission applied or an error occurred
-        }
-        
+      
         
         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
         let user = realm.objects(User.self).filter(predicate)
@@ -60,6 +55,12 @@ class MainMenuViewController: UIViewController {
         } else {
            welcomeLabel.text = "Welcome \(user[0].username)"
            UserLoggedIn = user[0]
+        }
+        
+        if user[0].username != "admin" {
+            clubRequestsButton.isHidden = true
+        } else if user[0].username == "admin" {
+            clubRequestsButton.isHidden = false
         }
         
         self.navigationItem.setHidesBackButton(true, animated:true);
@@ -137,7 +138,7 @@ class MainMenuViewController: UIViewController {
             
             }
             
-            self.performSegue(withIdentifier: "clubSegue", sender: self)
+           self.presentOkayAlert()
             
         }
         
@@ -186,9 +187,6 @@ class MainMenuViewController: UIViewController {
     }
     
     
-    
-    
-    
     @IBAction func signOutButtonPressed(_ sender: Any) {
         let alertController = UIAlertController(title: "Logout", message: "", preferredStyle: .alert);
         alertController.addAction(UIAlertAction(title: "Yes, Logout", style: .destructive, handler: {
@@ -202,6 +200,23 @@ class MainMenuViewController: UIViewController {
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func clubRequestsButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "clubRequests", sender: self)
+    }
+    
+    func presentOkayAlert() {
+        let okayAlert = UIAlertController(title: "Club is waiting for approval", message: "", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+       present(okayAlert, animated: true, completion: nil)
     }
     
 }

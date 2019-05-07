@@ -140,6 +140,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
             
             try! realm.write {
                 user.joinedClubs.append(oneClub[0])
+                oneClub[0].members.append(user)
                 oneClub[0].requests.remove(at: (indexPath?.row)!)
             }
         }

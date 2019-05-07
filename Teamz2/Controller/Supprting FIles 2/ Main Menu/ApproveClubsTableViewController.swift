@@ -1,43 +1,45 @@
 //
-//  ClubViewController.swift
+//  ApproveClubsTableViewController.swift
 //  Teamz2
 //
-//  Created by Asad Masroor on 07/03/2019.
+//  Created by Asad Masroor on 06/05/2019.
 //  Copyright © 2019 Asad Masroor. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
-class ClubViewController: UITableViewController {
+
+class ApproveClubsTableViewController: UITableViewController, clubRequestsDelegate {
     
     var clubs = List<Club>()
-    var allClubs : Results<Club>
-    let realm: Realm
     
+    var allClubs1 : Results<Club>
     var indexPath1 = 0
+    
+    let realm: Realm
     
     var notificationToken : NotificationToken?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
-        self.allClubs = realm.objects(Club.self)
+         self.allClubs1 = realm.objects(Club.self)
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
-        self.allClubs = realm.objects(Club.self)
+         self.allClubs1 = realm.objects(Club.self)
         super.init(coder: aDecoder)
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadClubs()
         
-      loadClubs()
-        
-        notificationToken = allClubs.observe { [weak self] (changes) in
+        notificationToken = allClubs1.observe { [weak self] (changes) in
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
@@ -51,11 +53,7 @@ class ClubViewController: UITableViewController {
                 fatalError("\(error)")
             }
         }
-       
-        
     }
-    
-    
 
     // MARK: - Table view data source
 
@@ -63,70 +61,59 @@ class ClubViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
         return clubs.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "clubCell", for: indexPath) as! ClubTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "clubRequestCell", for: indexPath) as! ClubRequestsViewCell
         
-        cell.clubLabel.text = clubs[indexPath.row].name
+        cell.delegate = self
         
-
+        cell.clubNameLabel.text = clubs[indexPath.row].name
+    
         return cell
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ 
+
+    func acceptButtonPressed(cell: ClubRequestsViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
         
-        if (segue.identifier == "squadchallenegeSegue") {
-            let barViewControllers = segue.destination as! SquadChallenegeTab
-            let destinationViewController = barViewControllers.viewControllers?[0] as! SquadViewController
-           
-            destinationViewController.selectedClubName = clubs[indexPath1].name
-            
-            let destinationViewController1 = barViewControllers.viewControllers?[1] as! ChallengeViewController
-            
-            
-            destinationViewController1.selectedClubName = clubs[indexPath1].name
-            
-            let destinationViewController2 = barViewControllers.viewControllers?[2] as! requestsTableViewController
-            
-            destinationViewController2.selectedClubName = clubs[indexPath1].name
-            
-       
+        let predicate = NSPredicate(format: "name = %@", "\(clubs[indexPath!.row].name)")
+        let club = realm.objects(Club.self).filter(predicate)
+        
+        try! realm.write {
+            club[0].approved = true
         }
         
-        
-       
+        loadClubs()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        indexPath1 = indexPath.row
+    func declineButtonPressed(cell: ClubRequestsViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
         
-        performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
-    
+        let predicate = NSPredicate(format: "name = %@", "\(clubs[indexPath!.row].name)")
+        let club = realm.objects(Club.self).filter(predicate)
         
+        try! realm.write {
+            realm.delete(club[0])
+        }
+        loadClubs()
     }
     
     func loadClubs() {
-       
-        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
-        let user = realm.objects(User.self).filter(predicate)
         
-        if user.count != 0 {
-            let myClubs = user[0].clubs
-            
-            for club in myClubs {
-                
-                if club.approved == true {
+       
+        let allClubs = realm.objects(Club.self)
+        clubs.removeAll()
+        for club in allClubs {
+            if club.approved == false {
                     clubs.append(club)
                 }
                 
             }
-        }
+        print(clubs.count)
+        tableView.reloadData()
     }
-    
-
 
 }

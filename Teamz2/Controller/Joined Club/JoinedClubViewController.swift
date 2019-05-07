@@ -98,13 +98,61 @@ class JoinedClubViewController: UITableViewController {
         performSegue(withIdentifier: "joinedSquadSegue", sender: nil)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Leave") { (action, indexPath) in
+            
+            let confirmation = UIAlertController(title: "Leave Club?", message: "Are you sure you want to leave \(self.joinedClubs[indexPath.row].name)?", preferredStyle: .alert)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
+                
+                
+                
+                for (index,club) in self.UserLoggedIn[0].joinedClubs.enumerated() {
+                    if club.name == self.joinedClubs[indexPath.row].name {
+                        
+                        
+                        try! self.realm.write {
+                            self.UserLoggedIn[0].joinedClubs.remove(at: index)
+                            
+                        }
+                    break
+                    }
+                }
+            })
+            
+           
+        
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
+                confirmation.dismiss(animated: true, completion: nil)
+            }
+            
+            confirmation.addAction(yesAction)
+            confirmation.addAction(cancelAction)
+            
+            self.present(confirmation, animated: true, completion: nil)
+            
+        }
+        
+        return [deleteAction]
+    }
+    
     
     func loadJoinedClubs(){
        
         joinedClubs.removeAll()
         
         for club in UserLoggedIn[0].joinedClubs {
-            joinedClubs.append(club)
+            if club.approved == true {
+                joinedClubs.append(club)
+            }
+            
         }
         
         

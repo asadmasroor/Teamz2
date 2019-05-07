@@ -76,8 +76,10 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
        
         
         for club in allClubs {
-            
-            allClubNames.append("\(club.name)")
+            if club.approved == true {
+                 allClubNames.append("\(club.name)")
+            }
+           
             
         }
         

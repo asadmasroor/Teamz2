@@ -126,11 +126,12 @@
                         <segue destination="6fw-kY-P4J" kind="relationship" relationship="viewControllers" id="S0W-49-1jX"/>
                         <segue destination="lEP-Z8-l34" kind="relationship" relationship="viewControllers" id="mb8-8s-dKY"/>
                         <segue destination="OQs-25-WAU" kind="relationship" relationship="viewControllers" id="1wV-VZ-pb8"/>
+                        <segue destination="10V-5p-Xag" kind="relationship" relationship="viewControllers" id="5yp-ba-wFB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="77O-hW-thm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="1633"/>
+            <point key="canvasLocation" x="401" y="1692"/>
         </scene>
         <!--Selection-->
         <scene sceneID="c3D-mp-8g4">
@@ -225,6 +226,35 @@
             </objects>
             <point key="canvasLocation" x="2300" y="1419"/>
         </scene>
+        <!--All Players-->
+        <scene sceneID="HPB-QQ-ckF">
+            <objects>
+                <tableViewController title="All Players" id="10V-5p-Xag" customClass="MembersTableViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4iu-E7-j1K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XzN-aw-EoF">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XzN-aw-EoF" id="hhv-g1-cKe">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="10V-5p-Xag" id="d8G-8l-SKI"/>
+                            <outlet property="delegate" destination="10V-5p-Xag" id="FoM-PC-W3b"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" image="people" id="L0Y-nJ-ZaX"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvy-ik-Fgz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1174" y="2202"/>
+        </scene>
         <!--Published Squad-->
         <scene sceneID="8jQ-YP-VMY">
             <objects>
@@ -300,10 +330,10 @@
             </objects>
             <point key="canvasLocation" x="2117.5999999999999" y="2157.6354679802957"/>
         </scene>
-        <!--Requests-->
+        <!--Club Requests-->
         <scene sceneID="4El-Oe-fR8">
             <objects>
-                <tableViewController id="OQs-25-WAU" customClass="requestsTableViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Club Requests" id="OQs-25-WAU" customClass="requestsTableViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zq9-sZ-0af">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -471,7 +501,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcU-vm-BWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55" y="2590"/>
+            <point key="canvasLocation" x="-422" y="2530"/>
         </scene>
         <!--New Challenege-->
         <scene sceneID="Meu-Cn-swb">
@@ -585,7 +615,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7O-cu-X5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="54" y="3347"/>
+            <point key="canvasLocation" x="-423" y="3337"/>
         </scene>
         <!--Results-->
         <scene sceneID="J0E-2t-Ih7">
@@ -638,7 +668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHP-Gw-HSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082" y="2590"/>
+            <point key="canvasLocation" x="353" y="2529"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="Mtz-3b-JVE">
@@ -909,6 +939,17 @@
                                     <action selector="challenegeButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="1x1-1P-JG2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWt-IP-9Yf">
+                                <rect key="frame" x="16" y="692" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                <state key="normal" title="Club requests">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clubRequestsButtonPressed:" destination="hWx-bn-TM6" eventType="touchUpInside" id="CAt-lj-UO0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2742924802676191" green="0.51672611681671876" blue="0.88106863486334452" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="jNd-yJ-H49"/>
@@ -922,17 +963,19 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clubRequestsButton" destination="fWt-IP-9Yf" id="bUC-pp-II1"/>
                         <outlet property="welcomeLabel" destination="txH-bg-bYq" id="7y9-By-gqp"/>
                         <segue destination="mUg-DE-HOH" kind="show" identifier="clubSegue" id="XN5-7p-PGG"/>
                         <segue destination="hdE-8r-msd" kind="show" identifier="joinedClubSegue" id="TL2-T9-ybq"/>
                         <segue destination="POb-zd-S6L" kind="show" identifier="searchSegue" id="nrg-WO-kPP"/>
                         <segue destination="B28-pk-okM" kind="show" identifier="selectionSegue" id="XsR-0j-vKP"/>
                         <segue destination="CXE-Oc-nJQ" kind="show" identifier="challenege1Segue" id="Kit-1A-aSZ"/>
+                        <segue destination="JNH-2w-p7P" kind="show" identifier="clubRequests" id="6vz-Np-Y7u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpi-ey-pMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-780" y="680.54187192118229"/>
+            <point key="canvasLocation" x="-802" y="681"/>
         </scene>
         <!--My Clubs-->
         <scene sceneID="7Fm-Sg-lP9">
@@ -1078,7 +1121,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMt-WU-dDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-577" y="1434"/>
+            <point key="canvasLocation" x="-478" y="1433"/>
         </scene>
         <!--Squads-->
         <scene sceneID="XMz-Qj-1VC">
@@ -1585,6 +1628,71 @@
             </objects>
             <point key="canvasLocation" x="-1750" y="-155"/>
         </scene>
+        <!--Club Requests-->
+        <scene sceneID="nEN-Hy-P2Q">
+            <objects>
+                <tableViewController title="Club Requests" id="JNH-2w-p7P" customClass="ApproveClubsTableViewController" customModule="Teamz2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="am7-zt-4uc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="clubRequestCell" rowHeight="87" id="2YK-H5-5dr" customClass="ClubRequestsViewCell" customModule="Teamz2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2YK-H5-5dr" id="wGi-Ms-K2o">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lT-Sy-Bip">
+                                            <rect key="frame" x="8" y="10.999999999999998" width="359" height="27.333333333333329"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="23"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sd2-tR-TuZ">
+                                            <rect key="frame" x="104" y="46" width="49" height="30"/>
+                                            <state key="normal" title="Accept"/>
+                                            <connections>
+                                                <action selector="acceptButtonPressed:" destination="2YK-H5-5dr" eventType="touchUpInside" id="cwq-s7-fy7"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeg-3J-TXh">
+                                            <rect key="frame" x="188" y="46" width="52" height="30"/>
+                                            <state key="normal" title="Decline"/>
+                                            <connections>
+                                                <action selector="declineButtonPressed:" destination="2YK-H5-5dr" eventType="touchUpInside" id="6pD-TU-MiW"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="eeg-3J-TXh" secondAttribute="bottom" constant="10.666666666666671" id="7nJ-zc-Pwk"/>
+                                        <constraint firstItem="sd2-tR-TuZ" firstAttribute="leading" secondItem="wGi-Ms-K2o" secondAttribute="leading" constant="104" id="8pZ-4p-xpY"/>
+                                        <constraint firstItem="9lT-Sy-Bip" firstAttribute="top" secondItem="wGi-Ms-K2o" secondAttribute="top" constant="11" id="8tC-qt-VdC"/>
+                                        <constraint firstItem="sd2-tR-TuZ" firstAttribute="top" secondItem="9lT-Sy-Bip" secondAttribute="bottom" constant="7.6666666666666714" id="LsI-A0-uh9"/>
+                                        <constraint firstItem="9lT-Sy-Bip" firstAttribute="leading" secondItem="wGi-Ms-K2o" secondAttribute="leading" constant="8" id="eXZ-bB-kAk"/>
+                                        <constraint firstAttribute="bottom" secondItem="sd2-tR-TuZ" secondAttribute="bottom" constant="10.666666666666671" id="i1N-tK-y9h"/>
+                                        <constraint firstItem="eeg-3J-TXh" firstAttribute="top" secondItem="9lT-Sy-Bip" secondAttribute="bottom" constant="7.6666666666666714" id="llt-8b-c4h"/>
+                                        <constraint firstAttribute="trailing" secondItem="9lT-Sy-Bip" secondAttribute="trailing" constant="8" id="m8d-xc-APp"/>
+                                        <constraint firstItem="eeg-3J-TXh" firstAttribute="leading" secondItem="wGi-Ms-K2o" secondAttribute="leading" constant="188" id="ouX-5m-V1D"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="clubNameLabel" destination="9lT-Sy-Bip" id="aD0-pL-bKu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="JNH-2w-p7P" id="AUd-nr-MBR"/>
+                            <outlet property="delegate" destination="JNH-2w-p7P" id="he7-PO-kOJ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yXR-CQ-Twa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2159.1999999999998" y="1443.8423645320197"/>
+        </scene>
         <!--Search for Club-->
         <scene sceneID="svk-IZ-O4P">
             <objects>
@@ -1674,7 +1782,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3h-Kg-leK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1263" y="1433"/>
+            <point key="canvasLocation" x="-1148" y="1433"/>
         </scene>
         <!--New Fixture-->
         <scene sceneID="Tbh-9K-dIr">
