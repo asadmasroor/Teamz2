@@ -94,6 +94,10 @@ class ClubViewController: UITableViewController {
             
             destinationViewController2.selectedClubName = clubs[indexPath1].name
             
+            let destinationViewController3 = barViewControllers.viewControllers?[3] as! MembersTableViewController
+            
+            destinationViewController3.selectedClubName = clubs[indexPath1].name
+            
        
         }
         
