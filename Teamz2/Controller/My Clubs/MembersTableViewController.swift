@@ -15,6 +15,7 @@ class MembersTableViewController: UITableViewController {
         super.viewDidLoad()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         self.tabBarController?.navigationItem.title = "Members"
         loadMembers()
@@ -39,10 +40,15 @@ class MembersTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
 =======
+=======
+>>>>>>> parent of 2c732df... remove members done
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
+<<<<<<< HEAD
+>>>>>>> parent of 2c732df... remove members done
+=======
 >>>>>>> parent of 2c732df... remove members done
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -52,8 +58,14 @@ class MembersTableViewController: UITableViewController {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Members"
+=======
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+>>>>>>> parent of 2c732df... remove members done
 =======
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -79,6 +91,7 @@ class MembersTableViewController: UITableViewController {
 
         return cell
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     
@@ -156,6 +169,9 @@ class MembersTableViewController: UITableViewController {
 =======
     */
 >>>>>>> parent of 2c732df... remove members done
+=======
+    */
+>>>>>>> parent of 2c732df... remove members done
 
     /*
     // Override to support conditional editing of the table view.
@@ -174,6 +190,7 @@ class MembersTableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+<<<<<<< HEAD
 <<<<<<< HEAD
     }
     */
@@ -202,6 +219,35 @@ class MembersTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+=======
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+>>>>>>> parent of 2c732df... remove members done
 =======
     }
     */
