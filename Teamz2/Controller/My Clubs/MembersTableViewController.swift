@@ -45,7 +45,7 @@ class MembersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.tabBarController?.navigationItem.title = "Members"
+        self.tabBarController?.navigationItem.title = "Members"
         loadMembers()
         
         notificationToken = allClubs.observe { [weak self] (changes) in
@@ -66,7 +66,9 @@ class MembersTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
- 
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.title = "Members"
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -122,7 +124,7 @@ class MembersTableViewController: UITableViewController {
                             print("hiiiii")
                             club1[0].members.remove(at: index)
                             
-                            //                            self.realm.delete(club1[0].members[index])
+                            //self.realm.delete(club1[0].members[index])
                         }
                         break
                     }
