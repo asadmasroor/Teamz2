@@ -13,9 +13,7 @@ class MembersTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         
         self.tabBarController?.navigationItem.title = "Members"
         loadMembers()
@@ -33,50 +31,26 @@ class MembersTableViewController: UITableViewController {
                 fatalError("\(error)")
             }
         }
-=======
->>>>>>> parent of 2c732df... remove members done
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-=======
-=======
->>>>>>> parent of 2c732df... remove members done
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-<<<<<<< HEAD
->>>>>>> parent of 2c732df... remove members done
-=======
->>>>>>> parent of 2c732df... remove members done
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Members"
-=======
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
->>>>>>> parent of 2c732df... remove members done
-=======
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
->>>>>>> parent of 2c732df... remove members done
-=======
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
->>>>>>> parent of 2c732df... remove members done
-    }
+
+   
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
