@@ -438,11 +438,11 @@
 			children = (
 				84DE331322318FBF00C91071 /* ClubViewController.swift */,
 				84157F5522706C960004B385 /* requestsTableViewController.swift */,
-				84A555FA228113D600985454 /* MembersTableViewController.swift */,
 				84AB35EF2267E20300901B20 /* TabBar controllers */,
 				84157F5C227092C50004B385 /* Fixtures */,
 				84157F59227092600004B385 /* Challenges */,
 				84157F5D227092FE0004B385 /* Selection */,
+				84A555FA228113D600985454 /* MembersTableViewController.swift */,
 			);
 			path = "My Clubs";
 			sourceTree = "<group>";
