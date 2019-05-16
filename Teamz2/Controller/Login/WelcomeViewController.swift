@@ -12,13 +12,12 @@ import ProgressHUD
 
 class WelcomeViewController: UIViewController {
     
+    @IBOutlet weak var usernameLabel: UITextField!
     var username: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
         
         // Do any additional setup after loading the view.
     }
@@ -26,43 +25,12 @@ class WelcomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         title = "Welcome"
-        
-        let query = RealmQuery()
-        
-        query.loginUser(username: username)
+
         
         if let _ = SyncUser.current {
             // We have already logged in here!
             performSegue(withIdentifier: "signedInSegue", sender: self)
-          //  self.navigationController?.pushViewController(MainMenuViewController(), animated: true)
-        } else {
-            
-            let alertController = UIAlertController(title: "Login/Sign Up", message: "Supply a username", preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(title: "Go!", style: .default, handler: { [unowned self]
-                alert -> Void in
-                
-                ProgressHUD.show("Signing in")
-                let textField = alertController.textFields![0] as UITextField
-                let creds = SyncCredentials.nickname(textField.text!, isAdmin: true)
-                self.username = textField.text!
-                
-                SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
-                    if let _ = user {
-                        ProgressHUD.dismiss()
-                        self!.performSegue(withIdentifier: "signedInSegue", sender: self)
-                       // self?.navigationController?.pushViewController(MainMenuViewController(), animated: true)
-                        
-                    } else if let error = err {
-                        print("This nickname already exists")
-                    }
-                })
-            }))
-//            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alertController.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
-                textField.placeholder = "A Name for your user"
-            })
-            self.present(alertController, animated: true, completion: nil)
+         
         }
         
     
@@ -76,6 +44,48 @@ class WelcomeViewController: UIViewController {
         destinationvc.username = username
     }
     
+    
+    @IBAction func goButtonPressed(_ sender: Any) {
+            
+            self.username = usernameLabel.text!
+            let creds = SyncCredentials.nickname(self.username, isAdmin: true)
+            
+            if  validation(username: self.username) {
+                ProgressHUD.show("Signing in")
+                SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
+                    if let _ = user {
+                        ProgressHUD.dismiss()
+                        self!.performSegue(withIdentifier: "signedInSegue", sender: self)
+                        // self?.navigationController?.pushViewController(MainMenuViewController(), animated: true)
+                        
+                    } else if let error = err {
+                        print("This nickname already exists")
+                    }
+                })
+            }
+        
+    }
+    
+    
+    func validation(username: String) -> Bool {
+        var valid = false
+        let errorMessage = UIAlertController(title: "Error", message: "No username entered", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            errorMessage.dismiss(animated: true, completion: nil)
+        }
+        
+        errorMessage.addAction(action)
+        if (username.count == 0) {
+            self.present(errorMessage, animated: true, completion: nil)
+        } else if (username.count > 15) {
+            self.present(errorMessage, animated: true, completion: nil)
+            errorMessage.message = "Username too long"
+        } else {
+            valid = true
+        }
+        
+        return valid
+    }
 
    
 

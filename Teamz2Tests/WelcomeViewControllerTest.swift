@@ -8,31 +8,80 @@
 
 import XCTest
 @testable import Teamz2
+import RealmSwift
 
 class WelcomeViewControllerTest: XCTestCase {
     
     var wvc = WelcomeViewController()
 
     override func setUp() {
-        //siging up a new user
-        wvc.username = "test1"
-        
-       
-        
+      
     }
 
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
+    }
+    
+    func testValidation(){
+
+        //Valid username as username count is above 0 but below 20
+        XCTAssertTrue(wvc.validation(username: "asad"));
+        
+        //inValid username as username count is equal to 0
+        XCTAssertFalse(wvc.validation(username: ""));
+        
+        //inValid username as username count is above 20
+        XCTAssertFalse(wvc.validation(username: "asadasadasadasadasadasadasadasad"));
+        
     }
     
     func testSignUp(){
+
+        let username = "testUser"
         
         
-     
-       XCTAssertEqual(wvc.username, "test1")
+        var usernameAfterSignUp = ""
+        let creds = SyncCredentials.nickname(username, isAdmin: true)
         
+        SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
+            if let _ = user {
+                
+                let config = SyncUser.current?.configuration()
+                let realm = try! Realm(configuration: config!)
+                
+                let user = User()
+                user.owner =  SyncUser.current!.identity!
+                user.username = username
+                
+                //adding user to database
+                try! realm.write {
+                    realm.add(user)
+                }
+                
+                let user1 = realm.objects(User.self).filter("username = %@", username)
+                
+                // Assigning result from query
+                usernameAfterSignUp = user1[0].username
+                
+                // Comparing result from query to orginal username that was set
+                XCTAssertEqual(username, usernameAfterSignUp)
+                
+                //deleting user
+                try! realm.write {
+                    realm.delete(user1[0])
+                }
+                
+                
+                
+            } else if let error = err {
+                print("This nickname already exists")
+            }
+        })
+    
         
+       
+
     }
 
     func testExample() {

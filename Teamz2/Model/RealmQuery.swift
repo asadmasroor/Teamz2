@@ -12,29 +12,49 @@ import UIKit
 
 class RealmQuery {
     
-    func loginUser(username: String) -> Bool {
-        
-        var loggedIn = false
     
-        if let _ = SyncUser.current {
-            loggedIn = true
-        } else {
-            let auth_url = URL(string: "teamz1.us1a.cloud.realm.io")!
+    
+    
+//    func loginUser(username: String) -> Bool {
+//
+//        var loggedIn = false
+//
+//        if let _ = SyncUser.current {
+//            SyncUser.current?.logOut()
+//        } else {
+//            let creds = SyncCredentials.nickname("\(username)", isAdmin: true)
+//
+//            SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
+//                if let _ = user {
+//                    let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+//                    realm = try! Realm(configuration: config!)
+//                    print("Logged In: Realm Query")
+//                } else if let error = err {
+//                    print("Cool")
+//                }
+//            })        }
+//
+//        return loggedIn
+//
+//    }
+    
+    func loginUser(username: String) {
+        
+        
+        
             let creds = SyncCredentials.nickname("\(username)", isAdmin: true)
             
-            SyncUser.logIn(with: creds, server: auth_url, onCompletion: { [weak self](user, err) in
+            SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
                 if let _ = user {
-                    // User is logged in
-                    loggedIn = true
+                   
                 } else if let error = err {
-                    fatalError(error.localizedDescription)
+                    print("Cool")
                 }
             })
-        }
         
-        return loggedIn
-       
     }
+
+    
   
   
     
