@@ -27,6 +27,10 @@ class WelcomeViewController: UIViewController {
         super.viewDidAppear(animated)
         title = "Welcome"
         
+        let query = RealmQuery()
+        
+        query.loginUser(username: username)
+        
         if let _ = SyncUser.current {
             // We have already logged in here!
             performSegue(withIdentifier: "signedInSegue", sender: self)
