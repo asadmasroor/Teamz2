@@ -1,5 +1,5 @@
 //
-//  WelcomeViewController.swift
+//  MainMenuViewControllerTest.swift
 //  Teamz2Tests
 //
 //  Created by Asad Masroor on 16/05/2019.
@@ -9,38 +9,13 @@
 import XCTest
 @testable import Teamz2
 import RealmSwift
-
-class WelcomeViewControllerTest: XCTestCase {
+class MainMenuViewControllerTest: XCTestCase {
     
-    var wvc = WelcomeViewController()
+    let mmvc = MainMenuViewController()
 
     override func setUp() {
-      
-    }
-
-
-    override func tearDown() {
-
-    }
-    
-    func testValidation(){
-
-        //Valid username as username count is above 0 but below 20
-        XCTAssertTrue(wvc.validation(username: "asad"));
         
-        //inValid username as username count is equal to 0
-        XCTAssertFalse(wvc.validation(username: ""));
-        
-        //inValid username as username count is above 20
-        XCTAssertFalse(wvc.validation(username: "asadasadasadasadasadasadasadasad"));
-        
-    }
-    
-    func testSignUp(){
-
         let username = "testUser"
-        
-        
         var usernameAfterSignUp = ""
         let creds = SyncCredentials.nickname(username, isAdmin: true)
         
@@ -61,26 +36,16 @@ class WelcomeViewControllerTest: XCTestCase {
                 
                 let user1 = realm.objects(User.self).filter("username = %@", username)
                 
-                // Assigning result from query
-                usernameAfterSignUp = user1[0].username
                 
-                // Comparing result from query to orginal username that was set
-                XCTAssertEqual(username, usernameAfterSignUp)
-                
-                //deleting user
-                try! realm.write {
-                    realm.delete(user1[0])
-                }
-                            
                 
             } else if let error = err {
                 print("This nickname already exists")
             }
         })
-    
-        
-       
+    }
 
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testExample() {
@@ -88,5 +53,11 @@ class WelcomeViewControllerTest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
+    }
 
 }

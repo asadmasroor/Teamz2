@@ -32,36 +32,13 @@ class MainMenuViewController: UIViewController {
         
     }
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
       
         
-        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
-        let user = realm.objects(User.self).filter(predicate)
-        
-       
-        
-        if user.count == 0 {
-            let newUser = User()
-            newUser.username = "\(username!)"
-            newUser.owner = (SyncUser.current?.identity)!
-            welcomeLabel.text = "Welcome \(username!)"
-            
-            
-            try! self.realm.write {
-                self.realm.add(newUser)
-            }
-        } else {
-           welcomeLabel.text = "Welcome \(user[0].username)"
-           UserLoggedIn = user[0]
-        }
-        
-        if user[0].username != "admin" {
-            clubRequestsButton.isHidden = true
-        } else if user[0].username == "admin" {
-            clubRequestsButton.isHidden = false
-        }
+      loadUser()
         
         self.navigationItem.setHidesBackButton(true, animated:true);
      
@@ -126,17 +103,7 @@ class MainMenuViewController: UIViewController {
             let newClub = Club()
             newClub.name = (textField.text)!
             
-            let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
-            let user = self.realm.objects(User.self).filter(predicate)
-            
-             try! self.realm.write {
-            
-        
-             self.realm.add(newClub)
-             user[0].clubs.append(newClub)
-             user[0].joinedClubs.append(newClub)
-            
-            }
+            self.addNewClub(club: newClub)
             
            self.presentOkayAlert()
             
@@ -217,6 +184,46 @@ class MainMenuViewController: UIViewController {
         okayAlert.addAction(okayAction)
         
        present(okayAlert, animated: true, completion: nil)
+    }
+    
+    func addNewClub(club: Club){
+        try! self.realm.write {
+            
+            let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+            let user = self.realm.objects(User.self).filter(predicate)
+            
+            self.realm.add(club)
+            user[0].clubs.append(club)
+            user[0].joinedClubs.append(club)
+            
+        }
+    }
+    
+    func loadUser() {
+        let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
+        let user = realm.objects(User.self).filter(predicate)
+    
+        
+        if user.count == 0 {
+            let newUser = User()
+            newUser.username = "\(username!)"
+            newUser.owner = (SyncUser.current?.identity)!
+            welcomeLabel.text = "Welcome \(username!)"
+            
+            
+            try! self.realm.write {
+                self.realm.add(newUser)
+            }
+        } else {
+            welcomeLabel.text = "Welcome \(user[0].username)"
+            UserLoggedIn = user[0]
+        }
+        
+        if user[0].username != "admin" {
+            clubRequestsButton.isHidden = true
+        } else if user[0].username == "admin" {
+            clubRequestsButton.isHidden = false
+        }
     }
     
 }

@@ -23,5 +23,6 @@ class Club: Object {
     override static func primaryKey() -> String? {
         return "name"
     }
+    
 
 }

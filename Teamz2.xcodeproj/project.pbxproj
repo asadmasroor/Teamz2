@@ -59,6 +59,10 @@
 		84C436F1225AA11700BAAA68 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C436F0225AA11700BAAA68 /* SearchTableViewCell.swift */; };
 		84C76A37228CD708000D7942 /* WelcomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A36228CD708000D7942 /* WelcomeViewControllerTest.swift */; };
 		84C76A39228CD991000D7942 /* RealmQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A38228CD991000D7942 /* RealmQuery.swift */; };
+		84C76A3B228D27D2000D7942 /* MainMenuViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A3A228D27D2000D7942 /* MainMenuViewControllerTest.swift */; };
+		84C76A3D228DA9EB000D7942 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A3C228DA9EB000D7942 /* UserTests.swift */; };
+		84C76A3F228E252C000D7942 /* ClubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A3E228E252C000D7942 /* ClubTests.swift */; };
+		84C76A42228E28EB000D7942 /* SquadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A41228E28EB000D7942 /* SquadTests.swift */; };
 		84DE33122231851A00C91071 /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33112231851A00C91071 /* SquadViewController.swift */; };
 		84DE331422318FBF00C91071 /* ClubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE331322318FBF00C91071 /* ClubViewController.swift */; };
 		84DE33162231C55500C91071 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33152231C55500C91071 /* MainMenuViewController.swift */; };
@@ -154,6 +158,10 @@
 		84C436F0225AA11700BAAA68 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		84C76A36228CD708000D7942 /* WelcomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewControllerTest.swift; sourceTree = "<group>"; };
 		84C76A38228CD991000D7942 /* RealmQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmQuery.swift; sourceTree = "<group>"; };
+		84C76A3A228D27D2000D7942 /* MainMenuViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewControllerTest.swift; sourceTree = "<group>"; };
+		84C76A3C228DA9EB000D7942 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
+		84C76A3E228E252C000D7942 /* ClubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTests.swift; sourceTree = "<group>"; };
+		84C76A41228E28EB000D7942 /* SquadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadTests.swift; sourceTree = "<group>"; };
 		84DE33112231851A00C91071 /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
 		84DE331322318FBF00C91071 /* ClubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewController.swift; sourceTree = "<group>"; };
 		84DE33152231C55500C91071 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +330,8 @@
 				843412E7222CBDEC0098CFEA /* Teamz2Tests.swift */,
 				843412E9222CBDEC0098CFEA /* Info.plist */,
 				84C76A36228CD708000D7942 /* WelcomeViewControllerTest.swift */,
+				84C76A3A228D27D2000D7942 /* MainMenuViewControllerTest.swift */,
+				84C76A40228E28CC000D7942 /* Unit testing */,
 			);
 			path = Teamz2Tests;
 			sourceTree = "<group>";
@@ -409,6 +419,16 @@
 				84C436F0225AA11700BAAA68 /* SearchTableViewCell.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		84C76A40228E28CC000D7942 /* Unit testing */ = {
+			isa = PBXGroup;
+			children = (
+				84C76A3C228DA9EB000D7942 /* UserTests.swift */,
+				84C76A3E228E252C000D7942 /* ClubTests.swift */,
+				84C76A41228E28EB000D7942 /* SquadTests.swift */,
+			);
+			path = "Unit testing";
 			sourceTree = "<group>";
 		};
 		84DE332D2232933200C91071 /* MyClubs */ = {
@@ -776,6 +796,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				843412E8222CBDEC0098CFEA /* Teamz2Tests.swift in Sources */,
+				84C76A3B228D27D2000D7942 /* MainMenuViewControllerTest.swift in Sources */,
+				84C76A42228E28EB000D7942 /* SquadTests.swift in Sources */,
+				84C76A3F228E252C000D7942 /* ClubTests.swift in Sources */,
+				84C76A3D228DA9EB000D7942 /* UserTests.swift in Sources */,
 				84C76A37228CD708000D7942 /* WelcomeViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
