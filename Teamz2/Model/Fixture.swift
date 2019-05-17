@@ -20,4 +20,6 @@ class Fixture: Object {
     var availablePlayers = List<Available>()
     var publishedSquad = List<Confirmation>()
     
+    
+    
 }

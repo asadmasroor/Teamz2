@@ -12,7 +12,6 @@ import RealmSwift
 class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
-    
     let realm: Realm
 
     // Global variable to store the indexpath of the table
@@ -24,11 +23,13 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     var selectedClubName: String?
     var notificationToken: NotificationToken?
     let club: Results<Club>
+    let fixture: Results<Fixture>
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.club = realm.objects(Club.self)
+        self.fixture = realm.objects(Fixture.self)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,6 +38,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.club = realm.objects(Club.self)
+        self.fixture = realm.objects(Fixture.self)
         
         super.init(coder: aDecoder)
     }
@@ -49,7 +51,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         loadFixtures()
         
         
-        notificationToken = club.observe { [weak self] (changes) in
+        notificationToken = fixture.observe { [weak self] (changes) in
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
@@ -255,7 +257,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         let predicate1 = NSPredicate(format: "name = %@", "\((selectedSquadName)!)")
         let squad = club1[0].squads.filter(predicate1)
         
-        for fixture in squad[0].fixtures {
+        for fixture in squad[0].fixtures.sorted(byKeyPath: "date") {
             fixtures.append(fixture)
         }
         

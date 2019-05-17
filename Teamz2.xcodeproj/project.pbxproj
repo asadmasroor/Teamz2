@@ -63,6 +63,8 @@
 		84C76A3D228DA9EB000D7942 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A3C228DA9EB000D7942 /* UserTests.swift */; };
 		84C76A3F228E252C000D7942 /* ClubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A3E228E252C000D7942 /* ClubTests.swift */; };
 		84C76A42228E28EB000D7942 /* SquadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A41228E28EB000D7942 /* SquadTests.swift */; };
+		84C76A44228E2BA4000D7942 /* FixtureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A43228E2BA4000D7942 /* FixtureTests.swift */; };
+		84C76A46228E3C33000D7942 /* ChallenegeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C76A45228E3C33000D7942 /* ChallenegeTests.swift */; };
 		84DE33122231851A00C91071 /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33112231851A00C91071 /* SquadViewController.swift */; };
 		84DE331422318FBF00C91071 /* ClubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE331322318FBF00C91071 /* ClubViewController.swift */; };
 		84DE33162231C55500C91071 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE33152231C55500C91071 /* MainMenuViewController.swift */; };
@@ -162,6 +164,8 @@
 		84C76A3C228DA9EB000D7942 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		84C76A3E228E252C000D7942 /* ClubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTests.swift; sourceTree = "<group>"; };
 		84C76A41228E28EB000D7942 /* SquadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadTests.swift; sourceTree = "<group>"; };
+		84C76A43228E2BA4000D7942 /* FixtureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureTests.swift; sourceTree = "<group>"; };
+		84C76A45228E3C33000D7942 /* ChallenegeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallenegeTests.swift; sourceTree = "<group>"; };
 		84DE33112231851A00C91071 /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
 		84DE331322318FBF00C91071 /* ClubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewController.swift; sourceTree = "<group>"; };
 		84DE33152231C55500C91071 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 				84C76A3C228DA9EB000D7942 /* UserTests.swift */,
 				84C76A3E228E252C000D7942 /* ClubTests.swift */,
 				84C76A41228E28EB000D7942 /* SquadTests.swift */,
+				84C76A43228E2BA4000D7942 /* FixtureTests.swift */,
+				84C76A45228E3C33000D7942 /* ChallenegeTests.swift */,
 			);
 			path = "Unit testing";
 			sourceTree = "<group>";
@@ -795,8 +801,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C76A44228E2BA4000D7942 /* FixtureTests.swift in Sources */,
 				843412E8222CBDEC0098CFEA /* Teamz2Tests.swift in Sources */,
 				84C76A3B228D27D2000D7942 /* MainMenuViewControllerTest.swift in Sources */,
+				84C76A46228E3C33000D7942 /* ChallenegeTests.swift in Sources */,
 				84C76A42228E28EB000D7942 /* SquadTests.swift in Sources */,
 				84C76A3F228E252C000D7942 /* ClubTests.swift in Sources */,
 				84C76A3D228DA9EB000D7942 /* UserTests.swift in Sources */,

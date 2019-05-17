@@ -29,7 +29,7 @@ class UserTests: XCTestCase {
 //        }
     }
     
-    func testAddingNewUser() {
+    func test1AddingNewUser() {
         //There should be no users
         let existingCount = testRealm.objects(User.self).count
         XCTAssertEqual(existingCount, 0)
@@ -44,10 +44,22 @@ class UserTests: XCTestCase {
         //There should be only one user in the database
         XCTAssertEqual(testRealm.objects(User.self).count, 1)
     }
+    
+    func test2RetreiveExistingUser() {
+        
+        //There should be only 1 user in the database which was created in test1AddingNewUser()
+        let existingCount = testRealm.objects(User.self).count
+        XCTAssertEqual(existingCount, 1)
+        
+        //loading user from database
+        let user1 = testRealm.objects(User.self)
+        
+        //There should be no users in the database
+        XCTAssertEqual(user1[0].username,"Test")
+    }
 
     
-    func testDeleteExistingUser() {
-        
+    func test3DeleteExistingUser() {
         
         //There should be only 1 user in the database which was created in testAddingNewUser()
         let existingCount = testRealm.objects(User.self).count
