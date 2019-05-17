@@ -111,8 +111,23 @@ class JoinedClubViewController: UITableViewController {
             
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
                 
+                let predicate = NSPredicate(format: "name == %@", "\(self.joinedClubs[indexPath.row].name)")
+                let club1 = self.realm.objects(Club.self).filter(predicate)
                 
-                
+                //removing from members
+                for (index, user) in club1[0].members.enumerated() {
+                    if user.username == self.UserLoggedIn[0].username {
+                        try! self.realm.write {
+                           
+                            club1[0].members.remove(at: index)
+                            
+                           
+                        }
+                        break
+                    }
+                }
+        
+               //removing from user joined clubs
                 for (index,club) in self.UserLoggedIn[0].joinedClubs.enumerated() {
                     if club.name == self.joinedClubs[indexPath.row].name {
                         
@@ -124,6 +139,8 @@ class JoinedClubViewController: UITableViewController {
                     break
                     }
                 }
+                
+               
             })
             
            

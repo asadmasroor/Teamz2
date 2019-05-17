@@ -63,6 +63,10 @@ class MembersTableViewController: UITableViewController {
         }
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.title = "Members"
+    }
 
     // MARK: - Table view data source
 

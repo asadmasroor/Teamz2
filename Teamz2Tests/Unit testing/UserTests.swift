@@ -58,7 +58,6 @@ class UserTests: XCTestCase {
         XCTAssertEqual(user1[0].username,"Test")
     }
 
-    
     func test3DeleteExistingUser() {
         
         //There should be only 1 user in the database which was created in testAddingNewUser()
