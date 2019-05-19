@@ -134,6 +134,7 @@ class SelectionViewController: UITableViewController {
  
     @IBAction func publishButtonPressed(_ sender: Any) {
         
+        
     
         let confirmations = self.realm.objects(Confirmation.self)
 
@@ -143,10 +144,9 @@ class SelectionViewController: UITableViewController {
         
         
         
-        deleteConfirmationObject(confirmation: deleteConfirmations)
-        
         if availablePlayers.count != 0 {
             for user in availablePlayers{
+                
                 if user.isSelected == true {
                     
                     let confirmation = Confirmation()

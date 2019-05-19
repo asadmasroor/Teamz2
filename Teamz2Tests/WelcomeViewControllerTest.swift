@@ -9,6 +9,7 @@
 import XCTest
 @testable import Teamz2
 import RealmSwift
+import Validation
 
 class WelcomeViewControllerTest: XCTestCase {
     
@@ -24,15 +25,19 @@ class WelcomeViewControllerTest: XCTestCase {
     }
     
     func testValidation(){
-
+        
+        var v = Validation()
+        v.minimumLength = 1
+        v.maximumLength = 20
+        
         //Valid username as username count is above 0 but below 20
-        XCTAssertTrue(wvc.validation(username: "asad"));
+        XCTAssertTrue(v.validateString("asad"));
         
         //inValid username as username count is equal to 0
-        XCTAssertFalse(wvc.validation(username: ""));
+        XCTAssertFalse(v.validateString(""));
         
         //inValid username as username count is above 20
-        XCTAssertFalse(wvc.validation(username: "asadasadasadasadasadasadasadasad"));
+        XCTAssertFalse(v.validateString("asadasadasadasadasadasadasad"));
         
     }
     
@@ -77,9 +82,7 @@ class WelcomeViewControllerTest: XCTestCase {
                 print("This nickname already exists")
             }
         })
-    
-        
-       
+
 
     }
 

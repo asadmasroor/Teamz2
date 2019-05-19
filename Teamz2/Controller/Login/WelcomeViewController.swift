@@ -9,17 +9,20 @@
 import UIKit
 import RealmSwift
 import ProgressHUD
+import Validation
+import Log
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameLabel: UITextField!
     var username: String = ""
+    let Log = Logger()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        // Do any additional setup after loading the view.
+        
+       usernameLabel.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,12 +48,70 @@ class WelcomeViewController: UIViewController {
     }
     
     
-    @IBAction func goButtonPressed(_ sender: Any) {
+    @IBAction @objc func goButtonPressed(_ sender: Any) {
+        
+        
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        var validation = Validation()
+        validation.characterSet = NSCharacterSet.letters
+        validation.minimumLength = 1
+        validation.maximumLength = 20
+        
+        var validation2 = Validation()
+        validation.characterSet = NSCharacterSet.lowercaseLetters
+       
+        
+        
             
             self.username = usernameLabel.text!
             let creds = SyncCredentials.nickname(self.username, isAdmin: true)
             
-            if  validation(username: self.username) {
+        
+                if validation.validateString(self.username) && validation2.validateString(self.username) {
+                    
+                    ProgressHUD.show("Signing in")
+                    SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
+                        if let _ = user {
+                            ProgressHUD.dismiss()
+                            self!.performSegue(withIdentifier: "signedInSegue", sender: self)
+                            // self?.navigationController?.pushViewController(MainMenuViewController(), animated: true)
+                            
+                        } else if let error = err {
+                            print("This nickname already exists")
+                        }
+                    })
+
+                    
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Please only use lowercase letters between 1 to 20 with no symbols.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+        
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+        Log.info("Time elapsed for sign in: \(timeElapsed) s.")
+       
+        
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        var validation = Validation()
+        validation.characterSet = NSCharacterSet.lowercaseLetters
+        validation.minimumLength = 1
+        validation.maximumLength = 20
+        
+        textField.resignFirstResponder() // Dismiss the keyboard
+        self.username = usernameLabel.text!
+        let creds = SyncCredentials.nickname(self.username, isAdmin: true)
+        
+        
+            if validation.validateString(self.username) {
+                
                 ProgressHUD.show("Signing in")
                 SyncUser.logIn(with: creds, server: Constants.AUTH_URL, onCompletion: { [weak self](user, err) in
                     if let _ = user {
@@ -62,30 +123,21 @@ class WelcomeViewController: UIViewController {
                         print("This nickname already exists")
                     }
                 })
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Please only use lowercase letters between 1 to 20.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+       Log.info("Time elapsed for sign in: \(timeElapsed) s.")
+        return true
         
     }
     
     
-    func validation(username: String) -> Bool {
-        var valid = false
-        let errorMessage = UIAlertController(title: "Error", message: "No username entered", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
-            errorMessage.dismiss(animated: true, completion: nil)
-        }
-        
-        errorMessage.addAction(action)
-        if (username.count == 0) {
-            self.present(errorMessage, animated: true, completion: nil)
-        } else if (username.count > 15) {
-            self.present(errorMessage, animated: true, completion: nil)
-            errorMessage.message = "Username too long"
-        } else {
-            valid = true
-        }
-        
-        return valid
-    }
+ 
 
    
 

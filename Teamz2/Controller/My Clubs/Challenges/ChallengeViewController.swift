@@ -65,7 +65,7 @@ class ChallengeViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
-        self.tabBarController?.navigationItem.title = "Challeneges"
+        self.tabBarController?.navigationItem.title = "Challenges"
         
         let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChallenge))

@@ -47,26 +47,39 @@ class ClubTests: XCTestCase {
         //Number of clubs that exist should equal to 1
         XCTAssertEqual(testRealm.objects(Club.self).count, 1)
         
+    
+        
     }
     
-    func testDeleteClub() {
+    func testZDeleteClub() {
         
-        // test to make prove that only one club exists that was made in the previous test
-        let existingCount = testRealm.objects(Club.self).count
-        XCTAssertEqual(existingCount, 1)
+        //automate adding one club
+        addClub()
         
-        //retriving club created in previous test
+        //retriving club created above
         let predicate = NSPredicate(format: "name = %@", "SSCC")
         let club1 = testRealm.objects(Club.self).filter(predicate)
         
         //deleteing club
         try! testRealm.write {
-            testRealm.delete(club1)
+            testRealm.delete(club1[0])
         }
         
         //Number of clubs that exist should equal to 0
         XCTAssertEqual(testRealm.objects(Club.self).count, 0)
         
+    }
+    
+    func addClub() {
+        let club1 = Club()
+        club1.name = "SSSC"
+        club1.approved = true
+        
+        try! testRealm.write {
+            
+            testRealm.deleteAll()
+            testRealm.add(club1)
+        }
     }
     
     

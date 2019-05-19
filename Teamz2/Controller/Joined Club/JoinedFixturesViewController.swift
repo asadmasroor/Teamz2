@@ -128,6 +128,7 @@ class JoinedFixturesViewController: UITableViewController, joinedFixtureDelegate
             available.available = true
             
             
+            
             try! realm.write {
                 realm.add(available)
                 fixture[iPath].availablePlayers.append(available)

@@ -8,10 +8,11 @@
 
 import UIKit
 import RealmSwift
+import Log
 
 class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
-    
+    let Log = Logger()
     let realm: Realm
 
     // Global variable to store the indexpath of the table
@@ -50,6 +51,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         
         loadFixtures()
         
+         self.title = "\(selectedSquadName!): Fixtures"
+        
         
         notificationToken = fixture.observe { [weak self] (changes) in
             guard let tableView = self?.tableView else { return }
@@ -79,6 +82,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+         self.title = "\(selectedSquadName!): Fixtures"
+        
         loadFixtures()
         
     }
@@ -200,13 +205,11 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if (fixtures.count != 0) {
-         return true
-        }
-        else {
-            return false
-        }
+        
+       return true
     }
+    
+ 
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         

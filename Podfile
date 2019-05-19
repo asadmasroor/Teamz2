@@ -19,5 +19,7 @@ target 'Teamz2' do
 
   pod 'RealmSwift'
   pod 'ProgressHUD'
+  pod 'Validation'
+  pod 'Log', '~> 1.0'
 
 end

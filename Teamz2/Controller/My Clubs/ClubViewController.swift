@@ -73,10 +73,50 @@ class ClubViewController: UITableViewController {
         
         cell.clubLabel.text = clubs[indexPath.row].name
         
-
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+
+            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(self.clubs[indexPath.row].name)?", preferredStyle: .alert)
+
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+
+                //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
+                let predicate = NSPredicate(format: "name = %@", "\(self.clubs[indexPath.row].name)")
+                let club = self.realm.objects(Club.self).filter(predicate)
+                try! self.realm.write {
+
+                    if club.count != 0 {
+                        self.realm.delete(club[0])
+                        self.loadClubs()
+
+                    }
+
+                }
+
+            }
+
+            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
+                confirmation.dismiss(animated: true, completion: nil)
+            }
+
+            confirmation.addAction(yesAction)
+            confirmation.addAction(cancelAction)
+
+            self.present(confirmation, animated: true, completion: nil)
+
+        }
+
+        return [deleteAction]
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "squadchallenegeSegue") {
@@ -105,16 +145,20 @@ class ClubViewController: UITableViewController {
        
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexPath1 = indexPath.row
         
         performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
     
-        
     }
+    
+    
     
     func loadClubs() {
        
+        clubs.removeAll()
+        
         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
         let user = realm.objects(User.self).filter(predicate)
         
@@ -129,6 +173,8 @@ class ClubViewController: UITableViewController {
                 
             }
         }
+        
+        tableView.reloadData()
     }
     
 

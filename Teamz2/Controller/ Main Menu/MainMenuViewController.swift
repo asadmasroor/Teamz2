@@ -8,11 +8,12 @@
 
 import UIKit
 import RealmSwift
-
+import Validation
+import Log
 class MainMenuViewController: UIViewController {
    
     let realm: Realm
-    
+    let Log = Logger(formatter: .default, theme: .default)
     var UserLoggedIn : User?
     
     @IBOutlet weak var clubRequestsButton: UIButton!
@@ -36,7 +37,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+       
         
       loadUser()
         
@@ -98,14 +99,34 @@ class MainMenuViewController: UIViewController {
         var textField = UITextField()
         let newClubAlert = UIAlertController(title: "Make New Club", message: "", preferredStyle: .alert)
         
+        
         let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
             
-            let newClub = Club()
-            newClub.name = (textField.text)!
+            var validation = Validation()
+            validation.maximumLength = 30
+            validation.minimumLength = 1
             
-            self.addNewClub(club: newClub)
             
-           self.presentOkayAlert()
+            
+            if (validation.validateString((textField.text)!)) {
+                let allClubs = self.realm.object(ofType: Club.self, forPrimaryKey: textField.text!)
+                if allClubs != nil {
+                    self.presentClubExistsAlert(name: (textField.text)!)
+                } else {
+                    let newClub = Club()
+                    newClub.name = (textField.text)!
+                    
+                    self.addNewClub(club: newClub)
+                    
+                    self.presentOkayAlert()
+                }
+                
+            } else {
+                self.presentErrorAlert()
+            }
+            
+            
+            
             
         }
         
@@ -186,7 +207,34 @@ class MainMenuViewController: UIViewController {
        present(okayAlert, animated: true, completion: nil)
     }
     
+    func presentErrorAlert() {
+        let okayAlert = UIAlertController(title: "Error", message: "Please enter valid name. Between 1-30 characters.", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+        present(okayAlert, animated: true, completion: nil)
+    }
+    
+    func presentClubExistsAlert(name: String) {
+        let okayAlert = UIAlertController(title: "Error", message: "Club with name '\(name)' already exists!", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+        present(okayAlert, animated: true, completion: nil)
+    }
+    
     func addNewClub(club: Club){
+        
+         let startTime = CFAbsoluteTimeGetCurrent()
+        
         try! self.realm.write {
             
             let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
@@ -195,8 +243,9 @@ class MainMenuViewController: UIViewController {
             self.realm.add(club)
             user[0].clubs.append(club)
             user[0].joinedClubs.append(club)
-            
-        }
+            }
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+        Log.info("Time elapsed for making new Club \(timeElapsed) s.")
     }
     
     func loadUser() {

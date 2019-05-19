@@ -8,9 +8,11 @@
 
 import UIKit
 import RealmSwift
+import Validation
+import Log
 
 class SquadViewController: UITableViewController {
-    
+    let Log = Logger()
     let realm: Realm
     var selectedClubName : String?
     
@@ -51,26 +53,43 @@ class SquadViewController: UITableViewController {
         
         
         @objc func addNewSqaud() {
+            var validation = Validation()
+            validation.minimumLength = 1
+            validation.maximumLength = 20
+            
             var textField = UITextField()
             let newSquadAlert = UIAlertController(title: "Make New Squad", message: "", preferredStyle: .alert)
             
             let action =  UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
                 
-                let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
-                let club = self.realm.objects(Club.self).filter(predicate)
+                let startTime = CFAbsoluteTimeGetCurrent()
                 
-                let newSquad = Squad()
-                newSquad.name = (textField.text)!
-                
-                if club.count != 0 {
-                    try! self.realm.write {
-                        club[0].squads.append(newSquad)
+                if (validation.validateString(textField.text!)) {
+                    if !(self.checkSquadExists(name: textField.text!)) {
+                        let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+                        let club = self.realm.objects(Club.self).filter(predicate)
+                        
+                        let newSquad = Squad()
+                        newSquad.name = (textField.text)!
+                        
+                        if club.count != 0 {
+                            try! self.realm.write {
+                                club[0].squads.append(newSquad)
+                            }
+                        }
+                        
+                        self.loadSquads()
+                        
+                        self.tableView.reloadData()
+                    } else {
+                        self.presentSquadExistsAlert(name: textField.text!)
                     }
+                } else {
+                    self.presentErrorAlert()
                 }
                 
-                self.loadSquads()
-                
-                self.tableView.reloadData()
+                let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+                self.Log.info("Time elapsed for adding new Squad: \(timeElapsed) s.")
                 
             }
             
@@ -145,17 +164,22 @@ class SquadViewController: UITableViewController {
             
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
                 
-               
+                let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+                let club = self.realm.objects(Club.self).filter(predicate)
+                
+                let predicate2 = NSPredicate(format: "name = %@", "\(self.squads[indexPath.row].name)")
+                let squad = club[0].squads.filter(predicate2)
                 
                 //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
-                let predicate = NSPredicate(format: "name = %@", "\(self.squads[indexPath.row].name)")
-                let squad = self.realm.objects(Squad.self).filter(predicate)
+               
+               
                 try! self.realm.write {
                     
                     if squad.count != 0 {
                         self.squads.remove(at: indexPath.row)
                         tableView.reloadData()
                         self.realm.delete(squad[0])
+                        self.loadSquads()
                     }
                     
                     
@@ -180,6 +204,8 @@ class SquadViewController: UITableViewController {
     }
     
     func loadSquads(){
+        
+        squads.removeAll()
         let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
         let club = realm.objects(Club.self).filter(predicate)
         
@@ -190,6 +216,46 @@ class SquadViewController: UITableViewController {
                 squads.append(squad)
             }
         }
+    }
+    
+    func checkSquadExists(name: String) -> Bool{
+        var exists = false
+        let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
+        let club = self.realm.objects(Club.self).filter(predicate)
+        
+        let squads = club[0].squads
+        
+        for squad in squads {
+            if squad.name == name {
+                exists = true
+            }
+        }
+        
+        return exists
+    }
+    
+    func presentErrorAlert() {
+        let errorAlert = UIAlertController(title: "Error", message: "Please enter valid squad name. Between 1-20 characters.", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            errorAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        errorAlert.addAction(okayAction)
+        
+        present(errorAlert, animated: true, completion: nil)
+    }
+    
+    func presentSquadExistsAlert(name: String) {
+        let okayAlert = UIAlertController(title: "Error", message: "Squad with name '\(name)' already exists!", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+        present(okayAlert, animated: true, completion: nil)
     }
         
 }

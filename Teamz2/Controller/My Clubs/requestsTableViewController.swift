@@ -46,7 +46,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.navigationItem.title = "Request's"
+        self.tabBarController?.navigationItem.title = "Requests"
         
         loadRequests()
         
@@ -70,8 +70,19 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+    
+        self.tabBarController?.navigationItem.rightBarButtonItems = [homeButton]
+    }
+    
+    @objc func home() {
+        navigationController?.popToRootViewController(animated: true)
+        
+    }
+
     override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Request's"
+        self.tabBarController?.navigationItem.title = "Requests"
     }
     
 

@@ -8,9 +8,10 @@
 
 import UIKit
 import RealmSwift
-
+import Validation
+import Log
 class MakeNewFixture: UIViewController, UITextFieldDelegate {
-    
+    let Log = Logger(formatter: .default, theme: .default)
     let realm: Realm
     var club: Results<Club>? = nil
     var squad: Results<Squad>? = nil
@@ -147,7 +148,15 @@ class MakeNewFixture: UIViewController, UITextFieldDelegate {
     
     @IBAction func addFIxtureButtonPrssed(_ sender: Any) {
         
-        if (fixtureTitleTF.text?.count != 0) && (fixtureAddressTF.text.count != 0) && (fixtureDateTF.text?.count != 0) && (fixtureTimeTF.text?.count != 0){
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        var validation = Validation()
+        validation.minimumLength = 1
+        validation.maximumLength = 200
+        
+   if (validation.validateString(fixtureTitleTF.text!)) && (validation.validateString(fixtureTitleTF.text!)) && (validation.validateString(fixtureAddressTF.text!)) && (validation.validateString(fixtureAddressTF.text!)) {
+        
+        if (fixtureDateTF.text?.count != 0) && (fixtureTimeTF.text?.count != 0){
             
             let confirmation = UIAlertController(title: "Add New Fixture", message: "Are you sure you want to add this new Fixture to the Club?", preferredStyle: .alert)
             
@@ -167,6 +176,8 @@ class MakeNewFixture: UIViewController, UITextFieldDelegate {
                     print("hello")
                 }
                 
+                let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+                self.Log.info("Time elapsed for making new fixture: \(timeElapsed) s.")
                 self.navigationController?.popViewController(animated: true)
                 
             }
@@ -191,7 +202,22 @@ class MakeNewFixture: UIViewController, UITextFieldDelegate {
             fillAlert.addAction(yesAction)
             present(fillAlert, animated: true, completion: nil)
         }
+   } else {
+        self.presentErrorAlert()
+        }
         
+    }
+    
+    func presentErrorAlert() {
+        let okayAlert = UIAlertController(title: "Error", message: "Please enter valid Fixture title/address. Between 1-200 characters.", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+        present(okayAlert, animated: true, completion: nil)
     }
     
 }

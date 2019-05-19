@@ -8,9 +8,10 @@
 
 import UIKit
 import RealmSwift
-
+import Validation
+import Log
 class makeChallenegeController: UIViewController {
-    
+    let Log = Logger(formatter: .default, theme: .default)
     let realm: Realm
      var club: Results<Club>? = nil 
     
@@ -84,11 +85,25 @@ class makeChallenegeController: UIViewController {
 
     @IBAction func addButtonPressed(_ sender: Any) {
         
+        
+        var validation = Validation()
+        validation.minimumLength = 1
+        validation.maximumLength = 200
+        
+        var milesValidate = Validation()
+        milesValidate.characterSet = NSCharacterSet.decimalDigits
+        milesValidate.minimumValue = 0.5
+        milesValidate.minimumLength = 1
+        milesValidate.maximumValue = 100
+        
+        if (validation.validateString(nameTF.text!)) && (validation.validateString(descriptionTV.text!)) && (milesValidate.validateString(String(milesTF.text!))){
+            
         if (nameTF.text?.count != 0) && (descriptionTV.text.count != 0) && (expiryTF.text?.count != 0) {
             
-            let confirmation = UIAlertController(title: "Add New Challenege", message: "Are you sure you want to add this new challenege to the Club?", preferredStyle: .alert)
+            let confirmation = UIAlertController(title: "Add New Challenge", message: "Are you sure you want to add this new challenege to the Club?", preferredStyle: .alert)
             
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+                let startTime = CFAbsoluteTimeGetCurrent()
                 
                 try! self.realm.write {
                     let challenege = Challenge()
@@ -104,6 +119,8 @@ class makeChallenegeController: UIViewController {
                     print("hello")
                 }
                 
+                let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+                self.Log.info("Time elapsed for adding new Challenge: \(timeElapsed) s.")
                 self.navigationController?.popViewController(animated: true)
               
              }
@@ -130,8 +147,23 @@ class makeChallenegeController: UIViewController {
         }
         
     }
-    
+        else {
+            self.presentErrorAlert()
+        }
+    }
 
+    func presentErrorAlert() {
+        let okayAlert = UIAlertController(title: "Error", message: "Please either enter valid Challenge Name/Description. Between 1-200 characters or valid miles between (0.5 to 100) ", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) in
+            okayAlert.dismiss(animated: true, completion: nil)
+        }
+        
+        okayAlert.addAction(okayAction)
+        
+        present(okayAlert, animated: true, completion: nil)
+    }
+    
 }
 
 

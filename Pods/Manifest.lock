@@ -1,26 +1,34 @@
 PODS:
+  - Log (1.0)
   - ProgressHUD (2.51)
   - Realm (3.13.1):
     - Realm/Headers (= 3.13.1)
   - Realm/Headers (3.13.1)
   - RealmSwift (3.13.1):
     - Realm (= 3.13.1)
+  - Validation (2.0.0)
 
 DEPENDENCIES:
+  - Log (~> 1.0)
   - ProgressHUD
   - RealmSwift
+  - Validation
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Log
     - ProgressHUD
     - Realm
     - RealmSwift
+    - Validation
 
 SPEC CHECKSUMS:
+  Log: 5e368c9528db07517d18d2d04ff5fe2b6f5a1e21
   ProgressHUD: 54b4c2fa202bf3da7dddc1c698ae4e6376333bd9
   Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
   RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  Validation: 747bcb33073bf9c83238e00b4f087103c1f2b419
 
-PODFILE CHECKSUM: 373cd1e2126becdd00e260f1471483fb83fdf6d0
+PODFILE CHECKSUM: e5c94e944473a67860465d115d885d6a39b56405
 
 COCOAPODS: 1.5.3

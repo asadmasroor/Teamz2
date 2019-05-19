@@ -70,6 +70,16 @@ class MembersTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    override func viewWillAppear(_ animated: Bool) {
+        let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+        
+        self.tabBarController?.navigationItem.rightBarButtonItems = [homeButton]
+    }
+    
+    @objc func home() {
+        navigationController?.popToRootViewController(animated: true)
+        
+    }
  
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

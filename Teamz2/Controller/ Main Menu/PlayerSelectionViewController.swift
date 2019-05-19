@@ -60,7 +60,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
-                print("717171717171")
+                
                 self?.loadSelectedFixtures()
                 tableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
@@ -106,12 +106,18 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
             
             if user[0].available == true {
                 cell.backgroundColor = UIColor(red:0.22, green:0.75, blue:0.19, alpha:1.0)
-                 cell.confirmButton.isHidden = true
+                cell.confirmButton.isHidden = true
+                cell.decideButton.isHidden = false
+                cell.statusLabel.text = "Status: Selection Confirmed"
             } else if (user[0].available == false) {
             cell.backgroundColor = UIColor(red:0.26, green:0.54, blue:0.98, alpha:1.0)
+             cell.decideButton.isHidden = true
+                cell.confirmButton.isHidden = false
+                cell.statusLabel.text = "Status: Awaiting Decision"
             }
-            
+      
             cell.titleLabel.text = fixture1.title
+            cell.dateLabel.text = "Date: \(cell.formatDate(date: fixture1.date)) Time:\(cell.formatTime(date: fixture1.time))"
             cell.addressLabel.text =  fixture1.address
         } else {
             
@@ -164,6 +170,29 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+    }
+    
+    func decideButtonPressed(cell: PlayerSelectionViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        
+        
+        let predicate = NSPredicate(format: "title = %@", "\(selectedFixtures[indexPath!.row].title)")
+        let fixture = realm.objects(Fixture.self).filter(predicate)
+        
+        let predicate1 = NSPredicate(format: "user.username = %@", "\(userLoggedIn[0].username)")
+        let user = fixture[0].publishedSquad.filter(predicate1)
+        
+        
+        print(fixture[0].title)
+        try! realm.write {
+            
+            user[0].available = false
+            
+            
+            self.tableView.reloadData()
+            
+        }
+        loadSelectedFixtures()
     }
 
     
