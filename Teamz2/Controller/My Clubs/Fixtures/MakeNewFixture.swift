@@ -11,7 +11,7 @@ import RealmSwift
 import Validation
 import Log
 class MakeNewFixture: UIViewController, UITextFieldDelegate {
-    let Log = Logger(formatter: .default, theme: .default)
+    let Log = Logger()
     let realm: Realm
     var club: Results<Club>? = nil
     var squad: Results<Squad>? = nil
