@@ -34,6 +34,8 @@ class MakeNewFixture: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    
 
     @IBOutlet weak var fixtureTitleTF: UITextField!
     @IBOutlet weak var fixtureAddressTF: UITextView!

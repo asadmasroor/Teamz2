@@ -15,25 +15,22 @@ class SquadViewController: UITableViewController {
     let Log = Logger()
     let realm: Realm
     var selectedClubName : String?
+    
     var squads = List<Squad>()
     var findexPath = 0
     
-    
-    //intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         super.init(nibName: nil, bundle: nil)
     }
     
-    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         super.init(coder: aDecoder)
     }
     
-    //function that executes when the view loads
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,22 +38,21 @@ class SquadViewController: UITableViewController {
         
     }
     
-    //function that excutes when the view will appears
-    override func viewWillAppear(_ animated: Bool) {
+        override func viewWillAppear(_ animated: Bool) {
+            
+            self.tabBarController?.navigationItem.title = "Squads"
+            
+            let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+            let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewSqaud))
+            
+            self.tabBarController?.navigationItem.rightBarButtonItems = [addBarButton, homeButton]
+            
+            
+            
+        }
         
-        self.tabBarController?.navigationItem.title = "Squads"
         
-        let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
-        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewSqaud))
-        
-        self.tabBarController?.navigationItem.rightBarButtonItems = [addBarButton, homeButton]
-        
-        
-        
-    }
-        
-    //function that excutes when the user wants to add new squad
-    @objc func addNewSqaud() {
+        @objc func addNewSqaud() {
             var validation = Validation()
             validation.minimumLength = 1
             validation.maximumLength = 20
@@ -113,20 +109,20 @@ class SquadViewController: UITableViewController {
             
         }
         
-    //function to take user back to the main screen.
-    @objc func home() {
+        
+        @objc func home() {
             navigationController?.popToRootViewController(animated: true)
             
         }
 
     // MARK: - Table view data source
 
-    //functions to populate the table with data
   
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
          return squads.count
     }
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "squadCell", for: indexPath) as! SquadTableViewCell
@@ -153,6 +149,8 @@ class SquadViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -205,8 +203,6 @@ class SquadViewController: UITableViewController {
         return [deleteAction]
     }
     
-    
-    // function to load squads from the database in the cloud
     func loadSquads(){
         
         squads.removeAll()
@@ -222,7 +218,6 @@ class SquadViewController: UITableViewController {
         }
     }
     
-    // function to check if a squad exists already
     func checkSquadExists(name: String) -> Bool{
         var exists = false
         let predicate = NSPredicate(format: "name = %@", "\((self.selectedClubName)!)")
@@ -239,7 +234,6 @@ class SquadViewController: UITableViewController {
         return exists
     }
     
-    // function to present an error alert
     func presentErrorAlert() {
         let errorAlert = UIAlertController(title: "Error", message: "Please enter valid squad name. Between 1-20 characters.", preferredStyle: .alert)
         
@@ -252,7 +246,6 @@ class SquadViewController: UITableViewController {
         present(errorAlert, animated: true, completion: nil)
     }
     
-    // function to present an error alert - squad exsts
     func presentSquadExistsAlert(name: String) {
         let okayAlert = UIAlertController(title: "Error", message: "Squad with name '\(name)' already exists!", preferredStyle: .alert)
         

@@ -26,7 +26,6 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
     let club: Results<Club>
     let fixture: Results<Fixture>
     
-    //intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -35,7 +34,7 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         
         super.init(nibName: nil, bundle: nil)
     }
-    //intialiser
+    
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -45,7 +44,8 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         super.init(coder: aDecoder)
     }
     
-    //function that execuetes when the view controller loads
+    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,61 +80,15 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         
     
     }
-    //function that execuetes when the view controller will appear
+    
     override func viewDidAppear(_ animated: Bool) {
          self.title = "\(selectedSquadName!): Fixtures"
         
         loadFixtures()
         
     }
-    
-    
-    
-    // MARK: TableView functions
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(self.fixtures[indexPath.row].title)?", preferredStyle: .alert)
-            
-            let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
-                
-                
-                
-                //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
-                let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
-                let fixture = self.realm.objects(Fixture.self).filter(predicate)
-                try! self.realm.write {
-                    
-                    if fixture.count != 0 {
-                        self.fixtures.remove(at: indexPath.row)
-                        tableView.reloadData()
-                        self.realm.delete(fixture[0])
-                    }
-                    
-                }
-                
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
-                confirmation.dismiss(animated: true, completion: nil)
-            }
-            
-            confirmation.addAction(yesAction)
-            confirmation.addAction(cancelAction)
-            
-            self.present(confirmation, animated: true, completion: nil)
-            
-        }
-        
-        return [deleteAction]
-    }
+
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -142,10 +96,16 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
 //        result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    
+   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
   
+
+    
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "fixtureCell", for: indexPath) as! FixtureTableViewCell
         
@@ -208,19 +168,18 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         
     }
     
-    // MARK:  Button pressed functions
+ 
+    func challengeButtonPressed(cell: FixtureTableViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        
+        uIndexPath = indexPath!.row
+        
+        print(indexPath!.row)
+        performSegue(withIdentifier: "challengeSegue", sender: self)
+    }
     
-
-//    func challengeButtonPressed(cell: FixtureTableViewCell) {
-//        let indexPath = self.tableView.indexPath(for: cell)
-//
-//        uIndexPath = indexPath!.row
-//
-//        print(indexPath!.row)
-//        performSegue(withIdentifier: "challengeSegue", sender: self)
-//    }
     
-    // function that executes when selection button is pressed
+    
     func selectionButtonPressed(cell: FixtureTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -230,19 +189,69 @@ class FixtureViewController: UITableViewController, cellDelegateChallenge {
         performSegue(withIdentifier: "tabSegue", sender: self)
     }
     
-    // function to that takes to make new fixture screen
+    
+
+    
+    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: "newFixtureSegue", sender: self)
     }
     
-    // function that takes user back to the main menu
+    
     @IBAction func homeButtonPressed(_ sender: Any) {
         navigationController?.popToRootViewController(animated:     true)
     }
     
     
-    //function to load fixtures from the database in realm cloud.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+       return true
+    }
+    
+ 
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            let confirmation = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(self.fixtures[indexPath.row].title)?", preferredStyle: .alert)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+                
+                
+                
+                //let predicate = NSPredicate(format: "name = &@", "\(self.challanges[indexPath.row].name)")
+                let predicate = NSPredicate(format: "title = %@", "\(self.fixtures[indexPath.row].title)")
+                let fixture = self.realm.objects(Fixture.self).filter(predicate)
+                try! self.realm.write {
+                    
+                    if fixture.count != 0 {
+                        self.fixtures.remove(at: indexPath.row)
+                        tableView.reloadData()
+                        self.realm.delete(fixture[0])
+                    }
+                    
+                }
+            
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style:.default) { (UIAlertAction) in
+                confirmation.dismiss(animated: true, completion: nil)
+            }
+            
+            confirmation.addAction(yesAction)
+            confirmation.addAction(cancelAction)
+            
+            self.present(confirmation, animated: true, completion: nil)
+            
+        }
+        
+        return [deleteAction]
+    }
+    
+    
     func loadFixtures() {
         fixtures.removeAll()
         let predicate = NSPredicate(format: "name = %@", "\((selectedClubName)!)")
