@@ -108,8 +108,9 @@ class MembersTableViewController: UITableViewController {
             
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
                 
+                let username = self.clubMembers![indexPath.row].username
                 
-                let predicate1 = NSPredicate(format: "username == %@", "\(self.clubMembers![indexPath.row].username)")
+                let predicate1 = NSPredicate(format: "username == %@", "\(username)")
                 let user = self.realm.objects(User.self).filter(predicate1)
                 
                 //Deleting club from user joined club list
@@ -120,7 +121,7 @@ class MembersTableViewController: UITableViewController {
                             user[0].joinedClubs.remove(at: index)
                             //self.realm.delete(self.UserLoggedIn[0].joinedClubs[index])
                         }
-                        break
+                      
                     }
                 }
                 
@@ -129,14 +130,15 @@ class MembersTableViewController: UITableViewController {
                 let club1 = self.realm.objects(Club.self).filter(predicate)
                 
                 for (index, user) in club1[0].members.enumerated() {
-                    if user.username ==  self.clubMembers?[index].username {
+                   
+                    if user.username ==  username {
                         try! self.realm.write {
                             print("hiiiii")
                             club1[0].members.remove(at: index)
                             
                             //                            self.realm.delete(club1[0].members[index])
                         }
-                        break
+                     
                     }
                 }
                 
@@ -183,9 +185,9 @@ class MembersTableViewController: UITableViewController {
     }
     
     //deintialiser
-    deinit {
-        notificationToken?.invalidate()
-    }
+//    deinit {
+//        notificationToken?.invalidate()
+//    }
     
     
 

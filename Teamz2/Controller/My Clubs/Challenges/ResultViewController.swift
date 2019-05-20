@@ -92,7 +92,10 @@ class ResultViewController: UITableViewController {
                     let result1 = challenge[0].results
                     
                     for r in result1 {
-                        results.append(r)
+                        if r.details != nil {
+                             results.append(r)
+                        }
+                       
                     }
                 }
             }

@@ -21,7 +21,7 @@ class WelcomeViewController: UIViewController, UITextFieldDelegate {
     var username: String = ""
     
     // Logger variable declared to show the timings of methods.
-    let Log = Logger()
+//    let Log = Logger()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ class WelcomeViewController: UIViewController, UITextFieldDelegate {
     // Function that excutes when the Go button is pressed.
     @IBAction @objc func goButtonPressed(_ sender: Any) {
         
-        let startTime = CFAbsoluteTimeGetCurrent()
+//        let startTime = CFAbsoluteTimeGetCurrent()
         
         // Validation for the username - length
         var validation = Validation()
@@ -96,8 +96,8 @@ class WelcomeViewController: UIViewController, UITextFieldDelegate {
                     self.present(alert, animated: true, completion: nil)
                 }
         
-        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-        Log.info("Time elapsed for sign in: \(timeElapsed) s.")
+//        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+//        Log.info("Time elapsed for sign in: \(timeElapsed) s.")
        
         
         
@@ -136,8 +136,8 @@ class WelcomeViewController: UIViewController, UITextFieldDelegate {
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
-        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-       Log.info("Time elapsed for sign in: \(timeElapsed) s.")
+//        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+//       Log.info("Time elapsed for sign in: \(timeElapsed) s.")
         return true
         
     }

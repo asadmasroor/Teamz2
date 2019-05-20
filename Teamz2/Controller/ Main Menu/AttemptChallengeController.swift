@@ -57,6 +57,14 @@ class AttemptChallengeController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        stopRun()
+        self.distanceLabel.text = "Distance:"
+        self.timeLabel.text = "Time:"
+        self.paceLabel.text = "Pace:"
+        
+    }
+    
     
    
     
@@ -130,39 +138,37 @@ class AttemptChallengeController: UIViewController {
                     
                     run = newRun
                     timer?.invalidate()
-
                     
                     let result = Result()
                     result.user = userLoggedIn
                     result.details = run
                     
-                    realm.add(result)
-                    
+                    if result.details != nil {
+                         realm.add(result)
+                    }
                     
                     selectedChallenge?.results.append(result)
                 
                 }
                 
                 
-               
+                
                 
                 let alertController = UIAlertController(title: "Challenge Finished",
                                                         message: "Do you wish to see your challenge attempt?",
                                                         preferredStyle: .actionSheet)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                
+
                 alertController.addAction(UIAlertAction(title: "Yes", style: .destructive) { _ in
                     self.stopRun()
                     alertController.dismiss(animated: true, completion: nil)
                     self.performSegue(withIdentifier: "viewResultSegue", sender: self)
-                    
-                    self.distanceLabel.text = "Distance:"
-                    self.timeLabel.text = "Time:"
-                    self.paceLabel.text = "Pace:"
-                    
-                    
+
+
+
+
                 })
-                
+
                 present(alertController, animated: true)
               
                 
@@ -182,8 +188,8 @@ class AttemptChallengeController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ChallenegeAttemptsViewController
         
-        destinationVC.selectedChallenge = selectedChallenge
-        destinationVC.userLoggedIn = userLoggedIn
+//       destinationVC.selectedChallengeName = selectedChallenge?.name
+
     }
     
     

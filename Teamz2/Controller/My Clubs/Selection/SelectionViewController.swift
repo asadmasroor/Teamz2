@@ -142,6 +142,10 @@ class SelectionViewController: UITableViewController {
 
         let deleteConfirmations = confirmations.filter(predicate)
         
+        try! realm.write {
+            
+            realm.delete(deleteConfirmations)
+        }
         
         
         if availablePlayers.count != 0 {

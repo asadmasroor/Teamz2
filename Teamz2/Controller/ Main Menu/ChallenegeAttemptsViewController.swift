@@ -13,32 +13,41 @@ class ChallenegeAttemptsViewController: UITableViewController {
     
     var results = List<Result>()
     var userResults = List<Result>()
+    let result: Results<Result>
+    let realm : Realm
+    var selectedChallengeName: String?
     
-    var userLoggedIn : User?
-    
-    var selectedChallenge : Challenge? {
-        didSet {
-            
-            self.title = "\((selectedChallenge?.name)!)"
-            results = (selectedChallenge?.results)!
-            
-            for result in results {
-                if (result.user == userLoggedIn){
-                    userResults.append(result)
-                }
-            }
-            
-        }
+    // intialiser
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        
+        let predicate = NSPredicate(format: "user.owner = %@", "\((SyncUser.current?.identity)!)")
+        self.result = realm.objects(Result.self).filter(predicate)
+        
+        super.init(nibName: nil, bundle: nil)
     }
+    //intialiser
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        
+        let predicate = NSPredicate(format: "user.owner = %@", "\((SyncUser.current?.identity)!)")
+        self.result = realm.objects(Result.self).filter(predicate)
+        super.init(coder: aDecoder)
+    }
+    
+    
+    
 
     //function that executes when the tableviewcontroller loads
     override func viewDidLoad() {
         super.viewDidLoad()
-        for result in results {
-            if (result.user?.username == userLoggedIn?.username){
-                userResults.append(result)
-            }
+        for resul in result {
+            userResults.append(resul)
         }
+        
+        self.title = "Attempts"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
 
@@ -61,7 +70,7 @@ class ChallenegeAttemptsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return results.count
+        return userResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
