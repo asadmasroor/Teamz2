@@ -41,7 +41,8 @@ class MembersTableViewController: UITableViewController {
         
         super.init(coder: aDecoder)
     }
-
+    
+    //function that executes when the view has loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,13 +64,9 @@ class MembersTableViewController: UITableViewController {
         }
 
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Members"
     }
-
-    // MARK: - Table view data source
-
     override func viewWillAppear(_ animated: Bool) {
         let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
         
@@ -80,14 +77,15 @@ class MembersTableViewController: UITableViewController {
         navigationController?.popToRootViewController(animated: true)
         
     }
- 
 
+    // MARK: - Table view data source
+
+    // function to populate table with data
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return clubMembers!.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "membersCell", for: indexPath)
         
@@ -169,14 +167,12 @@ class MembersTableViewController: UITableViewController {
         return [deleteAction]
     }
     
-
-    
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
+    // realm functionfu to load members of the club from the database in the realm cloud
     func loadMembers(){
         
         let predicate = NSPredicate(format: "name == %@", "\(selectedClubName!)")
@@ -184,6 +180,11 @@ class MembersTableViewController: UITableViewController {
         selectedClub = club[0]
         clubMembers = club[0].members
         tableView.reloadData()
+    }
+    
+    //deintialiser
+    deinit {
+        notificationToken?.invalidate()
     }
     
     

@@ -13,22 +13,16 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
   
     
     let realm: Realm
-    
-    
-    
     let fixtures: Results<Fixture>
     let confirmations: Results<Confirmation>
     let userLoggedIn: Results<User>
     var selectedFixtures = List<Fixture>()
-   
     var publishedSquad = List<Confirmation>()
-
     var notificationToken: NotificationToken?
-   
-    
     var stringUser : [String] = []
-     var number : [Int] = []
+    var number : [Int] = []
     
+    //intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -41,6 +35,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         super.init(nibName: nil, bundle: nil)
     }
     
+    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -51,6 +46,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         super.init(coder: aDecoder)
     }
     
+    //function that execuetes when the view controller loads
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,21 +72,11 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     }
 
     // MARK: - Table view data source
-
-    
-
+    //Methods to populate table with data
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if ((selectedFixtures.count)) != 0{
-//            return (selectedFixtures.count)
-//        } else {
-//            return 1
-//        }
-        
        return selectedFixtures.count
        
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectedCell", for: indexPath) as! PlayerSelectionViewCell
 
@@ -141,7 +127,7 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         return cell
     }
     
-    
+    //Loads all the fixture that the player has been selected
     func loadSelectedFixtures() {
         
         selectedFixtures.removeAll()
@@ -163,15 +149,9 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
     }
  
 
+    //MARK: Buttons pressed
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    
+    // function that executes when user presses deciderlater button
     func decideButtonPressed(cell: PlayerSelectionViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -194,8 +174,8 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
         }
         loadSelectedFixtures()
     }
-
     
+    //function that executes when user confirms his selection
     func confirmButtonPressed(cell: PlayerSelectionViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -221,7 +201,8 @@ class PlayerSelectionViewController: UITableViewController, playerSelectionDeleg
       
         
     }
-    
+
+    // function that excutes when user declines his selection
     func declineButtonPressed(cell: PlayerSelectionViewCell) {
         
         let declineAlert = UIAlertController(title: "Decline selection for this fixture?", message: "", preferredStyle: .alert)

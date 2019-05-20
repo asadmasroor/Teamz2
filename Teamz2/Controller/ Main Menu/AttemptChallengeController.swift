@@ -13,24 +13,6 @@ import CoreLocation
 class AttemptChallengeController: UIViewController {
     
     let realm : Realm
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
-        self.realm = try! Realm(configuration: config!)
-        
-       
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
-        self.realm = try! Realm(configuration: config!)
-       
-        
-        super.init(coder: aDecoder)
-    }
-    
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
@@ -53,14 +35,49 @@ class AttemptChallengeController: UIViewController {
         }
     }
     
-    var userLoggedIn : User? 
+    var userLoggedIn : User?
+    
+    
+    // intialisers
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+        
+       
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    // intialisers
+    required init?(coder aDecoder: NSCoder) {
+        let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
+        self.realm = try! Realm(configuration: config!)
+       
+        
+        super.init(coder: aDecoder)
+    }
+    
+    
+   
+    
+    // function that exccutes when view loads
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        milesLabel.text = "Challenge: \(String((selectedChallenge?.miles)!)) miles"
+        // Do any additional setup after loading the view.
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
+        
+    }
 
+    // Function to allow update display eachsecond
     func eachSecond() {
         seconds += 1
         updateDisplay()
         
     }
     
+    // Function to update the stats when the challenge starts
     private func updateDisplay() {
         
     
@@ -170,37 +187,30 @@ class AttemptChallengeController: UIViewController {
     }
     
     
-
+    
+    //To start challenge
     @IBAction func startTapped(_ sender: Any) {
         startRun()
     }
     
-    @IBAction func stopTapped(_ sender: Any) {
-//        let alertController = UIAlertController(title: "End Challenge?",
-//                                                message: "Do you wish to end your challenege attempt?",
-//                                                preferredStyle: .actionSheet)
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//
-//        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive) { _ in
-//            self.stopRun()
-//            _ = self.navigationController?.popToRootViewController(animated: true)
-//        })
-//
-//        present(alertController, animated: true)
-    }
+    //Unused method
+    // @IBAction func stopTapped(_ sender: Any) {
+////        let alertController = UIAlertController(title: "End Challenge?",
+////                                                message: "Do you wish to end your challenege attempt?",
+////                                                preferredStyle: .actionSheet)
+////        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+////
+////        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive) { _ in
+////            self.stopRun()
+////            _ = self.navigationController?.popToRootViewController(animated: true)
+////        })
+////
+////        present(alertController, animated: true)
+//    }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        milesLabel.text = "Challenge: \(String((selectedChallenge?.miles)!)) miles"
-        // Do any additional setup after loading the view.
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
-        
-    }
-    
+    // func to take user back to the home screen
     @objc func home(){
-        
         
         let alertController = UIAlertController(title: "Are you sure you want to go to the main menu?", message: "Attempt will not be saved", preferredStyle: .alert)
         
@@ -221,8 +231,8 @@ class AttemptChallengeController: UIViewController {
         
     }
     
+    // func that starts the run
     private func startRun() {
-        
         
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
@@ -236,11 +246,13 @@ class AttemptChallengeController: UIViewController {
         startLocationUpdates()
     }
     
+    //func to stop the run
     private func stopRun() {
       
         locationManager.stopUpdatingLocation()
     }
     
+    // func to start location methods
     private func startLocationUpdates() {
         locationManager.delegate = self
         locationManager.activityType = .fitness
@@ -248,25 +260,9 @@ class AttemptChallengeController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
-//    private func saveRun() {
-//        let newRun = Run()
-//        newRun.distance = distance.value
-//        newRun.duration = Int16(seconds)
-//        newRun.timestamp = Date()
-//        
-//        for location in locationList {
-//            let locationObject = Location()
-//            locationObject.timestamp = location.timestamp
-//            locationObject.latitude = location.coordinate.latitude
-//            locationObject.longitude = location.coordinate.longitude
-//            newRun.locations.append(locationObject)
-//        }
-//        
-//        run = newRun
-//    }
-    
 }
 
+// allows receiving location updates
 extension AttemptChallengeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

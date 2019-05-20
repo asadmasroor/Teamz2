@@ -12,28 +12,22 @@ import RealmSwift
 class requestsTableViewController: UITableViewController, requestTableViewDelegate {
     
     let realm: Realm
-    
     var selectedClubName : String?
-    
     let club: Results<Club>
-    
     var requests : List<User>?
-    
     var notificationToken: NotificationToken?
-    
     var uIndexPath = 0
     
-    
+    // intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
-        
-       
+
         self.club = realm.objects(Club.self)
         
         super.init(nibName: nil, bundle: nil)
     }
-    
+    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -42,7 +36,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
         super.init(coder: aDecoder)
     }
     
-
+    //function that excutes when the view loads
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,25 +63,29 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
     
 
     }
-    
+
+    //function that excutes when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
     
         self.tabBarController?.navigationItem.rightBarButtonItems = [homeButton]
     }
     
+    // function that excutes once the view has appeared.
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.title = "Requests"
+    }
+    
+    // function to take user back to the main screen
     @objc func home() {
         navigationController?.popToRootViewController(animated: true)
         
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Requests"
-    }
-    
 
     // MARK: - Table view data source
-
+    
+    // functions to populate table with data
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "requestCell", for: indexPath) as! requestsTableViewCell
         
@@ -112,7 +110,6 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
         
         return cell
     }
-    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if (requests!.count != 0) {
             return true
@@ -121,9 +118,6 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
             return false
         }
     }
-    
-    
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if requests?.count != 0 {
@@ -134,6 +128,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
         
     }
     
+    // function that executes when accept button is pressed
     func acceptButtonPressed(cell: requestsTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -161,6 +156,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
         
     }
     
+    // function that exccutes when decline button is pressed
     func declineButtonPressed(cell: requestsTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -179,7 +175,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
     }
     
     
-
+    // function to retrive requests to join club
     func loadRequests() {
         
         
@@ -192,6 +188,7 @@ class requestsTableViewController: UITableViewController, requestTableViewDelega
         tableView.reloadData()
     }
  
+    //deintialiser
     deinit {
         notificationToken?.invalidate()
     }

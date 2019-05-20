@@ -12,21 +12,19 @@ import RealmSwift
 class ApproveClubsTableViewController: UITableViewController, clubRequestsDelegate {
     
     var clubs = List<Club>()
-    
     var allClubs1 : Results<Club>
     var indexPath1 = 0
-    
     let realm: Realm
-    
     var notificationToken : NotificationToken?
     
+    //intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
          self.allClubs1 = realm.objects(Club.self)
         super.init(nibName: nil, bundle: nil)
     }
-    
+    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -35,6 +33,7 @@ class ApproveClubsTableViewController: UITableViewController, clubRequestsDelega
         
     }
 
+    //function that executes when the view loads
     override func viewDidLoad() {
         super.viewDidLoad()
         loadClubs()
@@ -56,15 +55,11 @@ class ApproveClubsTableViewController: UITableViewController, clubRequestsDelega
     }
 
     // MARK: - Table view data source
-
-   
-
+    // functions to populate the table with data
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return clubs.count
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "clubRequestCell", for: indexPath) as! ClubRequestsViewCell
         
@@ -75,7 +70,7 @@ class ApproveClubsTableViewController: UITableViewController, clubRequestsDelega
         return cell
     }
  
-
+    // function that executes when accept button is pressed
     func acceptButtonPressed(cell: ClubRequestsViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -88,7 +83,8 @@ class ApproveClubsTableViewController: UITableViewController, clubRequestsDelega
         
         loadClubs()
     }
-    
+
+    // function that excutes when decline button is pressed
     func declineButtonPressed(cell: ClubRequestsViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         
@@ -101,6 +97,8 @@ class ApproveClubsTableViewController: UITableViewController, clubRequestsDelega
         loadClubs()
     }
     
+    
+    // function to retrieve clubs that need approval from database in realm cloud
     func loadClubs() {
         
        

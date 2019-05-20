@@ -13,7 +13,7 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     
     var indexpath = 0
     
-   let realm: Realm
+    let realm: Realm
     
     var userLoggedIn : User?
 
@@ -21,20 +21,19 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     var allClubNames : [String] = []
     var joinedClubNames : [String] = []
     var notJoinedClubNames : [String] = []
-    //var notJoined = List<Club>()
     var notJoinedClubs: Results<Club>? = nil
     var user: Results<User>? = nil
     
     var notificationToken : NotificationToken?
 
-    
+    //Intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.allClubs = realm.objects(Club.self)
         super.init(nibName: nil, bundle: nil)
     }
-    
+    //Intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -43,7 +42,7 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
     }
    
     
-
+    //function that execuetes when the view controller loads
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +66,16 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         
     }
     
+    //function that execuetes when the view controller appears
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.estimatedRowHeight = 210
+        tableView.rowHeight = UITableView.automaticDimension
+        
+    }
     
+    // MARK: - Realm methods
+    
+    //Loads unJoined clubs for the logged in user
     func loadUnjoinedClubs() {
         
         let predicate = NSPredicate(format: "owner = %@", "\((SyncUser.current?.identity)!)")
@@ -108,6 +116,7 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         
     }
  
+    // function that excuetes when the join button is pressed for a user
     func joinButtonPressed(cell: SearchTableViewCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         indexpath = indexPath!.row
@@ -134,10 +143,9 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         tableView.reloadData()
        // loadUnjoinedClubs()
        }
-    // MARK: - Table view data source
-
     
-
+    // MARK: - Table view Methods
+    //populates table with data
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if (notJoinedClubs != nil) && (notJoinedClubs!.count != 0) {
@@ -146,8 +154,6 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
             return 1
         }
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notJoinedClubCell", for: indexPath) as! SearchTableViewCell
         
@@ -184,15 +190,6 @@ class SearchViewController: UITableViewController, SearchClubDelegate {
         cell.delegate = self
         return cell
     }
-
-
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.estimatedRowHeight = 210
-        tableView.rowHeight = UITableView.automaticDimension
-        
-    }
-
-
 
 }
 

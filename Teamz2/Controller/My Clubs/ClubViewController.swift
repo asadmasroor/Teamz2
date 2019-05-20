@@ -13,25 +13,25 @@ class ClubViewController: UITableViewController {
     var clubs = List<Club>()
     var allClubs : Results<Club>
     let realm: Realm
-    
     var indexPath1 = 0
-    
     var notificationToken : NotificationToken?
     
+    //initaliser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.allClubs = realm.objects(Club.self)
         super.init(nibName: nil, bundle: nil)
     }
-    
+    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
         self.allClubs = realm.objects(Club.self)
         super.init(coder: aDecoder)
     }
-
+    
+    //function that loads up when the table view loads up
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,19 +55,15 @@ class ClubViewController: UITableViewController {
         
     }
     
-    
-
     // MARK: - Table view data source
-
-   
-
+    
+    //functions to populate data into table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return clubs.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "clubCell", for: indexPath) as! ClubTableViewCell
         
@@ -80,6 +76,7 @@ class ClubViewController: UITableViewController {
         return true
     }
 
+    //function for swipe functionality
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
@@ -116,7 +113,16 @@ class ClubViewController: UITableViewController {
 
         return [deleteAction]
     }
+    
+    // function for when user clicks on row
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexPath1 = indexPath.row
+        
+        performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
+        
+    }
 
+    // function to prepare for when the view is changed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "squadchallenegeSegue") {
@@ -146,15 +152,8 @@ class ClubViewController: UITableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        indexPath1 = indexPath.row
-        
-        performSegue(withIdentifier: "squadchallenegeSegue", sender: self)
-    
-    }
-    
-    
-    
+
+    // function to retrieve users clubs from the database in the realm cloud
     func loadClubs() {
        
         clubs.removeAll()
@@ -177,6 +176,9 @@ class ClubViewController: UITableViewController {
         tableView.reloadData()
     }
     
-
+    //deintialiser
+    deinit {
+        notificationToken?.invalidate()
+    }
 
 }

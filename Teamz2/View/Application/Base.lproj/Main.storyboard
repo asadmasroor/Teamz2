@@ -1694,7 +1694,7 @@
                                     <action selector="startTapped:" destination="TrJ-ZK-DkI" eventType="touchUpInside" id="FQl-8x-Wf0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymC-K2-ZjB">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymC-K2-ZjB">
                                 <rect key="frame" x="137" y="456" width="101" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.41555923080000001" green="0.65824104630000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
