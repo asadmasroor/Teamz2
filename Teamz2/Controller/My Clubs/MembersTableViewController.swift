@@ -16,10 +16,10 @@ class MembersTableViewController: UITableViewController {
     var clubMembers : List<User>?
     var selectedClubName : String?
     var selectedClub : Club?
-   let UserLoggedIn: Results<User>
-    
+    let UserLoggedIn: Results<User>
     var notificationToken: NotificationToken?
     
+    //intialiser
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -30,7 +30,7 @@ class MembersTableViewController: UITableViewController {
         
         super.init(nibName: nil, bundle: nil)
     }
-    
+    //intialiser
     required init?(coder aDecoder: NSCoder) {
         let config = SyncUser.current?.configuration(realmURL: Constants.REALM_URL, fullSynchronization: true)
         self.realm = try! Realm(configuration: config!)
@@ -64,9 +64,13 @@ class MembersTableViewController: UITableViewController {
         }
 
     }
+    
+    //function that executes when the view has appeared
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Members"
     }
+    
+    //function that executes when the view will appear
     override func viewWillAppear(_ animated: Bool) {
         let homeButton = UIBarButtonItem(image: UIImage(named:"home"), style: .plain, target: self, action: #selector(home))
         
@@ -80,7 +84,7 @@ class MembersTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    // function to populate table with data
+    // functions to populate table with data
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return clubMembers!.count
